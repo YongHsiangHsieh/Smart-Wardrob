@@ -4,7 +4,7 @@ import model.Clothing
 import model.ClothingType
 import model.Wardrobe
 
-class WardrobeController(private val wardrobe: Wardrobe) {
+class WardrobeAPI(private val wardrobe: Wardrobe) {
 
     fun addClothingToWardrobe(clothingData: Map<String, String>) {
     }
