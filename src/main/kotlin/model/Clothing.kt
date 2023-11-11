@@ -10,10 +10,10 @@ enum class ClothingType {
 
 @Serializable
 data class Clothing(
-    val id: Int,
-    val type: ClothingType,
-    val brand: String,
-    val name: String,
-    val color: String,
-    val texture: String,
+    val id: Int = -1,
+    val type: ClothingType = ClothingType.SHIRT,
+    val brand: String = "Unknown",
+    val name: String = "Unknown",
+    val color: String = "Unknown",
+    val texture: String = "Unknown",
 )
