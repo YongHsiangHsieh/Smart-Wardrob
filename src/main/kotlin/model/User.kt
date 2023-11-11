@@ -12,4 +12,8 @@ class User(
     fun setPassword(newPassword: String) {
         password = newPassword
     }
+
+    override fun toString(): String {
+        return "User: $username, Password=$password\nWardrobe: $wardrobe"
+    }
 }
