@@ -1,7 +1,9 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import utils.JsonUtils
+import model.*
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main(args: Array<String>) {
+    val cloths = Clothing(1, model.ClothingType.JUMPER, "Nike", "Nike Jumper", "Black", "Cotton")
+    val jsonCloths = JsonUtils.serializeToJson(cloths)
+    println(cloths)
+    println(jsonCloths)
 }

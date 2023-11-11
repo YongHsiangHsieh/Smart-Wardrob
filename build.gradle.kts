@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.20"
     application
+    kotlin("plugin.serialization") version "1.5.0"
 }
 
 group = "me.YongHsiangHsieh"
@@ -11,7 +12,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.10")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 }
 
 tasks.test {
