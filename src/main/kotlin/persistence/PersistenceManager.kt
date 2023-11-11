@@ -10,6 +10,7 @@ object PersistenceManager {
     private const val WARDROBE_DATA_PATH = "data/wardrobes/"
 
     init {
+        // Ensure that data directories exist
         File(USER_DATA_PATH).mkdirs()
         File(WARDROBE_DATA_PATH).mkdirs()
     }
