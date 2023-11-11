@@ -20,7 +20,8 @@ class Wardrobe {
         }
     }
 
-    fun deleteClothing(clothingId: Int) {
+    fun deleteClothing(clothingId: Int): Boolean {
+        return clothes.removeIf { it.id == clothingId }
     }
 
     fun getClothesByType(type: ClothingType): List<Clothing> {
