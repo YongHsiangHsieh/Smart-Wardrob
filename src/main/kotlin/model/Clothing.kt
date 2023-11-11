@@ -14,6 +14,6 @@ data class Clothing(
     val type: ClothingType = ClothingType.SHIRT,
     val brand: String = "Unknown",
     val name: String = "Unknown",
-    val color: String = "Unknown",
-    val texture: String = "Unknown",
+    var color: String = "Unknown",
+    var texture: String = "Unknown",
 )
