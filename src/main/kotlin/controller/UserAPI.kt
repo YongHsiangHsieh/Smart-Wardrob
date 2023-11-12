@@ -2,27 +2,45 @@ package controller
 
 import model.User
 import model.Wardrobe
+import persistence.PersistenceManager
 
-
-class UserAPI() {
+class UserController(private val persistenceManager: PersistenceManager) {
 
     private val users: MutableMap<String, User> = mutableMapOf()
 
-    fun createUser(username: String, password: String): User {
-       return User(username, password)
+    fun createUser(username: String, password: String): Boolean {
+        if (users.containsKey(username)) {
+            // Username already exists
+            return false
+        }
+
+        val newUser = User(username, password)
+        users[username] = newUser
+        persistenceManager.saveUserData(newUser)
+        return true
     }
 
-    fun deleteUser(username: String) {
-    }
-
-    fun getUser(username: String): User? {
-        return users[username]
-    }
-
-    fun authenticateUser(username: String, password: String): Boolean {
+    fun deleteUser(username: String): Boolean {
+        val removedUser = users.remove(username)
+        if (removedUser != null) {
+            persistenceManager.deleteUserData(username)
+            return true
+        }
         return false
     }
 
-    fun updateUserWardrobe(username: String, wardrobe: Wardrobe) {
+    fun getUser(username: String): User? {
+        return users[username] ?: persistenceManager.loadUserData(username)
     }
+
+//    fun authenticateUser(username: String, password: String): Boolean {
+//        return users[username]?.checkPassword(password) ?: false
+//    }
+//
+//    fun updateUserWardrobe(username: String, wardrobe: Wardrobe) {
+//        users[username]?.let {
+//            it.wardrobe = wardrobe
+//            persistenceManager.saveUserData(it)
+//        }
+//    }
 }
