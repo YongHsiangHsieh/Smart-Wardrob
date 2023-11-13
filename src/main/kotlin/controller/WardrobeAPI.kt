@@ -17,7 +17,6 @@ class WardrobeAPI(private val wardrobe: Wardrobe) {
     fun updateClothingInWardrobe(clothingId: Int, clothingData: Map<String, String>): Boolean {
         val color = clothingData["color"]?: return false
         val texture = clothingData["texture"]?: return false
-
         return wardrobe.updateClothing(clothingId, color, texture)
     }
 
