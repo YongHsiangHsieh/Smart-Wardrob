@@ -1,7 +1,8 @@
-import utils.JsonUtils
 import persistence.PersistenceManager
 import model.*
-import utils.OutfitSuggester
+import utils.*
+import controller.*
+import view.*
 
 fun main(args: Array<String>) {
     val cloth1 = Clothing(1, ClothingType.JUMPER, "Nike", "Nike Jumper", "Red", "Cotton")
@@ -19,7 +20,7 @@ fun main(args: Array<String>) {
     user2.wardrobe.addClothing(cloth3)
 //    println(user1.toString())
 
-//    val wardrobe1 = Wardrobe()
+    val wardrobe1 = Wardrobe()
 //    wardrobe1.addClothing(cloth1)
 //    println(wardrobe1)
 
@@ -40,6 +41,12 @@ fun main(args: Array<String>) {
 //    }
 
     val outfit = u1?.let { OutfitSuggester.suggestOutfit(it.wardrobe, 8) }
-    println(outfit)
+//    println(outfit)
+    val wardrobe = controller.WardrobeAPI(wardrobe1)
+    val users = controller.UserAPI(PersistenceManager)
+    val view = ConsoleView(users, wardrobe)
+
+    view.displayMainMenu()
+
 
 }
