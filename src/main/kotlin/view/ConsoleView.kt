@@ -9,14 +9,24 @@ class ConsoleView(
     private val userAPI: UserAPI,
     private val wardrobeAPI: WardrobeAPI
 ) {
-    fun displayMainMenu() {
-        val userInput = ScannerInput.readNextInt(
+//    fun loginUser(): Boolean {
+//        val username = ScannerInput.readNextLine("Enter username: ")
+//        val user = userAPI.findUser(username)
+//        if (user == null) {
+//            println("User not found!")
+//            return false
+//        }
+//        val password = ScannerInput.readNextLine("Enter password: ")
+//        // Check password
+//        return true
+//    }
+
+    fun displayMainMenu(): Int {
+        return ScannerInput.readNextInt(
             """
-            Welcome to the Smart Wardrobe Console App
-            1. Manage Users
-            2. Manage Wardrobe
-            3. Suggest Outfit
-            4. Exit
+            1. Admin
+            2. Smart Wardrobe
+            3. Exit
             Enter option: 
         """.trimIndent()
         )
@@ -28,68 +38,47 @@ class ConsoleView(
             User Management:
             1. Create User
             2. Delete User
-            3. Login
+            3. Update User
             4. Back to Main Menu
             Enter option: 
         """.trimIndent()
         )
-        when (userInput) {
-            1 -> promptUserDetails()
-            2 -> promptUsernameForDeletion()
-            3 -> promptLogin()
-        }
     }
 
-    private fun promptUserDetails() {
-        // Prompt for user details and pass them to the UserController
+    fun displayWardrobe(): Int{
+        return ScannerInput.readNextInt(
+            """
+            1. Today's Outfit
+            2. View Wardrobe
+            3. Manage Wardrobe
+            4. Back to Main Menu
+            Enter option: 
+        """.trimIndent()
+        )
     }
-
-    private fun promptUsernameForDeletion() {
-        // Prompt for username and pass it to the UserController
-    }
-
-    private fun promptLogin() {
-        // Prompt for login details and authenticate through the UserController
-    }
-
     fun manageWardrobe() {
-        // Display wardrobe management options
         val userInput = ScannerInput.readNextInt(
             """
             Wardrobe Management:
             1. Add Clothing
             2. Update Clothing
             3. Remove Clothing
-            4. View Clothing by Type
-            5. Search Clothing by Color and Type
-            6. Back to Main Menu
+            4. Back to Wardrobe Menu
             Enter option: 
         """.trimIndent()
         )
-        when (userInput) {
-            1 -> promptAddClothing()
-            // ... Other cases
-        }
+    }
+
+    fun viewWardrobe() {
+        val userInput = ScannerInput.readNextInt(
+            """
+            Wardrobe View:
+            1. View All Clothing
+            2. View Clothing by Type
+            3. View Clothing by Type and Color
+            3. Back to Wardrobe Menu
+            Enter option: 
+        """.trimIndent()
+        )
     }
 }
-
-private fun promptAddClothing() {
-    // Prompt for clothing details and pass them to the WardrobeController
-}
-
-fun suggestOutfit() {
-    // Interface with the OutfitSuggester to provide outfit suggestions
-    println("Today's outfit suggestion is:")
-    // ...
-}
-
-fun displayClothing(clothingList: List<ClothingType>) {
-    // Display a list of clothing items to the user
-}
-
-fun displayMessage(message: String) {
-    println(message)
-}
-
-// ... Other methods for different UI interactions
-
