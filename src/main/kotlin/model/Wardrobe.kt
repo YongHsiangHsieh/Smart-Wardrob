@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class Wardrobe {
-    private val clothes: MutableList<Clothing> = mutableListOf()
+    val clothes: MutableList<Clothing> = mutableListOf()
 
     fun addClothing(clothing: Clothing): Boolean {
         return clothes.add(clothing)
