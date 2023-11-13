@@ -6,29 +6,30 @@ import persistence.PersistenceManager
 
 class UserAPI(private val persistenceManager: PersistenceManager) {
 
-    private val users: MutableMap<String, User> = mutableMapOf()
-
     fun createUser(username: String, password: String): Boolean {
-        if (users.containsKey(username)) {
+        if (persistenceManager.loadUserData(username) != null) {
             return false
         }
         val newUser = User(username, password)
-        users[username] = newUser
         persistenceManager.saveUserData(newUser)
         return true
     }
 
     fun deleteUser(username: String): Boolean {
-        val removedUser = users.remove(username)
-        if (removedUser != null) {
+        return if (persistenceManager.loadUserData(username) != null) {
             persistenceManager.deleteUserData(username)
-            return true
+            true
+        } else {
+            false
         }
-        return false
     }
 
     fun findUser(username: String): User? {
-        return users[username] ?: persistenceManager.loadUserData(username)
+        return persistenceManager.loadUserData(username)
+    }
+
+    fun authenticateUser(user: User, password: String): Boolean {
+        return user.checkPassword(password)
     }
 
 //    fun authenticateUser(username: String, password: String): Boolean {
