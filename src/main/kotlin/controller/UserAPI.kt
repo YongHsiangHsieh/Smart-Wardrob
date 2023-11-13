@@ -4,7 +4,7 @@ import model.User
 import model.Wardrobe
 import persistence.PersistenceManager
 
-class UserController(private val persistenceManager: PersistenceManager) {
+class UserAPI(private val persistenceManager: PersistenceManager) {
 
     private val users: MutableMap<String, User> = mutableMapOf()
 

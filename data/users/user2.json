@@ -1,0 +1,31 @@
+{
+    "username": "user2",
+    "password": "def",
+    "wardrobe": {
+        "clothes": [
+            {
+                "id": 1,
+                "type": "JUMPER",
+                "brand": "Nike",
+                "name": "Nike Jumper",
+                "color": "Red",
+                "texture": "Cotton"
+            },
+            {
+                "id": 2,
+                "brand": "Adidas",
+                "name": "Adidas Shirt",
+                "color": "Blue",
+                "texture": "Cotton"
+            },
+            {
+                "id": 3,
+                "type": "SHORTS",
+                "brand": "Puma",
+                "name": "Puma Shorts",
+                "color": "Black",
+                "texture": "Cotton"
+            }
+        ]
+    }
+}
