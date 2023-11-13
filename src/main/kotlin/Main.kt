@@ -1,6 +1,7 @@
 import utils.JsonUtils
 import persistence.PersistenceManager
 import model.*
+import utils.OutfitSuggester
 
 fun main(args: Array<String>) {
     val cloth1 = Clothing(1, ClothingType.JUMPER, "Nike", "Nike Jumper", "Red", "Cotton")
@@ -32,12 +33,13 @@ fun main(args: Array<String>) {
 //    println(PersistenceManager.saveUserData(user2))
 
     val u1 = PersistenceManager.loadUserData("user1")
-    if (u1 != null) {
-        for (c in u1.wardrobe.clothes) {
-            println(c)
-        }
-    }
+//    if (u1 != null) {
+//        for (c in u1.wardrobe.clothes) {
+//            println(c)
+//        }
+//    }
 
-
+    val outfit = u1?.let { OutfitSuggester.suggestOutfit(it.wardrobe, 8) }
+    println(outfit)
 
 }
