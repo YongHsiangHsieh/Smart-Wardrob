@@ -24,6 +24,8 @@ fun main(args: Array<String>) {
     val user1Obj: User = JsonUtils.deserializeFromJson(user1Json)
     println(user1Obj)
 
+    PersistenceManager.saveUserData(user1)
+
 
 
 }

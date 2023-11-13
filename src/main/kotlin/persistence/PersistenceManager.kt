@@ -26,6 +26,16 @@ object PersistenceManager {
         }
         return null
     }
+    fun deleteUserData(username: String) {
+        val userFile = File("$USER_DATA_PATH$username.json")
+        if (userFile.exists()) {
+            userFile.delete()
+        }
+        val wardrobeFile = File("$WARDROBE_DATA_PATH${username}_wardrobe.json")
+        if (wardrobeFile.exists()) {
+            wardrobeFile.delete()
+        }
+    }
 
 //    fun saveWardrobeData(username: String, wardrobe: Wardrobe) {
 //        val wardrobeData = JsonUtils.serializeToJson(wardrobe)
@@ -40,14 +50,4 @@ object PersistenceManager {
 //        return null
 //    }
 
-//    fun deleteUserData(username: String) {
-//        val userFile = File("$USER_DATA_PATH$username.json")
-//        if (userFile.exists()) {
-//            userFile.delete()
-//        }
-//        val wardrobeFile = File("$WARDROBE_DATA_PATH${username}_wardrobe.json")
-//        if (wardrobeFile.exists()) {
-//            wardrobeFile.delete()
-//        }
-//    }
 }
