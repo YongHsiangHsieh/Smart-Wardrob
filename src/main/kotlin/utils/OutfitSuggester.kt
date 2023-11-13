@@ -9,7 +9,7 @@ object OutfitSuggester {
 
     fun suggestOutfit(wardrobe: Wardrobe, currentMonth: Int): List<Clothing> {
         val season = determineSeason(currentMonth)
-        return wardrobe.getSeasonalOutfit(season)
+        return getSeasonalOutfit(season)
     }
 
     private fun determineSeason(month: Int): Season {
@@ -21,8 +21,26 @@ object OutfitSuggester {
         }
     }
 
-    private fun Wardrobe.getSeasonalOutfit(season: Season): List<Clothing> {
-        return listOf()
+    private fun getSeasonalOutfit(season: Season): List<Clothing> {
+        return when(season) {
+            Season.SPRING -> listOf(
+                Clothing(0, ClothingType.TRACKSUIT),
+                Clothing(0, ClothingType.SHIRT)
+            )
+            Season.SUMMER -> listOf(
+                Clothing(0, ClothingType.SHIRT),
+                Clothing(0, ClothingType.SHORTS)
+            )
+            Season.AUTUMN -> listOf(
+                Clothing(0, ClothingType.JUMPER),
+                Clothing(0, ClothingType.TRACKSUIT)
+            )
+            Season.WINTER -> listOf(
+                Clothing(0, ClothingType.JUMPER),
+                Clothing(0, ClothingType.TRACKSUIT),
+                Clothing(0, ClothingType.JACKET)
+            )
+        }
     }
 }
 

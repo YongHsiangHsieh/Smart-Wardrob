@@ -14,7 +14,6 @@ import java.util.*
  * @author Siobhan Drohan, Mairead Meagher
  * @since 1.0
  */
-
 object ScannerInput {
     /**
      * Read an int from the user.
