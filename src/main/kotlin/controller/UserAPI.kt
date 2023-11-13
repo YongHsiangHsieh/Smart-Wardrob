@@ -7,7 +7,6 @@ import persistence.PersistenceManager
 class UserAPI(private val persistenceManager: PersistenceManager) {
 
     fun createUser(username: String, password: String): Boolean {
-        // Check if user already exists
         if (persistenceManager.loadUserData(username) != null) {
             return false
         }
@@ -27,6 +26,10 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
 
     fun findUser(username: String): User? {
         return persistenceManager.loadUserData(username)
+    }
+
+    fun authenticateUser(user: User, password: String): Boolean {
+        return user.checkPassword(password)
     }
 
 //    fun authenticateUser(username: String, password: String): Boolean {

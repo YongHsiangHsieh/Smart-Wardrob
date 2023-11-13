@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class Wardrobe {
-    val clothes: MutableList<Clothing> = mutableListOf()
+    private val clothes: MutableList<Clothing> = mutableListOf()
 
     fun addClothing(clothing: Clothing): Boolean {
         return clothes.add(clothing)
@@ -12,14 +12,14 @@ class Wardrobe {
 
     fun updateClothing(id: Int, color: String? = null, texture: String? = null): Boolean {
         val clothingIndex = clothes.indexOfFirst { it.id == id }
-        if (clothingIndex != -1) {
+        return if (clothingIndex != -1) {
             val clothing = clothes[clothingIndex]
             if (color != null) clothing.color = color
             if (texture != null) clothing.texture = texture
             clothes[clothingIndex] = clothing
-            return true
+            true
         } else {
-            return false
+            false
         }
     }
 
