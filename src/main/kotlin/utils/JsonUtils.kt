@@ -14,4 +14,5 @@ object JsonUtils {
     inline fun <reified T> deserializeFromJson(jsonString: String): T {
         return json.decodeFromString(jsonString)
     }
+
 }
