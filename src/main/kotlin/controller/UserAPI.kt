@@ -10,10 +10,8 @@ class UserController(private val persistenceManager: PersistenceManager) {
 
     fun createUser(username: String, password: String): Boolean {
         if (users.containsKey(username)) {
-            // Username already exists
             return false
         }
-
         val newUser = User(username, password)
         users[username] = newUser
         persistenceManager.saveUserData(newUser)
@@ -29,7 +27,7 @@ class UserController(private val persistenceManager: PersistenceManager) {
         return false
     }
 
-    fun getUser(username: String): User? {
+    fun findUser(username: String): User? {
         return users[username] ?: persistenceManager.loadUserData(username)
     }
 
