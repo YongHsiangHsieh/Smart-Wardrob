@@ -27,6 +27,7 @@ class Wardrobe {
         return clothes.removeIf { it.id == clothingId }
     }
 
+
     fun getClothesByType(type: ClothingType): List<Clothing> {
         return clothes.filter { it.type == type }
     }
