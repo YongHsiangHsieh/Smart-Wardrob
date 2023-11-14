@@ -1,7 +1,6 @@
 package controller
 
 import model.User
-import model.Wardrobe
 import persistence.PersistenceManager
 
 class UserAPI(private val persistenceManager: PersistenceManager) {
@@ -31,15 +30,4 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
     fun authenticateUser(user: User, password: String): Boolean {
         return user.checkPassword(password)
     }
-
-//    fun authenticateUser(username: String, password: String): Boolean {
-//        return users[username]?.checkPassword(password) ?: false
-//    }
-//
-//    fun updateUserWardrobe(username: String, wardrobe: Wardrobe) {
-//        users[username]?.let {
-//            it.wardrobe = wardrobe
-//            persistenceManager.saveUserData(it)
-//        }
-//    }
 }
