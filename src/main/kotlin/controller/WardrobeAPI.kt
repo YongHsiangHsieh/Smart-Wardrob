@@ -24,11 +24,19 @@ class WardrobeAPI(private val wardrobe: Wardrobe) {
         return wardrobe.deleteClothing(clothingId)
     }
 
-//    fun getClothingByType(type: ClothingType): List<Clothing> {
-//        return wardrobe.getClothesByType(type)
-//    }
-//
-//    fun searchClothingByColorAndType(color: String, type: ClothingType): List<Clothing> {
-//        return wardrobe.searchByColorAndType(color, type)
-//    }
+    fun getAllClothing(): List<Clothing> {
+        return wardrobe.getAllClothing()
+    }
+
+    fun getClothingById(id: Int): Clothing? {
+        return wardrobe.getClothingById(id)
+    }
+
+    fun getClothingByType(type: ClothingType): List<Clothing> {
+        return wardrobe.getClothesByType(type)
+    }
+
+    fun searchClothingByColorAndType(color: String, type: ClothingType): List<Clothing> {
+        return wardrobe.searchByColorAndType(color, type)
+    }
 }
