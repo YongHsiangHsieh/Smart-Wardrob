@@ -82,6 +82,7 @@ class ConsoleView(
     // Wardrobe Menu
 
     private fun userLogin() {
+        println("Welcome to Smart Wardrobe! Please login to continue.")
         val username = ScannerInput.readNextLine("Enter username: ")
         val password = ScannerInput.readNextLine("Enter password: ")
         val user = userAPI.findUser(username)
@@ -148,6 +149,7 @@ class ConsoleView(
     }
 
     private fun addClothing() {
+        // TODO: Add clothing type enum
         val clothingData = mutableMapOf<String, String>()
         clothingData["id"] = ScannerInput.readNextLine("Enter clothing id: ")
         clothingData["type"] = ScannerInput.readNextLine("Enter clothing type: ")
@@ -220,23 +222,7 @@ class ConsoleView(
     }
 
     private fun viewClothingByType() {
-        val option = ScannerInput.readNextInt("""
-            Clothing Types:
-            1 -> JUMPER
-            2 -> SHIRT
-            3 -> SHORTS
-            4 -> TRACKSUIT
-            5 -> JACKET
-            Enter option: 
-        """.trimIndent())
-        val type = when(option){
-            1 -> ClothingType.JUMPER
-            2 -> ClothingType.SHIRT
-            3 -> ClothingType.SHORTS
-            4 -> ClothingType.TRACKSUIT
-            5 -> ClothingType.JACKET
-            else -> ClothingType.UNKNOWN
-        }
+        val type = getClothingType()
         val clothing = wardrobeAPI.getClothingByType(type)
         if (clothing.isNotEmpty()) {
             clothing.forEach { println(it) }
@@ -246,6 +232,17 @@ class ConsoleView(
     }
 
     private fun viewClothingByTypeAndColor() {
+        val type = getClothingType()
+        val color = ScannerInput.readNextLine("Enter clothing color: ")
+        val clothing = wardrobeAPI.searchClothingByColorAndType(color, type)
+        if (clothing.isNotEmpty()) {
+            clothing.forEach { println(it) }
+        } else {
+            logger.info { "No clothing of type $type and color $color in wardrobe" }
+        }
+    }
+
+    private fun getClothingType(): ClothingType {
         val option = ScannerInput.readNextInt("""
             Clothing Types:
             1 -> JUMPER
@@ -255,20 +252,13 @@ class ConsoleView(
             5 -> JACKET
             Enter option: 
         """.trimIndent())
-        val type = when(option){
+        return when(option){
             1 -> ClothingType.JUMPER
             2 -> ClothingType.SHIRT
             3 -> ClothingType.SHORTS
             4 -> ClothingType.TRACKSUIT
             5 -> ClothingType.JACKET
             else -> ClothingType.UNKNOWN
-        }
-        val color = ScannerInput.readNextLine("Enter clothing color: ")
-        val clothing = wardrobeAPI.searchClothingByColorAndType(color, type)
-        if (clothing.isNotEmpty()) {
-            clothing.forEach { println(it) }
-        } else {
-            logger.info { "No clothing of type $type and color $color in wardrobe" }
         }
     }
 }
