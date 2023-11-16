@@ -4,7 +4,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.decodeFromString
 
-object JsonUtils {
+object JsonUtil {
     val json = Json { prettyPrint = true }
 
     inline fun <reified T> serializeToJson(data: T): String {

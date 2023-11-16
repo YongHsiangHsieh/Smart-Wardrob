@@ -1,0 +1,24 @@
+{
+    "username": "wilson",
+    "password": "123",
+    "wardrobe": {
+        "clothes": [
+            {
+                "id": 1,
+                "type": "JUMPER",
+                "brand": "Nike",
+                "name": "Nike Jumper",
+                "color": "blue",
+                "texture": "cotton"
+            },
+            {
+                "id": 2,
+                "type": "SHIRT",
+                "brand": "Zara",
+                "name": "Zara Shirt",
+                "color": "brown",
+                "texture": "cotton"
+            }
+        ]
+    }
+}

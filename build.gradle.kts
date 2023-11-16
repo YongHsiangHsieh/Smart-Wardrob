@@ -14,6 +14,10 @@ repositories {
 dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.10")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    implementation("org.slf4j:slf4j-simple:2.0.9")
+    implementation("io.github.microutils:kotlin-logging:3.0.5")
+//    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+
 //    implementation("org.yaml:snakeyaml:1.33")
 }
 
