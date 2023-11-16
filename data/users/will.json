@@ -1,0 +1,16 @@
+{
+    "username": "will",
+    "password": "123",
+    "wardrobe": {
+        "clothes": [
+            {
+                "id": 1,
+                "type": "TRACKSUIT",
+                "brand": "Nike",
+                "name": "Nike Pants",
+                "color": "green",
+                "texture": "cotton"
+            }
+        ]
+    }
+}

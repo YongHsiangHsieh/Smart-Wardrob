@@ -10,6 +10,14 @@
                 "name": "Nike Jumper",
                 "color": "blue",
                 "texture": "cotton"
+            },
+            {
+                "id": 2,
+                "type": "SHIRT",
+                "brand": "Zara",
+                "name": "Zara Shirt",
+                "color": "brown",
+                "texture": "cotton"
             }
         ]
     }

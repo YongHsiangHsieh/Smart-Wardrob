@@ -56,6 +56,7 @@ class ConsoleView(
             when (choice) {
                 1 -> addUser()
                 2 -> deleteUser()
+                0 -> exitApplication()
                 else -> logger.info { "Invalid option" }
             }
         } while (choice != 0)
@@ -118,6 +119,7 @@ class ConsoleView(
                 1 -> todaysOutfit()
                 2 -> viewWardrobe()
                 3 -> manageWardrobe()
+                0 -> exitApplication()
                 else -> logger.info { "Invalid option" }
             }
         } while (choice != 0)
@@ -133,7 +135,7 @@ class ConsoleView(
             1 -> Add Clothing
             2 -> Update Clothing
             3 -> Remove Clothing
-            4 -> Back to Wardrobe Menu
+            0 -> Back to Wardrobe Menu
             Enter option: 
         """.trimIndent()
         )
@@ -147,6 +149,7 @@ class ConsoleView(
                 1 -> addClothing()
                 2 -> updateClothing()
                 3 -> removeClothing()
+                0 -> exitApplication()
                 else -> logger.info { "Invalid option" }
             }
         } while (choice != 0)
@@ -212,6 +215,7 @@ class ConsoleView(
                 1 -> viewAllClothing()
                 2 -> viewClothingByType()
                 3 -> viewClothingByTypeAndColor()
+                0 -> exitApplication()
                 else -> logger.info { "Invalid option" }
             }
         } while (choice != 0)
@@ -248,7 +252,9 @@ class ConsoleView(
     }
 
     private fun getClothingType(): ClothingType {
-        val option = ScannerInput.readNextInt("""
+        while (true) {
+            val option = ScannerInput.readNextInt(
+                """
             Clothing Types:
             1 -> JUMPER
             2 -> SHIRT
@@ -256,14 +262,19 @@ class ConsoleView(
             4 -> TRACKSUIT
             5 -> JACKET
             Enter option: 
-        """.trimIndent())
-        return when(option){
-            1 -> ClothingType.JUMPER
-            2 -> ClothingType.SHIRT
-            3 -> ClothingType.SHORTS
-            4 -> ClothingType.TRACKSUIT
-            5 -> ClothingType.JACKET
-            else -> ClothingType.UNKNOWN
+        """.trimIndent()
+            )
+            return when (option) {
+                1 -> ClothingType.JUMPER
+                2 -> ClothingType.SHIRT
+                3 -> ClothingType.SHORTS
+                4 -> ClothingType.TRACKSUIT
+                5 -> ClothingType.JACKET
+                else -> {
+                    logger.info { "Invalid option" }
+                    continue
+                }
+            }
         }
     }
 
