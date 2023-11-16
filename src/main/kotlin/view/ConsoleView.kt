@@ -17,7 +17,7 @@ class ConsoleView(
             choice = displayMainMenu()
             when (choice) {
                 1 -> adminMenu()
-//                2 -> smartWardrobeMenu()
+                2 -> userLogin()
                 else -> logger.info { "Invalid option" }
             }
         } while (choice != 0)
@@ -79,19 +79,45 @@ class ConsoleView(
         }
     }
 
+    // Wardrobe Menu
 
-    fun displayWardrobe(): Int{
+    private fun userLogin() {
+        val username = ScannerInput.readNextLine("Enter username: ")
+        val password = ScannerInput.readNextLine("Enter password: ")
+        val user = userAPI.findUser(username)
+        if (user != null && userAPI.authenticateUser(user, password)) {
+            displayWardrobe()
+        } else {
+            logger.info { "Invalid username or password" }
+        }
+    }
+
+    private fun displayWardrobe(): Int{
         return ScannerInput.readNextInt(
             """
-            1. Today's Outfit
-            2. View Wardrobe
-            3. Manage Wardrobe
-            4. Back to Main Menu
+            1 -> Today's Outfit
+            2 -> View Wardrobe
+            3 -> Manage Wardrobe
+            0 -> Back to Main Menu
             Enter option: 
         """.trimIndent()
         )
     }
-    fun manageWardrobe() {
+
+    private fun wardrobeMenu() {
+        var choice: Int
+        do {
+            choice = displayWardrobe()
+            when (choice) {
+                1 -> todaysOutfit()
+                2 -> viewWardrobe()
+                3 -> manageWardrobe()
+                else -> logger.info { "Invalid option" }
+            }
+        } while (choice != 0)
+    }
+
+    private fun manageWardrobe() {
         val userInput = ScannerInput.readNextInt(
             """
             Wardrobe Management:
@@ -104,7 +130,7 @@ class ConsoleView(
         )
     }
 
-    fun viewWardrobe() {
+    private fun viewWardrobe() {
         val userInput = ScannerInput.readNextInt(
             """
             Wardrobe View:
@@ -115,5 +141,8 @@ class ConsoleView(
             Enter option: 
         """.trimIndent()
         )
+    }
+
+    private fun todaysOutfit() {
     }
 }
