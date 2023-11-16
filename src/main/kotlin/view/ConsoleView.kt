@@ -4,6 +4,7 @@ import mu.KotlinLogging
 import controller.UserAPI
 import controller.WardrobeAPI
 import model.ClothingType
+import model.User
 import utils.ScannerInput
 
 class ConsoleView(
@@ -86,7 +87,8 @@ class ConsoleView(
         val password = ScannerInput.readNextLine("Enter password: ")
         val user = userAPI.findUser(username)
         if (user != null && userAPI.authenticateUser(user, password)) {
-            displayWardrobe()
+            wardrobeAPI.setWardrobe(user.getWardrobe())
+            wardrobeMenu()
         } else {
             logger.info { "Invalid username or password" }
         }
@@ -117,8 +119,8 @@ class ConsoleView(
         } while (choice != 0)
     }
 
-    private fun manageWardrobe() {
-        val userInput = ScannerInput.readNextInt(
+    private fun displayManageWardrobe(): Int {
+        return ScannerInput.readNextInt(
             """
             Wardrobe Management:
             1. Add Clothing
@@ -128,6 +130,56 @@ class ConsoleView(
             Enter option: 
         """.trimIndent()
         )
+    }
+
+    private fun manageWardrobe() {
+        var choice: Int
+        do {
+            choice = displayManageWardrobe()
+            when (choice) {
+                1 -> addClothing()
+                2 -> updateClothing()
+                3 -> removeClothing()
+                else -> logger.info { "Invalid option" }
+            }
+        } while (choice != 0)
+    }
+
+    private fun addClothing() {
+        val clothingData = mutableMapOf<String, String>()
+        clothingData["id"] = ScannerInput.readNextLine("Enter clothing id: ")
+        clothingData["type"] = ScannerInput.readNextLine("Enter clothing type: ")
+        clothingData["color"] = ScannerInput.readNextLine("Enter clothing color: ")
+        clothingData["texture"] = ScannerInput.readNextLine("Enter clothing texture: ")
+        val success = wardrobeAPI.addClothingToWardrobe(clothingData)
+        if (success) {
+            logger.info { "Clothing added successfully" }
+        } else {
+            logger.info { "Clothing already exists" }
+        }
+    }
+
+    private fun updateClothing() {
+        val clothingData = mutableMapOf<String, String>()
+        val id = ScannerInput.readNextInt("Enter clothing id: ")
+        clothingData["color"] = ScannerInput.readNextLine("Enter clothing color: ")
+        clothingData["texture"] = ScannerInput.readNextLine("Enter clothing texture: ")
+        val success = wardrobeAPI.updateClothingInWardrobe(id, clothingData)
+        if (success) {
+            logger.info { "Clothing updated successfully" }
+        } else {
+            logger.info { "Clothing does not exist" }
+        }
+    }
+
+    private fun removeClothing() {
+        val id = ScannerInput.readNextInt("Enter clothing id: ")
+        val success = wardrobeAPI.deleteClothingFromWardrobe(id)
+        if (success) {
+            logger.info { "Clothing deleted successfully" }
+        } else {
+            logger.info { "Clothing does not exist" }
+        }
     }
 
     private fun viewWardrobe() {
@@ -142,7 +194,6 @@ class ConsoleView(
         """.trimIndent()
         )
     }
-
     private fun todaysOutfit() {
     }
 }
