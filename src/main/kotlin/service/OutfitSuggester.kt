@@ -45,6 +45,7 @@ object OutfitSuggester {
     }
 }
 
+
 enum class Season {
     SPRING, SUMMER, AUTUMN, WINTER
 }
