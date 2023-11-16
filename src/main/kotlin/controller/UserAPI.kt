@@ -30,4 +30,8 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
     fun authenticateUser(user: User, password: String): Boolean {
         return user.checkPassword(password)
     }
+
+    fun updateUser(user: User) {
+        persistenceManager.saveUserData(user)
+    }
 }

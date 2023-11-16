@@ -2,5 +2,15 @@
     "username": "wilson",
     "password": "123",
     "wardrobe": {
+        "clothes": [
+            {
+                "id": 1,
+                "type": "JUMPER",
+                "brand": "Nike",
+                "name": "Nike Jumper",
+                "color": "blue",
+                "texture": "cotton"
+            }
+        ]
     }
 }

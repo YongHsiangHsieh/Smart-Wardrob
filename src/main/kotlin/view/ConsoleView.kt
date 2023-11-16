@@ -4,6 +4,7 @@ import mu.KotlinLogging
 import controller.UserAPI
 import controller.WardrobeAPI
 import model.ClothingType
+import model.User
 import utils.ScannerInput
 
 class ConsoleView(
@@ -11,6 +12,7 @@ class ConsoleView(
     private val wardrobeAPI: WardrobeAPI
 ) {
     private val logger = KotlinLogging.logger {}
+    private var currentUser: User? = null
     fun startApplication() {
         var choice: Int
         do {
@@ -18,6 +20,7 @@ class ConsoleView(
             when (choice) {
                 1 -> adminMenu()
                 2 -> userLogin()
+                0 -> exitApplication()
                 else -> logger.info { "Invalid option" }
             }
         } while (choice != 0)
@@ -87,7 +90,8 @@ class ConsoleView(
         val password = ScannerInput.readNextLine("Enter password: ")
         val user = userAPI.findUser(username)
         if (user != null && userAPI.authenticateUser(user, password)) {
-            wardrobeAPI.setWardrobe(user.getWardrobe())
+            currentUser = user
+            wardrobeAPI.setWardrobe(currentUser!!.getWardrobe())
             wardrobeMenu()
         } else {
             logger.info { "Invalid username or password" }
@@ -149,10 +153,11 @@ class ConsoleView(
     }
 
     private fun addClothing() {
-        // TODO: Add clothing type enum
         val clothingData = mutableMapOf<String, String>()
         clothingData["id"] = ScannerInput.readNextLine("Enter clothing id: ")
-        clothingData["type"] = ScannerInput.readNextLine("Enter clothing type: ")
+        clothingData["type"] = getClothingType().toString()
+        clothingData["brand"] = ScannerInput.readNextLine("Enter clothing brand: ")
+        clothingData["name"] = ScannerInput.readNextLine("Enter clothing name: ")
         clothingData["color"] = ScannerInput.readNextLine("Enter clothing color: ")
         clothingData["texture"] = ScannerInput.readNextLine("Enter clothing texture: ")
         val success = wardrobeAPI.addClothingToWardrobe(clothingData)
@@ -261,4 +266,12 @@ class ConsoleView(
             else -> ClothingType.UNKNOWN
         }
     }
+
+    private fun exitApplication() {
+        currentUser?.let {
+            userAPI.updateUser(it)
+            logger.info { "User data saved successfully." }
+        }
+    }
+
 }
