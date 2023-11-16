@@ -4,7 +4,6 @@ import mu.KotlinLogging
 import controller.UserAPI
 import controller.WardrobeAPI
 import model.ClothingType
-import model.User
 import utils.ScannerInput
 
 class ConsoleView(
@@ -94,7 +93,7 @@ class ConsoleView(
         }
     }
 
-    private fun displayWardrobe(): Int{
+    private fun displayWardrobe(): Int {
         return ScannerInput.readNextInt(
             """
             1 -> Today's Outfit
@@ -119,14 +118,17 @@ class ConsoleView(
         } while (choice != 0)
     }
 
+    private fun todaysOutfit() {
+    }
+
     private fun displayManageWardrobe(): Int {
         return ScannerInput.readNextInt(
             """
             Wardrobe Management:
-            1. Add Clothing
-            2. Update Clothing
-            3. Remove Clothing
-            4. Back to Wardrobe Menu
+            1 -> Add Clothing
+            2 -> Update Clothing
+            3 -> Remove Clothing
+            4 -> Back to Wardrobe Menu
             Enter option: 
         """.trimIndent()
         )
@@ -182,18 +184,91 @@ class ConsoleView(
         }
     }
 
-    private fun viewWardrobe() {
-        val userInput = ScannerInput.readNextInt(
+    private fun displayViewWardrobe(): Int {
+        return ScannerInput.readNextInt(
             """
             Wardrobe View:
-            1. View All Clothing
-            2. View Clothing by Type
-            3. View Clothing by Type and Color
-            3. Back to Wardrobe Menu
+            1 -> View All Clothing
+            2 -> View Clothing by Type
+            3 -> View Clothing by Type and Color
+            0 -> Back to Wardrobe Menu
             Enter option: 
         """.trimIndent()
         )
     }
-    private fun todaysOutfit() {
+
+    private fun viewWardrobe() {
+        var choice: Int
+        do {
+            choice = displayViewWardrobe()
+            when (choice) {
+                1 -> viewAllClothing()
+                2 -> viewClothingByType()
+                3 -> viewClothingByTypeAndColor()
+                else -> logger.info { "Invalid option" }
+            }
+        } while (choice != 0)
+    }
+
+    private fun viewAllClothing() {
+        val clothing = wardrobeAPI.getAllClothing()
+        if (clothing.isNotEmpty()) {
+            clothing.forEach { println(it) }
+        } else {
+            logger.info { "No clothing in wardrobe" }
+        }
+    }
+
+    private fun viewClothingByType() {
+        val option = ScannerInput.readNextInt("""
+            Clothing Types:
+            1 -> JUMPER
+            2 -> SHIRT
+            3 -> SHORTS
+            4 -> TRACKSUIT
+            5 -> JACKET
+            Enter option: 
+        """.trimIndent())
+        val type = when(option){
+            1 -> ClothingType.JUMPER
+            2 -> ClothingType.SHIRT
+            3 -> ClothingType.SHORTS
+            4 -> ClothingType.TRACKSUIT
+            5 -> ClothingType.JACKET
+            else -> ClothingType.UNKNOWN
+        }
+        val clothing = wardrobeAPI.getClothingByType(type)
+        if (clothing.isNotEmpty()) {
+            clothing.forEach { println(it) }
+        } else {
+            logger.info { "No clothing of type $type in wardrobe" }
+        }
+    }
+
+    private fun viewClothingByTypeAndColor() {
+        val option = ScannerInput.readNextInt("""
+            Clothing Types:
+            1 -> JUMPER
+            2 -> SHIRT
+            3 -> SHORTS
+            4 -> TRACKSUIT
+            5 -> JACKET
+            Enter option: 
+        """.trimIndent())
+        val type = when(option){
+            1 -> ClothingType.JUMPER
+            2 -> ClothingType.SHIRT
+            3 -> ClothingType.SHORTS
+            4 -> ClothingType.TRACKSUIT
+            5 -> ClothingType.JACKET
+            else -> ClothingType.UNKNOWN
+        }
+        val color = ScannerInput.readNextLine("Enter clothing color: ")
+        val clothing = wardrobeAPI.searchClothingByColorAndType(color, type)
+        if (clothing.isNotEmpty()) {
+            clothing.forEach { println(it) }
+        } else {
+            logger.info { "No clothing of type $type and color $color in wardrobe" }
+        }
     }
 }
