@@ -1,5 +1,6 @@
 package view
 
+import mu.KotlinLogging
 import controller.UserAPI
 import controller.WardrobeAPI
 import model.ClothingType
@@ -9,41 +10,75 @@ class ConsoleView(
     private val userAPI: UserAPI,
     private val wardrobeAPI: WardrobeAPI
 ) {
-//    fun loginUser(): Boolean {
-//        val username = ScannerInput.readNextLine("Enter username: ")
-//        val user = userAPI.findUser(username)
-//        if (user == null) {
-//            println("User not found!")
-//            return false
-//        }
-//        val password = ScannerInput.readNextLine("Enter password: ")
-//        // Check password
-//        return true
-//    }
+    private val logger = KotlinLogging.logger {}
+    fun startApplication() {
+        var choice: Int
+        do {
+            choice = displayMainMenu()
+            when (choice) {
+                1 -> adminMenu()
+//                2 -> smartWardrobeMenu()
+                else -> logger.info { "Invalid option" }
+            }
+        } while (choice != 0)
+    }
 
-    fun displayMainMenu(): Int {
+    private fun displayMainMenu(): Int {
         return ScannerInput.readNextInt(
             """
-            1. Admin
-            2. Smart Wardrobe
-            3. Exit
+            1 -> Admin
+            2 -> Smart Wardrobe
+            0 -> Exit
             Enter option: 
         """.trimIndent()
         )
     }
 
-    fun manageUsers() {
-        val userInput = ScannerInput.readNextInt(
+    private fun manageUsers(): Int {
+        return ScannerInput.readNextInt(
             """
             User Management:
-            1. Create User
-            2. Delete User
-            3. Update User
-            4. Back to Main Menu
+            1 -> Create User
+            2 -> Delete User
+            0 -> Back to Main Menu
             Enter option: 
         """.trimIndent()
         )
     }
+
+    private fun adminMenu() {
+        var choice: Int
+        do {
+            choice = manageUsers()
+            when (choice) {
+                1 -> addUser()
+                2 -> deleteUser()
+                else -> logger.info { "Invalid option" }
+            }
+        } while (choice != 0)
+    }
+
+    private fun addUser() {
+        val username = ScannerInput.readNextLine("Enter username: ")
+        val password = ScannerInput.readNextLine("Enter password: ")
+        val success = userAPI.createUser(username, password)
+        if (success) {
+            logger.info { "User created successfully" }
+        } else {
+            logger.info { "User already exists" }
+        }
+    }
+
+    private fun deleteUser() {
+        val username = ScannerInput.readNextLine("Enter username: ")
+        val success = userAPI.deleteUser(username)
+        if (success) {
+            logger.info { "User deleted successfully" }
+        } else {
+            logger.info { "User does not exist" }
+        }
+    }
+
 
     fun displayWardrobe(): Int{
         return ScannerInput.readNextInt(
