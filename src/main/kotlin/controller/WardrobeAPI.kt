@@ -39,4 +39,8 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
     fun searchClothingByColorAndType(color: String, type: ClothingType): List<Clothing> {
         return wardrobe?.searchByColorAndType(color, type) ?: emptyList()
     }
+
+    fun setWardrobe(newWardrobe: Wardrobe) {
+        wardrobe = newWardrobe
+    }
 }
