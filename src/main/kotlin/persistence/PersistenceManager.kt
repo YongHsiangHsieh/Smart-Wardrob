@@ -1,7 +1,7 @@
 package persistence
 
 import model.User
-import utils.JsonUtils
+import utils.JsonUtil
 import java.io.File
 
 object PersistenceManager {
@@ -12,14 +12,14 @@ object PersistenceManager {
     }
 
     fun saveUserData(user: User) {
-        val userData = JsonUtils.serializeToJson(user)
+        val userData = JsonUtil.serializeToJson(user)
         File("$USER_DATA_PATH${user.username}.json").writeText(userData)
     }
 
     fun loadUserData(username: String): User? {
         val userFile = File("$USER_DATA_PATH$username.json")
         if (userFile.exists()) {
-            return JsonUtils.deserializeFromJson(userFile.readText())
+            return JsonUtil.deserializeFromJson(userFile.readText())
         }
         return null
     }

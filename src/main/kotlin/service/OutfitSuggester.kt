@@ -1,9 +1,8 @@
-package utils
+package service
 
 import model.Clothing
 import model.ClothingType
 import model.Wardrobe
-import java.util.*
 
 // TODO: This class should be moved to the service package
 object OutfitSuggester {
