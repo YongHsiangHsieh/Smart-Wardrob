@@ -8,7 +8,7 @@ object OutfitSuggester {
 
     fun suggestOutfit(wardrobe: Wardrobe, currentMonth: Int): List<Clothing> {
         val season = determineSeason(currentMonth)
-        return getSeasonalOutfit(season)
+        return getSeasonalOutfit(season, wardrobe)
     }
 
     private fun determineSeason(month: Int): Season {
@@ -20,34 +20,22 @@ object OutfitSuggester {
         }
     }
 
-    private fun getSeasonalOutfit(season: Season): List<Clothing> {
-        return when(season) {
-            // TODO: Randomise the selection of clothing
-            Season.SPRING -> listOf(
-                Clothing(0, ClothingType.TRACKSUIT),
-                Clothing(0, ClothingType.SHIRT)
-            )
-            Season.SUMMER -> listOf(
-                Clothing(0, ClothingType.SHIRT),
-                Clothing(0, ClothingType.SHORTS)
-            )
-            Season.AUTUMN -> listOf(
-                Clothing(0, ClothingType.JUMPER),
-                Clothing(0, ClothingType.TRACKSUIT)
-            )
-            Season.WINTER -> listOf(
-                Clothing(0, ClothingType.JUMPER),
-                Clothing(0, ClothingType.TRACKSUIT),
-                Clothing(0, ClothingType.JACKET)
-            )
-        }
-    }
 
     private fun selectRandomOutfit(clothingTypes: List<ClothingType>, wardrobe: Wardrobe): List<Clothing> {
         return clothingTypes.mapNotNull {
             wardrobe.getClothesByType(it).randomOrNull()
         }
     }
+
+    private fun getSeasonalOutfit(season: Season, wardrobe: Wardrobe): List<Clothing> {
+        return when (season) {
+            Season.SPRING -> selectRandomOutfit(listOf(ClothingType.TRACKSUIT, ClothingType.SHIRT), wardrobe)
+            Season.SUMMER -> selectRandomOutfit(listOf(ClothingType.SHIRT, ClothingType.SHORTS), wardrobe)
+            Season.AUTUMN -> selectRandomOutfit(listOf(ClothingType.JUMPER, ClothingType.TRACKSUIT), wardrobe)
+            Season.WINTER -> selectRandomOutfit(listOf(ClothingType.JUMPER, ClothingType.TRACKSUIT, ClothingType.JACKET), wardrobe)
+        }
+    }
+
 
 }
 
