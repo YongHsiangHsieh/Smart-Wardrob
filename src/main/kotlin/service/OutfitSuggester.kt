@@ -4,12 +4,11 @@ import model.Clothing
 import model.ClothingType
 import model.Wardrobe
 
-// TODO: This class should be moved to the service package
 object OutfitSuggester {
 
     fun suggestOutfit(wardrobe: Wardrobe, currentMonth: Int): List<Clothing> {
         val season = determineSeason(currentMonth)
-        return getSeasonalOutfit(season)
+        return getSeasonalOutfit(season, wardrobe)
     }
 
     private fun determineSeason(month: Int): Season {
@@ -21,29 +20,42 @@ object OutfitSuggester {
         }
     }
 
-    private fun getSeasonalOutfit(season: Season): List<Clothing> {
-        return when(season) {
-            // TODO: Randomise the selection of clothing
-            Season.SPRING -> listOf(
-                Clothing(0, ClothingType.TRACKSUIT),
-                Clothing(0, ClothingType.SHIRT)
+
+    private fun selectRandomOutfit(clothingTypes: ClothingType, wardrobe: Wardrobe): Clothing? {
+        val clothing = wardrobe.getClothesByType(clothingTypes)
+        return if (clothing.isNotEmpty()) {
+            clothing.random()
+        } else {
+            null
+        }
+    }
+
+    private fun getSeasonalOutfit(season: Season, wardrobe: Wardrobe): List<Clothing> {
+        return when (season) {
+            Season.SPRING -> listOfNotNull(
+                selectRandomOutfit(ClothingType.SHIRT, wardrobe),
+                selectRandomOutfit(ClothingType.TRACKSUIT, wardrobe),
             )
-            Season.SUMMER -> listOf(
-                Clothing(0, ClothingType.SHIRT),
-                Clothing(0, ClothingType.SHORTS)
+
+            Season.SUMMER -> listOfNotNull(
+                selectRandomOutfit(ClothingType.SHIRT, wardrobe),
+                selectRandomOutfit(ClothingType.SHORTS, wardrobe),
             )
-            Season.AUTUMN -> listOf(
-                Clothing(0, ClothingType.JUMPER),
-                Clothing(0, ClothingType.TRACKSUIT)
+
+            Season.AUTUMN -> listOfNotNull(
+                selectRandomOutfit(ClothingType.JUMPER, wardrobe),
+                selectRandomOutfit(ClothingType.TRACKSUIT, wardrobe),
             )
-            Season.WINTER -> listOf(
-                Clothing(0, ClothingType.JUMPER),
-                Clothing(0, ClothingType.TRACKSUIT),
-                Clothing(0, ClothingType.JACKET)
+            Season.WINTER -> listOfNotNull(
+                selectRandomOutfit(ClothingType.JUMPER, wardrobe),
+                selectRandomOutfit(ClothingType.TRACKSUIT, wardrobe),
+                selectRandomOutfit(ClothingType.JACKET, wardrobe),
             )
         }
     }
+
 }
+
 
 enum class Season {
     SPRING, SUMMER, AUTUMN, WINTER
