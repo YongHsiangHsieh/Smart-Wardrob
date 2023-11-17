@@ -1,4 +1,4 @@
-# Smart-Wardrob
+# Smart Wardrob
 
 ## Introduction
 
@@ -10,23 +10,34 @@ Developed with robust Kotlin programming, Smart-Wardrob offers a seamless and in
 
 Join us on this journey to transform how you interact with your wardrobe. With Smart-Wardrob, prepare to step into a world where style meets technology, leading to a smarter, more organized wardrobe experience.
 
-## Features
-- **User Management:** Create and delete user accounts.
-- **Wardrobe Management:** Add and manage clothing items in a virtual wardrobe.
-- **Data Persistence:** Save and load user data securely.
-- **JSON Utilities:** For efficient data serialization and deserialization.
-- **Outfit Suggestion:** Automated outfit suggestions based on the season.
-- **Interactive Console Interface:** User-friendly console interface for easy navigation.
+### Overview
+This Kotlin program represents the culmination of sprint two in a series of development sprints. The program's primary focus is on functionality, laying the groundwork for a robust and interactive application. It's structured in a manner that separates concerns, adhering to MVC (Model-View-Controller) principles.
 
-## Getting Started
+### Components
+- **UserAPI & WardrobeAPI (Controllers)**: Handle the business logic related to users and wardrobes. They act as intermediaries between the model and the view, processing user input and manipulating data models.
+- **Clothing, User, Wardrobe (Models)**: Represent the core data structures of the application. Each class is designed with serialization in mind, facilitating ease of data storage and retrieval.
+- **PersistenceManager**: Manages data persistence, ensuring that user data is stored and retrieved efficiently.
+- **OutfitSuggester (Service)**: Provides logic for suggesting outfits, a key feature of the application. It utilizes clothing and wardrobe data to generate suitable outfit recommendations.
+- **JsonUtil (Utility)**: A utility class for handling JSON operations, crucial for the serialization and deserialization of model objects.
+- **ScannerInput (Utility)**: Handles console input, allowing for user interaction with the application.
+- **ConsoleView (View)**: Manages the user interface, presenting data and options to the user and capturing their inputs.
 
-### Prerequisites
-- JVM 11
-- Kotlin
-- IDE
+### Current Functionality (As of Sprint Two)
+- Basic data models for users, clothing, and wardrobes.
+- Controllers to manage user and wardrobe data.
+- Basic outfit suggestion logic.
+- Console-based user interaction.
+- Basic persistence layer for data storage and retrieval.
 
-### Installation
-1. Clone the repo:
-   ```
-   git clone [URL]
-   ```
+### Future Developments (Planned for Next Sprints)
+- Comprehensive testing and optimization of the code.
+- Advanced features in outfit suggestions based on user preferences and external factors like weather.
+- Enhanced user interface for a more engaging user experience.
+- Additional functionalities in the persistence layer for better data management.
+
+### Setup and Execution
+To set up and run the program:
+1. Ensure you have Kotlin and a compatible IDE (like IntelliJ IDEA) installed.
+2. Clone the repository or download the source code.
+3. Open the project in your IDE and resolve any dependencies.
+4. Run the program from the main entry point (Main.kt, if available).
