@@ -10,5 +10,4 @@ fun main(args: Array<String>) {
 
     consoleView.startApplication()
 
-
 }
