@@ -5,6 +5,7 @@ import controller.UserAPI
 import controller.WardrobeAPI
 import model.ClothingType
 import model.User
+import service.OutfitSuggester
 import utils.ScannerInput
 
 class ConsoleView(
@@ -126,6 +127,17 @@ class ConsoleView(
     }
 
     private fun todaysOutfit() {
+        val wardrobe = currentUser?.getWardrobe()
+        if (wardrobe != null) {
+            val outfit = OutfitSuggester.suggestOutfit(wardrobe, 5)
+            if (outfit.isNotEmpty()) {
+                outfit.forEach { println(it) }
+            } else {
+                logger.info { "No outfit suggestions for today" }
+            }
+        } else {
+            logger.info { "No wardrobe found" }
+        }
     }
 
     private fun displayManageWardrobe(): Int {
