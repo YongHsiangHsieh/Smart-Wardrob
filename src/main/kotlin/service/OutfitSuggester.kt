@@ -21,21 +21,38 @@ object OutfitSuggester {
     }
 
 
-    private fun selectRandomOutfit(clothingTypes: List<ClothingType>, wardrobe: Wardrobe): List<Clothing> {
-        return clothingTypes.mapNotNull {
-            wardrobe.getClothesByType(it).randomOrNull()
+    private fun selectRandomOutfit(clothingTypes: ClothingType, wardrobe: Wardrobe): Clothing? {
+        val clothing = wardrobe.getClothesByType(clothingTypes)
+        return if (clothing.isNotEmpty()) {
+            clothing.random()
+        } else {
+            null
         }
     }
 
     private fun getSeasonalOutfit(season: Season, wardrobe: Wardrobe): List<Clothing> {
         return when (season) {
-            Season.SPRING -> selectRandomOutfit(listOf(ClothingType.TRACKSUIT, ClothingType.SHIRT), wardrobe)
-            Season.SUMMER -> selectRandomOutfit(listOf(ClothingType.SHIRT, ClothingType.SHORTS), wardrobe)
-            Season.AUTUMN -> selectRandomOutfit(listOf(ClothingType.JUMPER, ClothingType.TRACKSUIT), wardrobe)
-            Season.WINTER -> selectRandomOutfit(listOf(ClothingType.JUMPER, ClothingType.TRACKSUIT, ClothingType.JACKET), wardrobe)
+            Season.SPRING -> listOfNotNull(
+                selectRandomOutfit(ClothingType.SHIRT, wardrobe),
+                selectRandomOutfit(ClothingType.TRACKSUIT, wardrobe),
+            )
+
+            Season.SUMMER -> listOfNotNull(
+                selectRandomOutfit(ClothingType.SHIRT, wardrobe),
+                selectRandomOutfit(ClothingType.SHORTS, wardrobe),
+            )
+
+            Season.AUTUMN -> listOfNotNull(
+                selectRandomOutfit(ClothingType.JUMPER, wardrobe),
+                selectRandomOutfit(ClothingType.TRACKSUIT, wardrobe),
+            )
+            Season.WINTER -> listOfNotNull(
+                selectRandomOutfit(ClothingType.JUMPER, wardrobe),
+                selectRandomOutfit(ClothingType.TRACKSUIT, wardrobe),
+                selectRandomOutfit(ClothingType.JACKET, wardrobe),
+            )
         }
     }
-
 
 }
 
