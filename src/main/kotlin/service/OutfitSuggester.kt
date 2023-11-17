@@ -4,7 +4,6 @@ import model.Clothing
 import model.ClothingType
 import model.Wardrobe
 
-// TODO: This class should be moved to the service package
 object OutfitSuggester {
 
     fun suggestOutfit(wardrobe: Wardrobe, currentMonth: Int): List<Clothing> {
@@ -43,6 +42,13 @@ object OutfitSuggester {
             )
         }
     }
+
+    private fun selectRandomOutfit(clothingTypes: List<ClothingType>, wardrobe: Wardrobe): List<Clothing> {
+        return clothingTypes.mapNotNull {
+            wardrobe.getClothesByType(it).randomOrNull()
+        }
+    }
+
 }
 
 
