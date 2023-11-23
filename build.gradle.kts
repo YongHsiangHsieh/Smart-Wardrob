@@ -16,7 +16,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
     implementation("org.slf4j:slf4j-simple:2.0.9")
     implementation("io.github.microutils:kotlin-logging:3.0.5")
-    implementation("io.github.cdimascio:dotenv-java:5.2.2")
+    implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
 //    implementation("com.squareup.okhttp3:okhttp:4.9.0")
 
 //    implementation("org.yaml:snakeyaml:1.33")
