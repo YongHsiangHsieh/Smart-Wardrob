@@ -8,12 +8,23 @@ import model.User
 import service.OutfitSuggester
 import utils.ScannerInput
 
+/**
+ * Console-based view for the application, providing a user interface for interacting with the system.
+ * Handles user and wardrobe management, including login, user creation/deletion, and wardrobe operations.
+ *
+ * @property userAPI An instance of [UserAPI] for handling user-related operations.
+ * @property wardrobeAPI An instance of [WardrobeAPI] for handling wardrobe-related operations.
+ */
 class ConsoleView(
     private val userAPI: UserAPI,
     private val wardrobeAPI: WardrobeAPI
 ) {
     private val logger = KotlinLogging.logger {}
     private var currentUser: User? = null
+
+    /**
+     * Starts the application, displaying the main menu and handling user input.
+     */
     fun startApplication() {
         var choice: Int
         do {
@@ -27,6 +38,11 @@ class ConsoleView(
         } while (choice != 0)
     }
 
+    /**
+     * Displays the main menu and reads the user's choice.
+     *
+     * @return The user's menu choice as an integer.
+     */
     private fun displayMainMenu(): Int {
         return ScannerInput.readNextInt(
             """
@@ -38,6 +54,11 @@ class ConsoleView(
         )
     }
 
+    /**
+     * Displays the user management menu and reads the user's choice.
+     *
+     * @return The user's choice for user management operations as an integer.
+     */
     private fun manageUsers(): Int {
         return ScannerInput.readNextInt(
             """
@@ -50,6 +71,9 @@ class ConsoleView(
         )
     }
 
+    /**
+     * Handles the admin menu, providing options for user management.
+     */
     private fun adminMenu() {
         var choice: Int
         do {
@@ -63,6 +87,9 @@ class ConsoleView(
         } while (choice != 0)
     }
 
+    /**
+     * Handles the process of adding a new user.
+     */
     private fun addUser() {
         val username = ScannerInput.readNextLine("Enter username: ")
         val password = ScannerInput.readNextLine("Enter password: ")
@@ -74,6 +101,9 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Handles the process of deleting an existing user.
+     */
     private fun deleteUser() {
         val username = ScannerInput.readNextLine("Enter username: ")
         val success = userAPI.deleteUser(username)
@@ -86,6 +116,9 @@ class ConsoleView(
 
     // Wardrobe Menu
 
+    /**
+     * Handles user login, setting the current user and transitioning to the wardrobe menu.
+     */
     private fun userLogin() {
         println("Welcome to Smart Wardrobe! Please login to continue.")
         val username = ScannerInput.readNextLine("Enter username: ")
@@ -100,6 +133,11 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Displays the wardrobe menu and reads the user's choice.
+     *
+     * @return The user's choice for wardrobe operations as an integer.
+     */
     private fun displayWardrobe(): Int {
         return ScannerInput.readNextInt(
             """
@@ -112,6 +150,9 @@ class ConsoleView(
         )
     }
 
+    /**
+     * Handles the wardrobe menu, providing options for outfit suggestions and wardrobe management.
+     */
     private fun wardrobeMenu() {
         var choice: Int
         do {
@@ -126,6 +167,9 @@ class ConsoleView(
         } while (choice != 0)
     }
 
+    /**
+     * Suggests an outfit for the current day based on the current user's wardrobe.
+     */
     private fun todaysOutfit() {
         val wardrobe = currentUser?.getWardrobe()
         if (wardrobe != null) {
@@ -140,6 +184,11 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Displays the wardrobe management menu and reads the user's choice.
+     *
+     * @return The user's choice for wardrobe management operations as an integer.
+     */
     private fun displayManageWardrobe(): Int {
         return ScannerInput.readNextInt(
             """
@@ -153,6 +202,9 @@ class ConsoleView(
         )
     }
 
+    /**
+     * Handles the process of managing the wardrobe, including adding, updating, and removing clothing.
+     */
     private fun manageWardrobe() {
         var choice: Int
         do {
@@ -167,6 +219,9 @@ class ConsoleView(
         } while (choice != 0)
     }
 
+    /**
+     * Handles the process of adding a new clothing item to the wardrobe.
+     */
     private fun addClothing() {
         val clothingData = mutableMapOf<String, String>()
         clothingData["id"] = ScannerInput.readNextLine("Enter clothing id: ")
@@ -183,6 +238,9 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Handles the process of updating an existing clothing item in the wardrobe.
+     */
     private fun updateClothing() {
         val clothingData = mutableMapOf<String, String>()
         val id = ScannerInput.readNextInt("Enter clothing id: ")
@@ -196,6 +254,9 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Handles the process of removing a clothing item from the wardrobe.
+     */
     private fun removeClothing() {
         val id = ScannerInput.readNextInt("Enter clothing id: ")
         val success = wardrobeAPI.deleteClothingFromWardrobe(id)
@@ -206,6 +267,11 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Displays options for viewing the wardrobe and reads the user's choice.
+     *
+     * @return The user's choice for viewing wardrobe contents as an integer.
+     */
     private fun displayViewWardrobe(): Int {
         return ScannerInput.readNextInt(
             """
@@ -219,6 +285,9 @@ class ConsoleView(
         )
     }
 
+    /**
+     * Handles the process of viewing the wardrobe contents.
+     */
     private fun viewWardrobe() {
         var choice: Int
         do {
@@ -233,6 +302,9 @@ class ConsoleView(
         } while (choice != 0)
     }
 
+    /**
+     * Displays all clothing items in the current user's wardrobe.
+     */
     private fun viewAllClothing() {
         val clothing = wardrobeAPI.getAllClothing()
         if (clothing.isNotEmpty()) {
@@ -242,6 +314,9 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Displays clothing items of a specific type in the current user's wardrobe.
+     */
     private fun viewClothingByType() {
         val type = getClothingType()
         val clothing = wardrobeAPI.getClothingByType(type)
@@ -252,6 +327,9 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Displays clothing items of a specific type and color in the current user's wardrobe.
+     */
     private fun viewClothingByTypeAndColor() {
         val type = getClothingType()
         val color = ScannerInput.readNextLine("Enter clothing color: ")
@@ -263,6 +341,11 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Gets the clothing type from the user.
+     *
+     * @return The chosen [ClothingType].
+     */
     private fun getClothingType(): ClothingType {
         while (true) {
             val option = ScannerInput.readNextInt(
@@ -290,6 +373,9 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Handles the process of exiting the application, including saving any changes to the current user.
+     */
     private fun exitApplication() {
         currentUser?.let {
             userAPI.updateUser(it)
