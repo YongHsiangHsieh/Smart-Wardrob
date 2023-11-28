@@ -5,7 +5,7 @@ import utils.JsonUtil
 import java.io.File
 
 object PersistenceManager {
-    private const val USER_DATA_PATH = "data/users/"
+    var USER_DATA_PATH = "data/users/"
 
     init {
         File(USER_DATA_PATH).mkdirs()
