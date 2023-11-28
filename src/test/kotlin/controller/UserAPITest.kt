@@ -1,6 +1,6 @@
 package controller
 
-import model.User
+import model.ClothingType
 import model.Wardrobe
 import org.junit.jupiter.api.AfterEach
 import persistence.PersistenceManager
@@ -18,13 +18,12 @@ class UserAPITest {
 
     @BeforeEach
     fun setup() {
-        persistenceManager = PersistenceManager // Assuming PersistenceManager is a singleton or similar
+        persistenceManager = PersistenceManager
         userAPI = UserAPI(persistenceManager)
     }
 
     @AfterEach
     fun tearDown() {
-        // Delete the test user after each test
         userAPI.deleteUser(testUsername)
     }
 
@@ -74,6 +73,29 @@ class UserAPITest {
         val user = userAPI.findUser(testUsername)
         assertNotNull(user)
         assertFalse(userAPI.authenticateUser(user!!, "wrongPassword"))
+    }
+
+    @Test
+    fun `update user's wardrobe should persist changes`() {
+        assertTrue(userAPI.createUser(testUsername, testPassword))
+        val user = userAPI.findUser(testUsername)
+        assertNotNull(user)
+        val wardrobeAPI = WardrobeAPI(user!!.getWardrobe())
+        val clothingData = mapOf(
+            "id" to "1",
+            "type" to "SHIRT",
+            "brand" to "TestBrand",
+            "name" to "TestBrand",
+            "color" to "Blue",
+            "texture" to "Cotton"
+        )
+        assertTrue(wardrobeAPI.addClothingToWardrobe(clothingData))
+        userAPI.updateUser(user)
+        val updatedUser = userAPI.findUser(testUsername)
+        assertNotNull(updatedUser)
+        val updatedWardrobe = updatedUser!!.getWardrobe()
+        assertNotNull(updatedWardrobe)
+        assertTrue(updatedWardrobe.getAllClothing().any { it.id == 1 && it.type == ClothingType.SHIRT })
     }
 
 }

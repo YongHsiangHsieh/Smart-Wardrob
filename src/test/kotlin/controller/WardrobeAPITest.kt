@@ -14,7 +14,7 @@ class WardrobeAPITest {
         "id" to "1",
         "type" to "SHIRT",
         "brand" to "TestBrand",
-        "name" to "TestName",
+        "name" to "TestBrand",
         "color" to "Red",
         "texture" to "Cotton"
     )
