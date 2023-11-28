@@ -1,6 +1,5 @@
 package controller
 
-import model.Clothing
 import model.ClothingType
 import model.Wardrobe
 import org.junit.jupiter.api.BeforeEach
