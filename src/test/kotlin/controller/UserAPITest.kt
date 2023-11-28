@@ -1,7 +1,6 @@
 package controller
 
 import model.ClothingType
-import model.Wardrobe
 import org.junit.jupiter.api.AfterEach
 import persistence.PersistenceManager
 import org.junit.jupiter.api.BeforeEach
