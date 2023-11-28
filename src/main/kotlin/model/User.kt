@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 class User(
-    val username: String,
+    var username: String,
     private val password: String,
     private var wardrobe: Wardrobe = Wardrobe()
 ) {
