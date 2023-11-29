@@ -28,7 +28,7 @@ object PersistenceManager {
      */
     fun saveUserData(user: User) {
         val userData = JsonUtil.serializeToJson(user)
-        File("$USER_DATA_PATH${user.username}.json").writeText(userData)
+        File(USER_DATA_PATH + user.username + EXTENSION).writeText(userData)
     }
 
     /**
