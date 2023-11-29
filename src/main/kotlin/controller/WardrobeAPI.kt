@@ -67,9 +67,8 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      * @param type The [ClothingType] to filter the clothing items.
      * @return A list of [Clothing] items of the specified type, or an empty list if the wardrobe is not set.
      */
-    fun getClothingByType(type: ClothingType): List<Clothing> {
-        return wardrobe?.getClothesByType(type) ?: emptyList()
-    }
+    fun getClothingByType(type: ClothingType): List<Clothing> = wardrobe?.getClothesByType(type) ?: emptyList()
+
 
     /**
      * Searches for clothing items in the wardrobe by their color and type.
