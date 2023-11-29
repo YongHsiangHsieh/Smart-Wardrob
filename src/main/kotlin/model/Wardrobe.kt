@@ -62,9 +62,7 @@ class Wardrobe {
      * @param type The [ClothingType] of clothing to retrieve.
      * @return A list of [Clothing] items of the specified type.
      */
-    fun getClothesByType(type: ClothingType): List<Clothing> {
-        return clothes.filter { it.type == type }
-    }
+    fun getClothesByType(type: ClothingType): List<Clothing> = clothes.filter { it.type == type }
 
     /**
      * Searches for clothing items by their color and type.
