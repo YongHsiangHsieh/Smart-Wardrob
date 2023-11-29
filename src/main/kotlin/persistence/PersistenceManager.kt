@@ -12,7 +12,8 @@ object PersistenceManager {
     /**
      * Path to the directory where user data is stored.
      */
-    var USER_DATA_PATH = "data/users/"
+    var USER_DATA_PATH = "data${File.separator}users${File.separator}"
+    private const val EXTENSION = ".json"
 
     init {
         File(USER_DATA_PATH).mkdirs()
@@ -27,7 +28,7 @@ object PersistenceManager {
      */
     fun saveUserData(user: User) {
         val userData = JsonUtil.serializeToJson(user)
-        File("$USER_DATA_PATH${user.username}.json").writeText(userData)
+        File(USER_DATA_PATH + user.username + EXTENSION).writeText(userData)
     }
 
     /**
@@ -39,11 +40,8 @@ object PersistenceManager {
      * @return The [User] object if found, null otherwise.
      */
     fun loadUserData(username: String): User? {
-        val userFile = File("$USER_DATA_PATH$username.json")
-        if (userFile.exists()) {
-            return JsonUtil.deserializeFromJson(userFile.readText())
-        }
-        return null
+        val userFile = File(USER_DATA_PATH + username + EXTENSION)
+        return if (userFile.exists()) JsonUtil.deserializeFromJson<User>(userFile.readText()) else null
     }
 
     /**
@@ -54,9 +52,6 @@ object PersistenceManager {
      * @param username The username of the user whose data file is to be deleted.
      */
     fun deleteUserData(username: String) {
-        val userFile = File("$USER_DATA_PATH$username.json")
-        if (userFile.exists()) {
-            userFile.delete()
-        }
+        File(USER_DATA_PATH + username + EXTENSION).delete()
     }
 }
