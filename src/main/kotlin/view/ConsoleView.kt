@@ -174,10 +174,12 @@ class ConsoleView(
         val wardrobe = currentUser?.getWardrobe()
         if (wardrobe != null) {
             val outfit = OutfitSuggester.suggestOutfit(wardrobe, 5)
-            if (outfit.isNotEmpty()) {
-                outfit.forEach { println(it) }
-            } else {
-                logger.info { "No outfit suggestions for today" }
+            if (outfit != null) {
+                if (outfit.isNotEmpty()) {
+                    outfit.forEach { println(it) }
+                } else {
+                    logger.info { "No outfit suggestions for today" }
+                }
             }
         } else {
             logger.info { "No wardrobe found" }
