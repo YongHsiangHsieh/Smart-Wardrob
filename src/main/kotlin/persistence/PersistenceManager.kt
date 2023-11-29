@@ -40,11 +40,8 @@ object PersistenceManager {
      * @return The [User] object if found, null otherwise.
      */
     fun loadUserData(username: String): User? {
-        val userFile = File("$USER_DATA_PATH$username.json")
-        if (userFile.exists()) {
-            return JsonUtil.deserializeFromJson(userFile.readText())
-        }
-        return null
+        val userFile = File(USER_DATA_PATH + username + EXTENSION)
+        return if (userFile.exists()) JsonUtil.deserializeFromJson<User>(userFile.readText()) else null
     }
 
     /**
@@ -55,9 +52,6 @@ object PersistenceManager {
      * @param username The username of the user whose data file is to be deleted.
      */
     fun deleteUserData(username: String) {
-        val userFile = File("$USER_DATA_PATH$username.json")
-        if (userFile.exists()) {
-            userFile.delete()
-        }
+        File(USER_DATA_PATH + username + EXTENSION).delete()
     }
 }
