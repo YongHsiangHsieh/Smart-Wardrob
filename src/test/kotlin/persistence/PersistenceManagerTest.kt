@@ -2,9 +2,9 @@ package persistence
 
 import model.User
 import org.junit.jupiter.api.*
+import org.junit.jupiter.api.Test
 import java.io.File
 import kotlin.test.*
-import org.junit.jupiter.api.Test
 
 class PersistenceManagerTest {
 

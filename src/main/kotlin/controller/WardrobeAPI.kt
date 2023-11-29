@@ -35,8 +35,8 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      * @return True if the update is successful, false otherwise.
      */
     fun updateClothingInWardrobe(clothingId: Int, clothingData: Map<String, String>): Boolean {
-        val color = clothingData["color"]?: return false
-        val texture = clothingData["texture"]?: return false
+        val color = clothingData["color"] ?: return false
+        val texture = clothingData["texture"] ?: return false
         return wardrobe?.updateClothing(clothingId, color, texture) ?: false
     }
 
@@ -47,7 +47,7 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      * @return True if the deletion is successful, false otherwise.
      */
     fun deleteClothingFromWardrobe(clothingId: Int): Boolean {
-        return wardrobe?.deleteClothing(clothingId) ?:  false
+        return wardrobe?.deleteClothing(clothingId) ?: false
     }
 
     /**
@@ -98,6 +98,4 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
     fun setWardrobe(newWardrobe: Wardrobe) {
         wardrobe = newWardrobe
     }
-
-
 }

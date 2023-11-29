@@ -2,10 +2,10 @@ package controller
 
 import model.ClothingType
 import org.junit.jupiter.api.AfterEach
-import persistence.PersistenceManager
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
+import persistence.PersistenceManager
 
 class UserAPITest {
 
@@ -96,5 +96,4 @@ class UserAPITest {
         assertNotNull(updatedWardrobe)
         assertTrue(updatedWardrobe.getAllClothing().any { it.id == 1 && it.type == ClothingType.SHIRT })
     }
-
 }

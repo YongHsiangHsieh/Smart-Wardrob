@@ -1,8 +1,8 @@
 package model
 
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 
 class UserTest {
     private lateinit var user: User
@@ -35,5 +35,4 @@ class UserTest {
         val expectedString = "User: $username, Password=$password\nWardrobe: ${user.getWardrobe()}"
         assertEquals(expectedString, user.toString())
     }
-
 }
