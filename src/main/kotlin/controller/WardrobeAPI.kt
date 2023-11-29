@@ -44,9 +44,8 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      * @param clothingId The ID of the clothing to delete.
      * @return True if the deletion is successful, false otherwise.
      */
-    fun deleteClothingFromWardrobe(clothingId: Int): Boolean {
-        return wardrobe?.deleteClothing(clothingId) ?: false
-    }
+    fun deleteClothingFromWardrobe(clothingId: Int): Boolean =
+        wardrobe?.deleteClothing(clothingId) ?: false
 
     /**
      * Retrieves all clothing items from the wardrobe.
