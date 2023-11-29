@@ -38,16 +38,12 @@ class ConsoleView(
      *
      * @return The user's menu choice as an integer.
      */
-    private fun displayMainMenu(): Int {
-        return ScannerInput.readNextInt(
-            """
-            1 -> Admin
-            2 -> Smart Wardrobe
-            0 -> Exit
-            Enter option: 
-            """.trimIndent()
-        )
-    }
+    private fun displayMainMenu(): Int = ScannerInput.readNextInt("""
+        1 -> Admin
+        2 -> Smart Wardrobe
+        0 -> Exit
+        Enter option: 
+        """.trimIndent())
 
     /**
      * Displays the user management menu and reads the user's choice.
