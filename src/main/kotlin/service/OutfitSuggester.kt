@@ -18,9 +18,9 @@ object OutfitSuggester {
      * @param currentMonth The current month, used to determine the season.
      * @return A list of [Clothing] items representing the suggested outfit.
      */
-    fun suggestOutfit(wardrobe: Wardrobe, currentMonth: Int): List<Clothing> {
+    fun suggestOutfit(wardrobe: Wardrobe, currentMonth: Int): List<Clothing>? {
         val season = determineSeason(currentMonth)
-        return getSeasonalOutfit(season, wardrobe)
+        return season?.let { getSeasonalOutfit(it, wardrobe) }
     }
 
     /**
