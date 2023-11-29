@@ -17,14 +17,14 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
      * @param password The password for the new user.
      * @return True if the user is successfully created, false if a user with the same username already exists.
      */
-    fun createUser(username: String, password: String): Boolean {
-        return if (persistenceManager.loadUserData(username) == null) {
+    fun createUser(username: String, password: String): Boolean =
+        if (persistenceManager.loadUserData(username) == null) {
             persistenceManager.saveUserData(User(username, password))
             true
         } else {
             false
         }
-    }
+
 
     /**
      * Deletes a user with the specified username.
@@ -32,12 +32,12 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
      * @param username The username of the user to be deleted.
      * @return True if the user is successfully deleted, false if the user does not exist.
      */
-    fun deleteUser(username: String): Boolean {
-        return persistenceManager.loadUserData(username)?.let {
+    fun deleteUser(username: String): Boolean =
+        persistenceManager.loadUserData(username)?.let {
             persistenceManager.deleteUserData(username)
             true
         } ?: false
-    }
+
 
     /**
      * Finds a user by their username.
@@ -54,9 +54,7 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
      * @param password The password to verify.
      * @return True if the password is correct, false otherwise.
      */
-    fun authenticateUser(user: User, password: String): Boolean {
-        return user.checkPassword(password)
-    }
+    fun authenticateUser(user: User, password: String): Boolean = user.checkPassword(password)
 
     /**
      * Updates the data of an existing user.
