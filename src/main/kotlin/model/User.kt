@@ -31,9 +31,7 @@ class User(
      *
      * @return The wardrobe of the user.
      */
-    fun getWardrobe(): Wardrobe {
-        return wardrobe
-    }
+    fun getWardrobe() = wardrobe
 
     /**
      * Returns a string representation of the User object.
