@@ -71,7 +71,6 @@ class Wardrobe {
      * @param type The [ClothingType] of the clothing to search for.
      * @return A list of [Clothing] items that match the specified color and type.
      */
-    fun searchByColorAndType(color: String, type: ClothingType): List<Clothing> {
-        return clothes.filter { it.type == type && it.color.equals(color, ignoreCase = true) }
-    }
+    fun searchByColorAndType(color: String, type: ClothingType): List<Clothing> =
+        clothes.filter { it.type == type && it.color.equals(color, ignoreCase = true) }
 }
