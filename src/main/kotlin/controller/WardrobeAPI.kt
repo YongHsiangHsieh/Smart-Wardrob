@@ -24,6 +24,7 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
         val name = clothingData["name"] ?: return false
         val color = clothingData["color"] ?: return false
         val texture = clothingData["texture"] ?: return false
+
         return wardrobe?.addClothing(Clothing(id, type, brand, name, color, texture)) ?: false
     }
 
@@ -34,11 +35,8 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      * @param clothingData A map containing the updated attributes (color and texture) of the clothing.
      * @return True if the update is successful, false otherwise.
      */
-    fun updateClothingInWardrobe(clothingId: Int, clothingData: Map<String, String>): Boolean {
-        val color = clothingData["color"] ?: return false
-        val texture = clothingData["texture"] ?: return false
-        return wardrobe?.updateClothing(clothingId, color, texture) ?: false
-    }
+    fun updateClothingInWardrobe(clothingId: Int, clothingData: Map<String, String>): Boolean =
+        wardrobe?.updateClothing(clothingId, clothingData["color"], clothingData["texture"]) ?: false
 
     /**
      * Deletes a clothing item from the wardrobe by its ID.
@@ -46,18 +44,14 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      * @param clothingId The ID of the clothing to delete.
      * @return True if the deletion is successful, false otherwise.
      */
-    fun deleteClothingFromWardrobe(clothingId: Int): Boolean {
-        return wardrobe?.deleteClothing(clothingId) ?: false
-    }
+    fun deleteClothingFromWardrobe(clothingId: Int): Boolean = wardrobe?.deleteClothing(clothingId) ?: false
 
     /**
      * Retrieves all clothing items from the wardrobe.
      *
      * @return A list of [Clothing] items in the wardrobe, or an empty list if the wardrobe is not set.
      */
-    fun getAllClothing(): List<Clothing> {
-        return wardrobe?.getAllClothing() ?: emptyList()
-    }
+    fun getAllClothing(): List<Clothing> = wardrobe?.getAllClothing() ?: emptyList()
 
     /**
      * Retrieves a specific clothing item from the wardrobe by its ID.
@@ -65,9 +59,7 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      * @param id The ID of the clothing item to retrieve.
      * @return The [Clothing] item if found, null otherwise.
      */
-    fun getClothingById(id: Int): Clothing? {
-        return wardrobe?.getClothingById(id)
-    }
+    fun getClothingById(id: Int): Clothing? = wardrobe?.getClothingById(id)
 
     /**
      * Retrieves all clothing items of a specific type from the wardrobe.
@@ -75,9 +67,7 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      * @param type The [ClothingType] to filter the clothing items.
      * @return A list of [Clothing] items of the specified type, or an empty list if the wardrobe is not set.
      */
-    fun getClothingByType(type: ClothingType): List<Clothing> {
-        return wardrobe?.getClothesByType(type) ?: emptyList()
-    }
+    fun getClothingByType(type: ClothingType): List<Clothing> = wardrobe?.getClothesByType(type) ?: emptyList()
 
     /**
      * Searches for clothing items in the wardrobe by their color and type.
@@ -86,9 +76,8 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      * @param type The [ClothingType] to filter the clothing items.
      * @return A list of [Clothing] items that match the specified color and type, or an empty list if the wardrobe is not set.
      */
-    fun searchClothingByColorAndType(color: String, type: ClothingType): List<Clothing> {
-        return wardrobe?.searchByColorAndType(color, type) ?: emptyList()
-    }
+    fun searchClothingByColorAndType(color: String, type: ClothingType): List<Clothing> =
+        wardrobe?.searchByColorAndType(color, type) ?: emptyList()
 
     /**
      * Sets a new wardrobe instance for the API to manage.
