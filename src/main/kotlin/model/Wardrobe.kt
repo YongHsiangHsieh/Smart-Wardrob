@@ -17,9 +17,7 @@ class Wardrobe {
      * @param clothing The [Clothing] item to be added.
      * @return True if the item is successfully added, false otherwise.
      */
-    fun addClothing(clothing: Clothing): Boolean {
-        return clothes.add(clothing)
-    }
+    fun addClothing(clothing: Clothing) = clothes.add(clothing)
 
     /**
      * Updates the color and/or texture of a clothing item identified by its ID.
