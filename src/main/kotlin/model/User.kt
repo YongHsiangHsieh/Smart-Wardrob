@@ -24,18 +24,14 @@ class User(
      * @param inputPassword The password to check against the user's password.
      * @return True if the provided password matches the user's password, false otherwise.
      */
-    fun checkPassword(inputPassword: String): Boolean {
-        return inputPassword == password
-    }
+    fun checkPassword(inputPassword: String) = inputPassword == password
 
     /**
      * Retrieves the user's wardrobe.
      *
      * @return The wardrobe of the user.
      */
-    fun getWardrobe(): Wardrobe {
-        return wardrobe
-    }
+    fun getWardrobe() = wardrobe
 
     /**
      * Returns a string representation of the User object.
@@ -45,7 +41,5 @@ class User(
      *
      * @return A string representation of the User object.
      */
-    override fun toString(): String {
-        return "User: $username, Password=$password\nWardrobe: $wardrobe"
-    }
+    override fun toString() = "User: $username, Password=$password\nWardrobe: $wardrobe"
 }
