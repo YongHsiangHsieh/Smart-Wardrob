@@ -33,12 +33,10 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
      * @return True if the user is successfully deleted, false if the user does not exist.
      */
     fun deleteUser(username: String): Boolean {
-        return if (persistenceManager.loadUserData(username) != null) {
+        return persistenceManager.loadUserData(username)?.let {
             persistenceManager.deleteUserData(username)
             true
-        } else {
-            false
-        }
+        } ?: false
     }
 
     /**
