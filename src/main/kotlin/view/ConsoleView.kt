@@ -45,6 +45,15 @@ class ConsoleView(
         Enter option: 
         """.trimIndent())
 
+    private fun handleMainMenuChoice(choice: Int) {
+        when (choice) {
+            1 -> adminMenu()
+            2 -> userLogin()
+            0 -> exitApplication()
+            else -> logger.info { "Invalid option" }
+        }
+    }
+
     /**
      * Displays the user management menu and reads the user's choice.
      *
