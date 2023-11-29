@@ -33,7 +33,6 @@ class Wardrobe {
             if (texture != null) this.texture = texture
         } != null
 
-
     /**
      * Deletes a clothing item from the wardrobe based on its ID.
      *
@@ -42,15 +41,12 @@ class Wardrobe {
      */
     fun deleteClothing(clothingId: Int) = clothes.removeIf { it.id == clothingId }
 
-
     /**
      * Retrieves all clothing items in the wardrobe.
      *
      * @return A list of all [Clothing] items.
      */
-    fun getAllClothing(): List<Clothing> {
-        return clothes.toList()
-    }
+    fun getAllClothing(): List<Clothing> = clothes.toList()
 
     /**
      * Retrieves a specific clothing item by its ID.
