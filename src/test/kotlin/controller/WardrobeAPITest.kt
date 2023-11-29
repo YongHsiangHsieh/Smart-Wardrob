@@ -14,7 +14,7 @@ class WardrobeAPITest {
         "id" to "1",
         "type" to "SHIRT",
         "brand" to "TestBrand",
-        "name" to "TestBrand",
+        "name" to "TestName",
         "color" to "Red",
         "texture" to "Cotton"
     )
@@ -79,6 +79,6 @@ class WardrobeAPITest {
     fun `set wardrobe should correctly update the wardrobe instance`() {
         val newWardrobe = Wardrobe()
         wardrobeAPI.setWardrobe(newWardrobe)
-        assertSame(newWardrobe, wardrobeAPI.getAllClothing())
+        assertSame(newWardrobe.getAllClothing(), wardrobeAPI.getAllClothing())
     }
 }
