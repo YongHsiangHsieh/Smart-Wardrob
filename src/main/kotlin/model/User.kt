@@ -41,7 +41,6 @@ class User(
      *
      * @return A string representation of the User object.
      */
-    override fun toString(): String {
-        return "User: $username, Password=$password\nWardrobe: $wardrobe"
-    }
+    override fun toString() = "User: $username\nWardrobe: $wardrobe"
+
 }
