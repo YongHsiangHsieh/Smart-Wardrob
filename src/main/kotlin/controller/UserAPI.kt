@@ -45,9 +45,7 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
      * @param username The username of the user to find.
      * @return The user if found, null otherwise.
      */
-    fun findUser(username: String): User? {
-        return persistenceManager.loadUserData(username)
-    }
+    fun findUser(username: String): User? = persistenceManager.loadUserData(username)
 
     /**
      * Authenticates a user based on their password.
