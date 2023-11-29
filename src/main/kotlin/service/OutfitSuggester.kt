@@ -41,18 +41,14 @@ object OutfitSuggester {
     /**
      * Selects a random piece of clothing of a specified type from the wardrobe.
      *
-     * @param clothingTypes The type of clothing to select.
+     * @param clothingType The type of clothing to select.
      * @param wardrobe The wardrobe from which to select the clothing.
      * @return A randomly selected [Clothing] item of the specified type, or null if none are available.
      */
-    private fun selectRandomOutfit(clothingTypes: ClothingType, wardrobe: Wardrobe): Clothing? {
-        val clothing = wardrobe.getClothesByType(clothingTypes)
-        return if (clothing.isNotEmpty()) {
-            clothing.random()
-        } else {
-            null
-        }
+    private fun selectRandomOutfit(clothingType: ClothingType, wardrobe: Wardrobe): Clothing? {
+        return wardrobe.getClothesByType(clothingType).randomOrNull()
     }
+
 
     /**
      * Compiles an outfit suitable for the given season from the wardrobe.
