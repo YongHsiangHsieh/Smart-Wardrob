@@ -3,7 +3,7 @@ package service
 import model.Clothing
 import model.ClothingType
 import model.Wardrobe
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class OutfitSuggesterTest {
