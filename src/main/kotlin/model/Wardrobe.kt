@@ -30,17 +30,14 @@ class Wardrobe {
      * @return True if the update is successful, false if the item with the given ID is not found.
      */
     fun updateClothing(id: Int, color: String? = null, texture: String? = null): Boolean {
-        val clothingIndex = clothes.indexOfFirst { it.id == id }
-        return if (clothingIndex != -1) {
-            val clothing = clothes[clothingIndex]
-            if (color != null) clothing.color = color
-            if (texture != null) clothing.texture = texture
-            clothes[clothingIndex] = clothing
-            true
-        } else {
-            false
+        val clothingItem = clothes.find { it.id == id } ?: return false
+        clothingItem.apply {
+            if (color != null) this.color = color
+            if (texture != null) this.texture = texture
         }
+        return true
     }
+
 
     /**
      * Deletes a clothing item from the wardrobe based on its ID.
