@@ -54,9 +54,7 @@ class Wardrobe {
      * @param id The ID of the clothing to be retrieved.
      * @return The [Clothing] item if found, null otherwise.
      */
-    fun getClothingById(id: Int): Clothing? {
-        return clothes.find { it.id == id }
-    }
+    fun getClothingById(id: Int): Clothing? = clothes.firstOrNull { it.id == id }
 
     /**
      * Retrieves all clothing items of a specific type.
