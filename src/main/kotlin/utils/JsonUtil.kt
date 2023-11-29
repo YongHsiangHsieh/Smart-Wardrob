@@ -9,7 +9,6 @@ import kotlinx.serialization.json.Json
  * Uses Kotlin serialization for converting objects to JSON strings and vice versa.
  */
 object JsonUtil {
-    // A Json instance with pretty printing enabled.
     val json = Json { prettyPrint = true }
 
     /**
@@ -21,9 +20,7 @@ object JsonUtil {
      * @param data The object to be serialized.
      * @return A JSON string representation of the object.
      */
-    inline fun <reified T> serializeToJson(data: T): String {
-        return json.encodeToString(data)
-    }
+    inline fun <reified T> serializeToJson(data: T): String = json.encodeToString(data)
 
     /**
      * Deserializes a JSON string to an object of any type.
