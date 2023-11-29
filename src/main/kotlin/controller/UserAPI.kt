@@ -17,14 +17,14 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
      * @param password The password for the new user.
      * @return True if the user is successfully created, false if a user with the same username already exists.
      */
-    fun createUser(username: String, password: String): Boolean {
-        if (persistenceManager.loadUserData(username) != null) {
-            return false
+    fun createUser(username: String, password: String): Boolean =
+        if (persistenceManager.loadUserData(username) == null) {
+            persistenceManager.saveUserData(User(username, password))
+            true
+        } else {
+            false
         }
-        val newUser = User(username, password)
-        persistenceManager.saveUserData(newUser)
-        return true
-    }
+
 
     /**
      * Deletes a user with the specified username.
@@ -32,14 +32,12 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
      * @param username The username of the user to be deleted.
      * @return True if the user is successfully deleted, false if the user does not exist.
      */
-    fun deleteUser(username: String): Boolean {
-        return if (persistenceManager.loadUserData(username) != null) {
+    fun deleteUser(username: String): Boolean =
+        persistenceManager.loadUserData(username)?.let {
             persistenceManager.deleteUserData(username)
             true
-        } else {
-            false
-        }
-    }
+        } ?: false
+
 
     /**
      * Finds a user by their username.
@@ -47,9 +45,7 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
      * @param username The username of the user to find.
      * @return The user if found, null otherwise.
      */
-    fun findUser(username: String): User? {
-        return persistenceManager.loadUserData(username)
-    }
+    fun findUser(username: String): User? = persistenceManager.loadUserData(username)
 
     /**
      * Authenticates a user based on their password.
@@ -58,9 +54,7 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
      * @param password The password to verify.
      * @return True if the password is correct, false otherwise.
      */
-    fun authenticateUser(user: User, password: String): Boolean {
-        return user.checkPassword(password)
-    }
+    fun authenticateUser(user: User, password: String): Boolean = user.checkPassword(password)
 
     /**
      * Updates the data of an existing user.
