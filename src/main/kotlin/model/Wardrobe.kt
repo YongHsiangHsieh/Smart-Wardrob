@@ -27,14 +27,11 @@ class Wardrobe {
      * @param texture Optional new texture for the clothing.
      * @return True if the update is successful, false if the item with the given ID is not found.
      */
-    fun updateClothing(id: Int, color: String? = null, texture: String? = null): Boolean {
-        val clothingItem = clothes.find { it.id == id } ?: return false
-        clothingItem.apply {
+    fun updateClothing(id: Int, color: String? = null, texture: String? = null): Boolean =
+        clothes.firstOrNull { it.id == id }?.apply {
             if (color != null) this.color = color
             if (texture != null) this.texture = texture
-        }
-        return true
-    }
+        } != null
 
 
     /**
