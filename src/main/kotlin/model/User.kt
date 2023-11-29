@@ -24,9 +24,7 @@ class User(
      * @param inputPassword The password to check against the user's password.
      * @return True if the provided password matches the user's password, false otherwise.
      */
-    fun checkPassword(inputPassword: String): Boolean {
-        return inputPassword == password
-    }
+    fun checkPassword(inputPassword: String) = inputPassword == password
 
     /**
      * Retrieves the user's wardrobe.
