@@ -40,9 +40,8 @@ class Wardrobe {
      * @param clothingId The ID of the clothing to be deleted.
      * @return True if the deletion is successful, false otherwise.
      */
-    fun deleteClothing(clothingId: Int): Boolean {
-        return clothes.removeIf { it.id == clothingId }
-    }
+    fun deleteClothing(clothingId: Int) = clothes.removeIf { it.id == clothingId }
+
 
     /**
      * Retrieves all clothing items in the wardrobe.
