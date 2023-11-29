@@ -59,9 +59,7 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      * @param id The ID of the clothing item to retrieve.
      * @return The [Clothing] item if found, null otherwise.
      */
-    fun getClothingById(id: Int): Clothing? {
-        return wardrobe?.getClothingById(id)
-    }
+    fun getClothingById(id: Int): Clothing? = wardrobe?.getClothingById(id)
 
     /**
      * Retrieves all clothing items of a specific type from the wardrobe.
