@@ -35,11 +35,8 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      * @param clothingData A map containing the updated attributes (color and texture) of the clothing.
      * @return True if the update is successful, false otherwise.
      */
-    fun updateClothingInWardrobe(clothingId: Int, clothingData: Map<String, String>): Boolean {
-        val color = clothingData["color"] ?: return false
-        val texture = clothingData["texture"] ?: return false
-        return wardrobe?.updateClothing(clothingId, color, texture) ?: false
-    }
+    fun updateClothingInWardrobe(clothingId: Int, clothingData: Map<String, String>): Boolean =
+        wardrobe?.updateClothing(clothingId, clothingData["color"], clothingData["texture"]) ?: false
 
     /**
      * Deletes a clothing item from the wardrobe by its ID.
