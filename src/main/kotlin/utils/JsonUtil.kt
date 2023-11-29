@@ -31,7 +31,5 @@ object JsonUtil {
      * @param jsonString The JSON string to be deserialized.
      * @return An object of type T represented by the JSON string.
      */
-    inline fun <reified T> deserializeFromJson(jsonString: String): T {
-        return json.decodeFromString(jsonString)
-    }
+    inline fun <reified T> deserializeFromJson(jsonString: String): T = json.decodeFromString(jsonString)
 }
