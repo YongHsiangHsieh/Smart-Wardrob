@@ -29,12 +29,7 @@ class ConsoleView(
         var choice: Int
         do {
             choice = displayMainMenu()
-            when (choice) {
-                1 -> adminMenu()
-                2 -> userLogin()
-                0 -> exitApplication()
-                else -> logger.info { "Invalid option" }
-            }
+            handleMainMenuChoice(choice)
         } while (choice != 0)
     }
 
