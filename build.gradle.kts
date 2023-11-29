@@ -19,17 +19,16 @@ repositories {
 
 dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.10")
+    testImplementation("org.testng:testng:7.1.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
     implementation("org.slf4j:slf4j-simple:2.0.9")
     implementation("io.github.microutils:kotlin-logging:3.0.5")
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
-    testImplementation("org.testng:testng:7.1.0")
 
     // For generating a Dokka Site from KDoc
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:1.9.10")
 
 //    implementation("com.squareup.okhttp3:okhttp:4.9.0")
-
 //    implementation("org.yaml:snakeyaml:1.33")
 }
 
