@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "me.YongHsiangHsieh"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 repositories {
     mavenCentral()
@@ -24,7 +24,6 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:2.0.9")
     implementation("io.github.microutils:kotlin-logging:3.0.5")
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
-
     // For generating a Dokka Site from KDoc
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:1.9.10")
 
