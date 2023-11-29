@@ -3,8 +3,8 @@ package service
 import model.Clothing
 import model.ClothingType
 import model.Wardrobe
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 
 class OutfitSuggesterTest {
 
@@ -59,8 +59,13 @@ class OutfitSuggesterTest {
 
     private fun createTestWardrobe(): Wardrobe {
         val wardrobe = Wardrobe()
-        listOf(ClothingType.SHIRT, ClothingType.SHORTS, ClothingType.TRACKSUIT,
-            ClothingType.JACKET, ClothingType.JUMPER).forEach { type ->
+        listOf(
+            ClothingType.SHIRT,
+            ClothingType.SHORTS,
+            ClothingType.TRACKSUIT,
+            ClothingType.JACKET,
+            ClothingType.JUMPER
+        ).forEach { type ->
             wardrobe.addClothing(Clothing(id = 1, type = type, brand = "TestBrand", name = "TestName", color = "TestColor", texture = "TestTexture"))
         }
         return wardrobe

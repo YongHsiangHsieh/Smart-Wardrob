@@ -1,10 +1,14 @@
 package persistence
 
 import model.User
-import org.junit.jupiter.api.*
-import java.io.File
-import kotlin.test.*
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.io.File
 
 class PersistenceManagerTest {
 
@@ -50,7 +54,9 @@ class PersistenceManagerTest {
 
         val loadedUser = PersistenceManager.loadUserData(testUsername)
         assertNotNull(loadedUser)
-        assertEquals(testUsername, loadedUser.username)
+        if (loadedUser != null) {
+            assertEquals(testUsername, loadedUser.username)
+        }
     }
 
     @Test

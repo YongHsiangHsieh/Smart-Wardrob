@@ -2,9 +2,13 @@ package controller
 
 import model.ClothingType
 import model.Wardrobe
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertSame
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 
 class WardrobeAPITest {
 
@@ -14,7 +18,7 @@ class WardrobeAPITest {
         "id" to "1",
         "type" to "SHIRT",
         "brand" to "TestBrand",
-        "name" to "TestBrand",
+        "name" to "TestName",
         "color" to "Red",
         "texture" to "Cotton"
     )
@@ -79,6 +83,6 @@ class WardrobeAPITest {
     fun `set wardrobe should correctly update the wardrobe instance`() {
         val newWardrobe = Wardrobe()
         wardrobeAPI.setWardrobe(newWardrobe)
-        assertSame(newWardrobe, wardrobeAPI.getAllClothing())
+        assertSame(newWardrobe.getAllClothing(), wardrobeAPI.getAllClothing())
     }
 }

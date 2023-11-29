@@ -1,10 +1,10 @@
 package view
 
-import mu.KotlinLogging
 import controller.UserAPI
 import controller.WardrobeAPI
 import model.ClothingType
 import model.User
+import mu.KotlinLogging
 import service.OutfitSuggester
 import utils.ScannerInput
 
@@ -50,7 +50,7 @@ class ConsoleView(
             2 -> Smart Wardrobe
             0 -> Exit
             Enter option: 
-        """.trimIndent()
+            """.trimIndent()
         )
     }
 
@@ -67,7 +67,7 @@ class ConsoleView(
             2 -> Delete User
             0 -> Back to Main Menu
             Enter option: 
-        """.trimIndent()
+            """.trimIndent()
         )
     }
 
@@ -146,7 +146,7 @@ class ConsoleView(
             3 -> Manage Wardrobe
             0 -> Back to Main Menu
             Enter option: 
-        """.trimIndent()
+            """.trimIndent()
         )
     }
 
@@ -198,7 +198,7 @@ class ConsoleView(
             3 -> Remove Clothing
             0 -> Back to Wardrobe Menu
             Enter option: 
-        """.trimIndent()
+            """.trimIndent()
         )
     }
 
@@ -281,7 +281,7 @@ class ConsoleView(
             3 -> View Clothing by Type and Color
             0 -> Back to Wardrobe Menu
             Enter option: 
-        """.trimIndent()
+            """.trimIndent()
         )
     }
 
@@ -357,7 +357,7 @@ class ConsoleView(
             4 -> TRACKSUIT
             5 -> JACKET
             Enter option: 
-        """.trimIndent()
+                """.trimIndent()
             )
             return when (option) {
                 1 -> ClothingType.JUMPER
@@ -382,5 +382,4 @@ class ConsoleView(
             logger.info { "User data saved successfully." }
         }
     }
-
 }

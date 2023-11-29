@@ -1,8 +1,8 @@
 package utils
 
 import kotlinx.serialization.Serializable
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 
 class JsonUtilTest {
 

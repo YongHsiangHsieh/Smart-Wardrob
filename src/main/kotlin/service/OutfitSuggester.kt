@@ -65,26 +65,25 @@ object OutfitSuggester {
         return when (season) {
             Season.SPRING -> listOfNotNull(
                 selectRandomOutfit(ClothingType.SHIRT, wardrobe),
-                selectRandomOutfit(ClothingType.TRACKSUIT, wardrobe),
+                selectRandomOutfit(ClothingType.TRACKSUIT, wardrobe)
             )
 
             Season.SUMMER -> listOfNotNull(
                 selectRandomOutfit(ClothingType.SHIRT, wardrobe),
-                selectRandomOutfit(ClothingType.SHORTS, wardrobe),
+                selectRandomOutfit(ClothingType.SHORTS, wardrobe)
             )
 
             Season.AUTUMN -> listOfNotNull(
                 selectRandomOutfit(ClothingType.JUMPER, wardrobe),
-                selectRandomOutfit(ClothingType.TRACKSUIT, wardrobe),
+                selectRandomOutfit(ClothingType.TRACKSUIT, wardrobe)
             )
             Season.WINTER -> listOfNotNull(
                 selectRandomOutfit(ClothingType.JUMPER, wardrobe),
                 selectRandomOutfit(ClothingType.TRACKSUIT, wardrobe),
-                selectRandomOutfit(ClothingType.JACKET, wardrobe),
+                selectRandomOutfit(ClothingType.JACKET, wardrobe)
             )
         }
     }
-
 }
 
 /**

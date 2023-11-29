@@ -1,8 +1,3 @@
-import controller.UserAPI
-import controller.WardrobeAPI
-import persistence.PersistenceManager
-import view.ConsoleView
-import io.github.cdimascio.dotenv.dotenv
 
 
 fun main(args: Array<String>) {
@@ -11,6 +6,6 @@ fun main(args: Array<String>) {
 //    val consoleView = ConsoleView(userAPI, wardrobeAPI)
 //    consoleView.startApplication()
 
+    println("Hello World")
 //    val dotenv = dotenv()
-
 }
