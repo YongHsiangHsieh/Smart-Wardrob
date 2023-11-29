@@ -12,7 +12,8 @@ object PersistenceManager {
     /**
      * Path to the directory where user data is stored.
      */
-    var USER_DATA_PATH = "data/users/"
+    var USER_DATA_PATH = "data${File.separator}users${File.separator}"
+    private const val EXTENSION = ".json"
 
     init {
         File(USER_DATA_PATH).mkdirs()
