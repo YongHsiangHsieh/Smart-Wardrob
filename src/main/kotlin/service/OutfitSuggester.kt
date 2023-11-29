@@ -29,13 +29,13 @@ object OutfitSuggester {
      * @param month The month for which to determine the season.
      * @return The [Season] corresponding to the given month.
      */
-    private fun determineSeason(month: Int): Season =
+    private fun determineSeason(month: Int): Season? =
         when (month) {
             in 2..4 -> Season.SPRING
             in 5..7 -> Season.SUMMER
             in 8..10 -> Season.AUTUMN
-            else -> Season.WINTER
-
+            11, 12, 1 -> Season.WINTER
+            else -> null
         }
 
     /**
@@ -61,8 +61,8 @@ object OutfitSuggester {
      * @param wardrobe The wardrobe from which to select the outfit.
      * @return A list of [Clothing] items representing the outfit suitable for the given season.
      */
-    private fun getSeasonalOutfit(season: Season, wardrobe: Wardrobe): List<Clothing> {
-        return when (season) {
+    private fun getSeasonalOutfit(season: Season, wardrobe: Wardrobe): List<Clothing> =
+        when (season) {
             Season.SPRING -> listOfNotNull(
                 selectRandomOutfit(ClothingType.SHIRT, wardrobe),
                 selectRandomOutfit(ClothingType.TRACKSUIT, wardrobe)
@@ -84,7 +84,6 @@ object OutfitSuggester {
                 selectRandomOutfit(ClothingType.JACKET, wardrobe)
             )
         }
-    }
 }
 
 /**
