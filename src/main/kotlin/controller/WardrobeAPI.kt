@@ -69,7 +69,6 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      */
     fun getClothingByType(type: ClothingType): List<Clothing> = wardrobe?.getClothesByType(type) ?: emptyList()
 
-
     /**
      * Searches for clothing items in the wardrobe by their color and type.
      *
@@ -79,7 +78,6 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
      */
     fun searchClothingByColorAndType(color: String, type: ClothingType): List<Clothing> =
         wardrobe?.searchByColorAndType(color, type) ?: emptyList()
-
 
     /**
      * Sets a new wardrobe instance for the API to manage.
