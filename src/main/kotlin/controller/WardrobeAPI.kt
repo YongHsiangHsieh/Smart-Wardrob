@@ -24,6 +24,7 @@ class WardrobeAPI(private var wardrobe: Wardrobe? = null) {
         val name = clothingData["name"] ?: return false
         val color = clothingData["color"] ?: return false
         val texture = clothingData["texture"] ?: return false
+
         return wardrobe?.addClothing(Clothing(id, type, brand, name, color, texture)) ?: false
     }
 
