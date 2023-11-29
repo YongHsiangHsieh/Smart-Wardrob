@@ -29,7 +29,12 @@ class ConsoleView(
         var choice: Int
         do {
             choice = displayMainMenu()
-            handleMainMenuChoice(choice)
+            when (choice) {
+                1 -> adminMenu()
+                2 -> userLogin()
+                0 -> exitApplication()
+                else -> logger.info { "Invalid option" }
+            }
         } while (choice != 0)
     }
 
@@ -38,20 +43,15 @@ class ConsoleView(
      *
      * @return The user's menu choice as an integer.
      */
-    private fun displayMainMenu(): Int = ScannerInput.readNextInt("""
-        1 -> Admin
-        2 -> Smart Wardrobe
-        0 -> Exit
-        Enter option: 
-        """.trimIndent())
-
-    private fun handleMainMenuChoice(choice: Int) {
-        when (choice) {
-            1 -> adminMenu()
-            2 -> userLogin()
-            0 -> exitApplication()
-            else -> logger.info { "Invalid option" }
-        }
+    private fun displayMainMenu(): Int {
+        return ScannerInput.readNextInt(
+            """
+            1 -> Admin
+            2 -> Smart Wardrobe
+            0 -> Exit
+            Enter option: 
+            """.trimIndent()
+        )
     }
 
     /**
@@ -385,3 +385,4 @@ class ConsoleView(
         }
     }
 }
+
