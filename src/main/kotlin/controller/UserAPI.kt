@@ -18,12 +18,12 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
      * @return True if the user is successfully created, false if a user with the same username already exists.
      */
     fun createUser(username: String, password: String): Boolean {
-        if (persistenceManager.loadUserData(username) != null) {
-            return false
+        return if (persistenceManager.loadUserData(username) == null) {
+            persistenceManager.saveUserData(User(username, password))
+            true
+        } else {
+            false
         }
-        val newUser = User(username, password)
-        persistenceManager.saveUserData(newUser)
-        return true
     }
 
     /**
