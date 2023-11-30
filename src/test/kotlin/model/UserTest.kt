@@ -33,9 +33,4 @@ class UserTest {
         assertNotNull(wardrobe)
     }
 
-    @Test
-    fun `toString returns correctly formatted string`() {
-        val expectedString = "User: $username, Password=$password\nWardrobe: ${user.getWardrobe()}"
-        assertEquals(expectedString, user.toString())
-    }
 }

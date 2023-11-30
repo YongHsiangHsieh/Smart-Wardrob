@@ -64,7 +64,6 @@ class ConsoleView(
         }
     }
 
-    // User login
     private fun userLogin() {
         println("Welcome to Smart Wardrobe! Please login to continue.")
         val username = ScannerInput.readNextLine("Enter username: ")
@@ -153,7 +152,7 @@ class ConsoleView(
         val type = MenuDisplay.displayClothingType()
         val clothing = wardrobeManager.getClothingByType(type)
         if (clothing.isNotEmpty()) {
-            clothing.forEach { println(it) }
+            clothing.forEach { println(it)}
         } else {
             println("No clothing of type ${wardrobeManager.convertToClothingType(type)} in wardrobe")
         }
@@ -207,9 +206,6 @@ class ConsoleView(
         }
     }
 
-    /**
-     * Handles the process of exiting the application, including saving any changes to the current user.
-     */
     private fun exitApplication() {
         exit()
         printLogger("exitApp() function invoked")

@@ -35,4 +35,9 @@ data class Clothing(
     val name: String = "Unknown",
     var color: String = "Unknown",
     var texture: String = "Unknown"
-)
+) {
+    override fun toString(): String =
+        "Clothing Details:\n" + "ID: $id\n" + "Type: $type\n" + "Brand: $brand\n" + "Name: $name\n" +
+                "Color: $color\n" + "Texture: $texture\n"
+
+}
