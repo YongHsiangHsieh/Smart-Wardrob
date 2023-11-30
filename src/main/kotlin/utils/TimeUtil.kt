@@ -3,7 +3,6 @@ package utils
 import java.time.LocalDate
 
 object TimeUtil {
-    fun getCurrentMonthAsInt(): Int {
-        return LocalDate.now().monthValue
-    }
+    fun getCurrentMonthAsInt(currentDate: LocalDate = LocalDate.now()): Int = currentDate.monthValue
+
 }
