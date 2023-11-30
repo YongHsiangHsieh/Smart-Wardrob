@@ -25,6 +25,9 @@ class WardrobeManager (private val wardrobeAPI: WardrobeAPI){
 
 
     fun updateClothing(color: String, texture: String, id: Int): Boolean {
+        if (color.isBlank() || texture.isBlank() || id <= 0) {
+            return false
+        }
         val clothingData = mapOf(
             "color" to color,
             "texture" to texture
@@ -32,13 +35,24 @@ class WardrobeManager (private val wardrobeAPI: WardrobeAPI){
         return wardrobeAPI.updateClothingInWardrobe(id, clothingData)
     }
 
-    fun removeClothing(id: Int) = wardrobeAPI.deleteClothingFromWardrobe(id)
+    fun removeClothing(id: Int) =
+        if (id <= 0) {
+            false
+        } else wardrobeAPI.deleteClothingFromWardrobe(id)
 
-    fun getAllClothing(): List<Clothing> =  wardrobeAPI.getAllClothing()
+    fun getAllClothing(): List<Clothing> = wardrobeAPI.getAllClothing()
 
-    fun getClothingByType(type: ClothingType): List<Clothing> = wardrobeAPI.getClothingByType(type)
+    fun getClothingByType(type: ClothingType): List<Clothing> =
+        if (type == ClothingType.UNKNOWN) {
+            emptyList()
+        } else
+        wardrobeAPI.getClothingByType(type)
 
-    fun getClothingByTypeAndColor(type: ClothingType, color: String): List<Clothing> = wardrobeAPI.searchClothingByColorAndType(color, type)
+    fun getClothingByTypeAndColor(type: ClothingType, color: String): List<Clothing> =
+        if (type == ClothingType.UNKNOWN || color.isBlank()) {
+            emptyList()
+        } else
+        wardrobeAPI.searchClothingByColorAndType(color, type)
 
 
 
