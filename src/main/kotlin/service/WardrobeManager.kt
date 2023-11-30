@@ -5,7 +5,7 @@ import model.Clothing
 import model.ClothingType
 
 
-class WardrobeManager (private val wardrobeAPI: WardrobeAPI){
+class WardrobeManager(private val wardrobeAPI: WardrobeAPI) {
     fun addClothing(id: Int, type: ClothingType, brand: String, name: String, color: String, texture: String): Boolean {
         if (id <= 0 || brand.isBlank() || name.isBlank() || color.isBlank() || texture.isBlank()) {
             return false
@@ -45,16 +45,11 @@ class WardrobeManager (private val wardrobeAPI: WardrobeAPI){
     fun getClothingByType(type: ClothingType): List<Clothing> =
         if (type == ClothingType.UNKNOWN) {
             emptyList()
-        } else
-        wardrobeAPI.getClothingByType(type)
+        } else wardrobeAPI.getClothingByType(type)
 
     fun getClothingByTypeAndColor(type: ClothingType, color: String): List<Clothing> =
         if (type == ClothingType.UNKNOWN || color.isBlank()) {
             emptyList()
-        } else
-        wardrobeAPI.searchClothingByColorAndType(color, type)
-
-
-
+        } else wardrobeAPI.searchClothingByColorAndType(color, type)
 
 }
