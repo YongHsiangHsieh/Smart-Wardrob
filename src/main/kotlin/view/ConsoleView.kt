@@ -2,7 +2,6 @@ package view
 
 import controller.UserAPI
 import controller.WardrobeAPI
-import model.ClothingType
 import model.User
 import service.OutfitSuggester
 import service.UserManager
@@ -14,8 +13,8 @@ import kotlin.system.exitProcess
 
 
 class ConsoleView(
-    private val userAPI: UserAPI,
-    private val wardrobeAPI: WardrobeAPI
+    userAPI: UserAPI,
+    wardrobeAPI: WardrobeAPI
 ) {
     private val userManager = UserManager(userAPI)
     private val wardrobeManager = WardrobeManager(wardrobeAPI)
