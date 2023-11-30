@@ -250,16 +250,15 @@ class ConsoleView(
 
     /**
      * Handles the process of adding a new clothing item to the wardrobe.
-     * Collects necessary information from the user and adds the item if all criteria are met.
+     * Collects clothing type, brand, name, color, and texture information for the new item.
      */
     private fun addClothing() {
-        val id = ScannerInput.readNextInt("Enter clothing id: ")
         val type = MenuDisplay.displayClothingType()
         val brand = ScannerInput.readNextLine("Enter clothing brand: ")
         val name = ScannerInput.readNextLine("Enter clothing name: ")
         val color = ScannerInput.readNextLine("Enter clothing color: ")
         val texture = ScannerInput.readNextLine("Enter clothing texture: ")
-        val success = wardrobeManager.addClothing(id, type, brand, name, color, texture)
+        val success = wardrobeManager.addClothing(type, brand, name, color, texture)
         if (success) {
             println("Clothing added successfully")
         } else {

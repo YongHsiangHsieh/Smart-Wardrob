@@ -4,6 +4,7 @@ import controller.WardrobeAPI
 import model.Clothing
 import model.ClothingType
 import model.Wardrobe
+import utils.IdGenerator
 
 /**
  * Manages wardrobe operations by interfacing with the [WardrobeAPI].
@@ -14,23 +15,24 @@ import model.Wardrobe
 class WardrobeManager(private val wardrobeAPI: WardrobeAPI) {
 
     /**
-     * Adds a clothing item to the wardrobe.
+     * Adds a new clothing item to the wardrobe.
      *
-     * @param id The unique identifier of the clothing item. Must be greater than 0.
-     * @param type The type of the clothing item, represented as an integer.
-     * @param brand The brand of the clothing item. Cannot be blank.
-     * @param name The name of the clothing item. Cannot be blank.
-     * @param color The color of the clothing item. Cannot be blank.
-     * @param texture The texture of the clothing item. Cannot be blank.
+     * @param type The type of the clothing item to add, represented as an integer.
+     * @param brand The brand of the clothing item to add. Cannot be blank.
+     * @param name The name of the clothing item to add. Cannot be blank.
+     * @param color The color of the clothing item to add. Cannot be blank.
+     * @param texture The texture of the clothing item to add. Cannot be blank.
      * @return `true` if the clothing item was successfully added; `false` otherwise.
      */
-    fun addClothing(id: Int, type: Int, brand: String, name: String, color: String, texture: String): Boolean {
-        if (id <= 0 || type < 1 || brand.isBlank() || name.isBlank() || color.isBlank() || texture.isBlank()) {
+    fun addClothing(type: Int, brand: String, name: String, color: String, texture: String): Boolean {
+        if (type < 1 || brand.isBlank() || name.isBlank() || color.isBlank() || texture.isBlank()) {
             return false
         }
 
+        val id = IdGenerator.generateRandomId(1, 1000).toString()
+
         val clothingData = mapOf(
-            "id" to id.toString(),
+            "id" to id,
             "type" to convertToClothingType(type).toString(),
             "brand" to brand,
             "name" to name,
