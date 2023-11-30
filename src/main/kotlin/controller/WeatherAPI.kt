@@ -8,13 +8,20 @@ import java.io.IOException
 object WeatherAPI {
     private val dotenv = dotenv()
     private const val BASE_URL = "https://api.openweathermap.org/data/3.0/onecall"
-    private val parameters = mapOf(
+    private val parameters = mutableMapOf<String, String>(
         "lat" to "52.259319",
         "lon" to "-7.110070",
-        "appid" to dotenv["OPEN_WEATHER_API_KEY"],
         "exclude" to "current,minutely,daily"
     )
+
     fun getApiResponse(): String {
+        val apiKey = dotenv["OPEN_WEATHER_API_KEY"]
+        if (apiKey.isNullOrEmpty()) {
+            return "API key not found. Please check your configuration."
+        }
+
+        parameters["appid"] = apiKey
+
         val client = OkHttpClient()
 
         val httpUrlBuilder = BASE_URL.toHttpUrlOrNull()?.newBuilder() ?: throw IllegalArgumentException("Invalid URL")

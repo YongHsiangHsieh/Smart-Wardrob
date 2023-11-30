@@ -11,9 +11,8 @@ import utils.JsonUtil
 
 object WeatherForecaster {
 
-    fun willRainToday(): Boolean {
-        val rawData: String = WeatherAPI.getApiResponse()
-        val jsonData = JsonUtil.deserializeFromJson<JsonObject>(rawData)
+    fun willRainToday(weatherData: String): Boolean {
+        val jsonData = JsonUtil.deserializeFromJson<JsonObject>(weatherData)
 
         return jsonData["hourly"]?.jsonArray?.let { hourlyData ->
             hourlyData.take(minOf(hourlyData.size, 12)).any { hour ->
