@@ -87,3 +87,22 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ### Weather-Based Outfit Suggestion
 - **Current State**: Outfit suggestions are based on user preferences and wardrobe contents without considering external factors.
 - **Enhancement**: Integrate a weather API to fetch daily weather forecasts. Utilize this data to offer more context-aware outfit suggestions, such as recommending an umbrella on rainy days. This feature aims to enhance the application's practicality by adapting suggestions to daily weather conditions.
+
+## Known Issues
+
+### UserManagerTest Fails on Gradle Build
+
+**Issue Description:**
+- The `UserManagerTest` suite passes when executed within IntelliJ IDEA, but fails during a Gradle build.
+- This inconsistency in test results is yet to be resolved.
+
+**Impact:**
+- This issue may affect the reliability of the `UserManager` functionality when the application is built using Gradle.
+
+**Current Workarounds:**
+- None at the moment. Tests are currently being executed and validated within the IntelliJ IDEA environment.
+
+**Investigation and Help Needed:**
+- We are actively investigating the root cause of this discrepancy.
+- Any insights or contributions to resolve this issue would be greatly appreciated. Please refer to our [Contribution Guidelines](link-to-contribution-guidelines) for more details on how you can help.
+
