@@ -24,7 +24,6 @@ object WeatherForecaster {
                     ?.jsonPrimitive
                     ?.intOrNull
 
-                println(weatherId)
                 weatherId != null && weatherId < 700
             }
         } ?: false

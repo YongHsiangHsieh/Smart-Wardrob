@@ -141,6 +141,7 @@ class ConsoleView(
     private fun suggestOutfit() {
         val outfit = currentUser?.let { OutfitSuggester.suggestOutfit(it.getWardrobe(), TimeUtil.getCurrentMonthAsInt()) }
         if (outfit != null) {
+            println("Suggested outfit:")
             outfit.forEach { println(it) }
         } else {
             println("No outfit suggestions available")
