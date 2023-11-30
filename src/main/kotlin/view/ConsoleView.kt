@@ -136,7 +136,7 @@ class ConsoleView(
      * Utilizes [OutfitSuggester] for generating outfit suggestions.
      */
     private fun suggestOutfit() {
-        val outfit = currentUser?.let { OutfitSuggester.suggestOutfit(it.getWardrobe(), 5) }
+        val outfit = currentUser?.let { OutfitSuggester.suggestOutfit(it.getWardrobe(), 12) }
         if (outfit != null) {
             outfit.forEach { println(it) }
         } else {
