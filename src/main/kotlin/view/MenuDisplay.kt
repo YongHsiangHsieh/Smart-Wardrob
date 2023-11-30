@@ -101,11 +101,10 @@ object MenuDisplay {
             3 -> SHORTS
             4 -> TRACKSUIT
             5 -> JACKET
-            0 -> Back to Wardrobe Menu
             Enter option: 
             """.trimIndent()
             )
-            if (choice in 0..5) {
+            if (choice in 1..5) {
                 return choice
             }
             println("Invalid option, please try again")
