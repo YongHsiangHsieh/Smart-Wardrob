@@ -7,6 +7,10 @@ import model.ClothingType
 
 class WardrobeManager (private val wardrobeAPI: WardrobeAPI){
     fun addClothing(id: Int, type: ClothingType, brand: String, name: String, color: String, texture: String): Boolean {
+        if (id <= 0 || brand.isBlank() || name.isBlank() || color.isBlank() || texture.isBlank()) {
+            return false
+        }
+
         val clothingData = mapOf(
             "id" to id.toString(),
             "type" to type.toString(),
@@ -15,8 +19,10 @@ class WardrobeManager (private val wardrobeAPI: WardrobeAPI){
             "color" to color,
             "texture" to texture
         )
+
         return wardrobeAPI.addClothingToWardrobe(clothingData)
     }
+
 
     fun updateClothing(color: String, texture: String, id: Int): Boolean {
         val clothingData = mapOf(
