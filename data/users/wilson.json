@@ -26,6 +26,142 @@
                 "name": "Puma Short",
                 "color": "black",
                 "texture": "cotton"
+            },
+            {
+                "id": 4,
+                "type": "TRACKSUIT",
+                "brand": "Adidas",
+                "name": "Adidas Tracksuit",
+                "color": "grey",
+                "texture": "polyester"
+            },
+            {
+                "id": 5,
+                "type": "JACKET",
+                "brand": "North Face",
+                "name": "North Face Jacket",
+                "color": "green",
+                "texture": "nylon"
+            },
+            {
+                "id": 6,
+                "type": "JUMPER",
+                "brand": "Gap",
+                "name": "Gap Jumper",
+                "color": "red",
+                "texture": "wool"
+            },
+            {
+                "id": 7,
+                "type": "SHIRT",
+                "brand": "H&M",
+                "name": "H&M Shirt",
+                "color": "white",
+                "texture": "linen"
+            },
+            {
+                "id": 8,
+                "type": "SHORTS",
+                "brand": "Under Armour",
+                "name": "Under Armour Shorts",
+                "color": "navy",
+                "texture": "synthetic"
+            },
+            {
+                "id": 9,
+                "type": "TRACKSUIT",
+                "brand": "Champion",
+                "name": "Champion Tracksuit",
+                "color": "purple",
+                "texture": "fleece"
+            },
+            {
+                "id": 10,
+                "type": "JACKET",
+                "brand": "Levi's",
+                "name": "Levi's Jacket",
+                "color": "denim",
+                "texture": "denim"
+            },
+            {
+                "id": 11,
+                "type": "JUMPER",
+                "brand": "Tommy Hilfiger",
+                "name": "Tommy Hilfiger Jumper",
+                "color": "orange",
+                "texture": "cashmere"
+            },
+            {
+                "id": 12,
+                "type": "SHIRT",
+                "brand": "Gucci",
+                "name": "Gucci Shirt",
+                "color": "pink",
+                "texture": "silk"
+            },
+            {
+                "id": 13,
+                "type": "SHORTS",
+                "brand": "Calvin Klein",
+                "name": "Calvin Klein Shorts",
+                "color": "khaki",
+                "texture": "cotton"
+            },
+            {
+                "id": 14,
+                "type": "TRACKSUIT",
+                "brand": "Fila",
+                "name": "Fila Tracksuit",
+                "color": "white",
+                "texture": "polyester"
+            },
+            {
+                "id": 15,
+                "type": "JACKET",
+                "brand": "Columbia",
+                "name": "Columbia Jacket",
+                "color": "blue",
+                "texture": "gore-tex"
+            },
+            {
+                "id": 16,
+                "type": "JUMPER",
+                "brand": "Balenciaga",
+                "name": "Balenciaga Jumper",
+                "color": "yellow",
+                "texture": "merino wool"
+            },
+            {
+                "id": 17,
+                "type": "SHIRT",
+                "brand": "Prada",
+                "name": "Prada Shirt",
+                "color": "silver",
+                "texture": "polyester"
+            },
+            {
+                "id": 18,
+                "type": "SHORTS",
+                "brand": "Ralph Lauren",
+                "name": "Ralph Lauren Shorts",
+                "color": "green",
+                "texture": "linen"
+            },
+            {
+                "id": 19,
+                "type": "TRACKSUIT",
+                "brand": "Nike",
+                "name": "Nike Tracksuit",
+                "color": "black",
+                "texture": "cotton blend"
+            },
+            {
+                "id": 20,
+                "type": "JACKET",
+                "brand": "Patagonia",
+                "name": "Patagonia Jacket",
+                "color": "red",
+                "texture": "recycled polyester"
             }
         ]
     }

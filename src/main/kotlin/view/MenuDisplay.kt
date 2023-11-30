@@ -22,6 +22,7 @@ object MenuDisplay {
         while (true) {
             val choice = ScannerInput.readNextInt(
                 """
+                    
                 1 -> Admin
                 2 -> Smart Wardrobe
                 0 -> Exit
@@ -47,6 +48,7 @@ object MenuDisplay {
         while (true) {
             val choice = ScannerInput.readNextInt(
                 """
+                    
                 1 -> Create User
                 2 -> Delete User
                 0 -> Back to Main Menu
@@ -72,6 +74,7 @@ object MenuDisplay {
         while (true) {
             val choice = ScannerInput.readNextInt(
                 """
+                    
             1 -> Today's Outfit
             2 -> View Wardrobe
             3 -> Manage Wardrobe
@@ -98,6 +101,7 @@ object MenuDisplay {
         while (true) {
             val choice = ScannerInput.readNextInt(
                 """
+                    
             1 -> Add Clothing
             2 -> Update Clothing
             3 -> Remove Clothing
@@ -124,6 +128,7 @@ object MenuDisplay {
         while (true) {
             val choice = ScannerInput.readNextInt(
                 """
+                    
             1 -> View All Clothing
             2 -> View Clothing by Type
             3 -> View Clothing by Type and Color
@@ -150,6 +155,7 @@ object MenuDisplay {
         while (true) {
             val choice = ScannerInput.readNextInt(
                 """
+                    
             Clothing Types:
             1 -> JUMPER
             2 -> SHIRT

@@ -2,12 +2,15 @@ package view
 
 import controller.UserAPI
 import controller.WardrobeAPI
+import controller.WeatherAPI
 import model.User
 import service.OutfitSuggester
 import service.UserManager
 import service.WardrobeManager
+import service.WeatherForecaster
 import utils.LoggerUtil.printLogger
 import utils.ScannerInput
+import utils.TimeUtil
 import kotlin.system.exitProcess
 
 /**
@@ -136,11 +139,22 @@ class ConsoleView(
      * Utilizes [OutfitSuggester] for generating outfit suggestions.
      */
     private fun suggestOutfit() {
-        val outfit = currentUser?.let { OutfitSuggester.suggestOutfit(it.getWardrobe(), 12) }
+        val outfit = currentUser?.let { OutfitSuggester.suggestOutfit(it.getWardrobe(), TimeUtil.getCurrentMonthAsInt()) }
         if (outfit != null) {
+            println("Suggested outfit:")
             outfit.forEach { println(it) }
         } else {
             println("No outfit suggestions available")
+        }
+        val weatherData = WeatherAPI.getApiResponse()
+        if (weatherData.isEmpty()) {
+            println("No API key found")
+        } else {
+            if (WeatherForecaster.willRainToday(weatherData)) {
+                println("It will rain today, consider bringing an umbrella")
+            } else {
+                println("It will not rain today, no need for an umbrella")
+            }
         }
     }
 
