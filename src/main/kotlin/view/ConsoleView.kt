@@ -10,7 +10,16 @@ import utils.LoggerUtil.printLogger
 import utils.ScannerInput
 import kotlin.system.exitProcess
 
-
+/**
+ * Provides a console-based user interface for interacting with the application.
+ * This class encapsulates user interface logic, handling user inputs and displaying relevant information.
+ *
+ * Utilizes [UserManager] and [WardrobeManager] for handling user and wardrobe data respectively.
+ *
+ * @property userManager Instance of [UserManager] for managing user-related operations.
+ * @property wardrobeManager Instance of [WardrobeManager] for managing wardrobe-related operations.
+ * @property currentUser The currently logged-in user, if any.
+ */
 class ConsoleView(
     userAPI: UserAPI,
     wardrobeAPI: WardrobeAPI
@@ -19,6 +28,9 @@ class ConsoleView(
     private val wardrobeManager = WardrobeManager(wardrobeAPI)
     private var currentUser: User? = null
 
+    /**
+     * Starts the application, displaying the main menu and handling user interactions.
+     */
     fun startApplication() {
         while (true) {
             val choice = MenuDisplay.displayMainMenu()
@@ -31,6 +43,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Handles the user management section of the application.
+     * Provides options for adding or deleting users.
+     */
     private fun handleUserManagement() {
         while (true) {
             val choice = MenuDisplay.displayUserManagementMenu()
@@ -43,6 +59,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Handles the process of adding a new user.
+     * Collects user input for username and password, and attempts to create a new user.
+     */
     private fun addUser() {
         val username = ScannerInput.readNextLine("Enter username: ")
         val password = ScannerInput.readNextLine("Enter password: ")
@@ -54,6 +74,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Handles the process of deleting an existing user.
+     * Collects user input for username, and attempts to delete the user.
+     */
     private fun deleteUser() {
         val username = ScannerInput.readNextLine("Enter username: ")
         val success = userManager.deleteUser(username)
@@ -64,6 +88,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Manages the user login process.
+     * Prompts for username and password, and attempts to authenticate the user.
+     */
     private fun userLogin() {
         println("Welcome to Smart Wardrobe! Please login to continue.")
         val username = ScannerInput.readNextLine("Enter username: ")
@@ -79,6 +107,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Handles wardrobe management functionalities after user login.
+     * Provides options for outfit suggestion, viewing, and managing wardrobe.
+     */
     private fun handleWardrobeManagement() {
         while (true) {
             val choice = MenuDisplay.displayWardrobe()
@@ -96,6 +128,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Suggests an outfit based on the user's wardrobe.
+     * Utilizes [OutfitSuggester] for generating outfit suggestions.
+     */
     private fun suggestOutfit() {
         val outfit = currentUser?.let { OutfitSuggester.suggestOutfit(it.getWardrobe(), 5) }
         if (outfit != null) {
@@ -105,6 +141,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Manages the display and selection process for viewing wardrobe options.
+     * Provides options for viewing all clothing, clothing by type, or clothing by type and color.
+     */
     private fun viewWardrobe() {
         while (true) {
             val choice = MenuDisplay.displayViewWardrobe()
@@ -122,6 +162,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Manages the display and selection process for managing wardrobe options.
+     * Provides options for adding, updating, or removing clothing from the wardrobe.
+     */
     private fun manageWardrobe() {
         while (true) {
             val choice = MenuDisplay.displayManageWardrobe()
@@ -139,6 +183,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Displays all clothing items in the wardrobe.
+     * Lists each item with its details if any are available.
+     */
     private fun viewAllClothing() {
         val clothing = wardrobeManager.getAllClothing()
         if (clothing.isNotEmpty()) {
@@ -148,6 +196,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Displays clothing items by a specific type.
+     * Prompts for the type and lists items of that type with their details if any are available.
+     */
     private fun viewClothingByType() {
         val type = MenuDisplay.displayClothingType()
         val clothing = wardrobeManager.getClothingByType(type)
@@ -158,6 +210,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Displays clothing items by a specific type and color.
+     * Prompts for the type and color and lists matching items with their details if any are available.
+     */
     private fun viewClothingByTypeAndColor() {
         val type = MenuDisplay.displayClothingType()
         val color = ScannerInput.readNextLine("Enter clothing color: ")
@@ -169,6 +225,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Handles the process of adding a new clothing item to the wardrobe.
+     * Collects necessary information from the user and adds the item if all criteria are met.
+     */
     private fun addClothing() {
         val id = ScannerInput.readNextInt("Enter clothing id: ")
         val type = MenuDisplay.displayClothingType()
@@ -184,6 +244,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Handles the process of updating an existing clothing item in the wardrobe.
+     * Collects new color and texture information along with the clothing item's ID for the update.
+     */
     private fun updateClothing() {
         val id = ScannerInput.readNextInt("Enter clothing id: ")
         val color = ScannerInput.readNextLine("Enter clothing color: ")
@@ -196,6 +260,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Handles the process of removing a clothing item from the wardrobe.
+     * Collects the clothing item's ID and removes the item if it exists.
+     */
     private fun removeClothing() {
         val id = ScannerInput.readNextInt("Enter clothing id: ")
         val success = wardrobeManager.removeClothing(id)
@@ -206,6 +274,10 @@ class ConsoleView(
         }
     }
 
+    /**
+     * Handles the application exit process.
+     * Logs the exit attempt, saves the current user's state, and terminates the application.
+     */
     private fun exitApplication() {
         exit()
         printLogger("exitApp() function invoked")
@@ -213,6 +285,12 @@ class ConsoleView(
         exitProcess(0)
     }
 
+    /**
+     * Saves the current state of the user.
+     * This function is typically called before exiting the application.
+     *
+     * @return `true` if the user state is saved successfully, `false` otherwise.
+     */
     private fun exit(): Boolean = userManager.saveUser(currentUser!!)
 
 }
