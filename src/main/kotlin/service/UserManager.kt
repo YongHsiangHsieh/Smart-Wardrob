@@ -2,8 +2,7 @@ package service
 
 import controller.UserAPI
 import model.User
-import model.Wardrobe
-import utils.LoggerUtil.printLogger
+
 
 class UserManager(private val userAPI: UserAPI) {
     fun createUser(username: String, password: String): Boolean =
@@ -22,6 +21,8 @@ class UserManager(private val userAPI: UserAPI) {
         }
         return userAPI.findUser(username)?.takeIf { userAPI.authenticateUser(it, password) }
     }
+
+    fun saveUser(user: User): Boolean = userAPI.updateUser(user)
 
 
 }
