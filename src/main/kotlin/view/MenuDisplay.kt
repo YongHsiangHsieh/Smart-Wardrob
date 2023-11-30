@@ -2,7 +2,22 @@ package view
 
 import utils.ScannerInput
 
+/**
+ * Provides display menus and options for the user interface.
+ * This object manages various menu displays, guiding users through different choices in the application.
+ *
+ * Utilizes [ScannerInput] for reading user input to navigate through the menus.
+ */
 object MenuDisplay {
+
+    /**
+     * Displays the main menu and handles user input for menu selection.
+     *
+     * Offers options for navigating to different sections such as Admin, Smart Wardrobe, or exiting the application.
+     * Validates the user input to ensure it's within the acceptable range.
+     *
+     * @return The selected menu option as an [Int].
+     */
     fun displayMainMenu(): Int {
         while (true) {
             val choice = ScannerInput.readNextInt(
@@ -20,6 +35,14 @@ object MenuDisplay {
         }
     }
 
+    /**
+     * Displays the user management menu and handles user input for menu selection.
+     *
+     * Provides options for creating or deleting users, or returning to the main menu.
+     * Validates the user input to ensure it's within the acceptable range.
+     *
+     * @return The selected menu option as an [Int].
+     */
     fun displayUserManagementMenu(): Int {
         while (true) {
             val choice = ScannerInput.readNextInt(
@@ -37,6 +60,14 @@ object MenuDisplay {
         }
     }
 
+    /**
+     * Displays the wardrobe menu and handles user input for menu selection.
+     *
+     * Offers choices like viewing today's outfit, managing or viewing the entire wardrobe, or returning to the main menu.
+     * Validates the user input to ensure it's within the acceptable range.
+     *
+     * @return The selected menu option as an [Int].
+     */
     fun displayWardrobe(): Int {
         while (true) {
             val choice = ScannerInput.readNextInt(
@@ -55,6 +86,14 @@ object MenuDisplay {
         }
     }
 
+    /**
+     * Displays the wardrobe management menu and handles user input for menu selection.
+     *
+     * Includes options for adding, updating, or removing clothing, or returning to the previous menu.
+     * Validates the user input to ensure it's within the acceptable range.
+     *
+     * @return The selected menu option as an [Int].
+     */
     fun displayManageWardrobe(): Int {
         while (true) {
             val choice = ScannerInput.readNextInt(
@@ -73,6 +112,14 @@ object MenuDisplay {
         }
     }
 
+    /**
+     * Displays the view wardrobe menu and handles user input for menu selection.
+     *
+     * Provides options for viewing all clothing, clothing by type, clothing by type and color, or returning to the previous menu.
+     * Validates the user input to ensure it's within the acceptable range.
+     *
+     * @return The selected menu option as an [Int].
+     */
     fun displayViewWardrobe(): Int {
         while (true) {
             val choice = ScannerInput.readNextInt(
@@ -91,6 +138,14 @@ object MenuDisplay {
         }
     }
 
+    /**
+     * Displays clothing types and handles user input for selecting a type.
+     *
+     * Lists different types of clothing such as Jumper, Shirt, Shorts, etc., for user selection.
+     * Validates the user input to ensure it's within the acceptable range of types.
+     *
+     * @return The selected clothing type as an [Int].
+     */
     fun displayClothingType(): Int {
         while (true) {
             val choice = ScannerInput.readNextInt(

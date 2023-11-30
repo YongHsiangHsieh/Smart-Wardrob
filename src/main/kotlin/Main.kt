@@ -10,7 +10,5 @@ fun main() {
     val consoleView = ConsoleView(userAPI, wardrobeAPI)
     consoleView.startApplication()
 
-
-
 //    val dotenv = dotenv()
 }
