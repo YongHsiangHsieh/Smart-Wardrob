@@ -38,7 +38,10 @@ class ConsoleView(
             when (choice) {
                 1 -> addUser()
                 2 -> deleteUser()
-                0 -> return
+                0 -> {
+                if (exit()) return
+                else printLogger("Failed to exit")
+            }
                 else -> println("Invalid option, please try again")
             }
         }
@@ -77,7 +80,7 @@ class ConsoleView(
             wardrobeManager.setWardrobe(user.getWardrobe())
             handleWardrobeManagement()
         } else {
-            println("Login failed")
+            printLogger("Login failed")
         }
     }
 
@@ -88,7 +91,10 @@ class ConsoleView(
                 1 -> suggestOutfit()
                 2 -> viewWardrobe()
                 3 -> manageWardrobe()
-                0 -> return
+                0 -> {
+                    if (exit()) return
+                    else printLogger("Failed to exit")
+                }
                 else -> println("Invalid option, please try again")
             }
         }
@@ -110,7 +116,10 @@ class ConsoleView(
                 1 -> viewAllClothing()
                 2 -> viewClothingByType()
                 3 -> viewClothingByTypeAndColor()
-                0 -> return
+                0 -> {
+                    if (exit()) return
+                    else printLogger("Failed to exit")
+                }
                 else -> println("Invalid option, please try again")
             }
         }
@@ -123,7 +132,10 @@ class ConsoleView(
                 1 -> addClothing()
                 2 -> updateClothing()
                 3 -> removeClothing()
-                0 -> return
+                0 -> {
+                    if (exit()) return
+                    else printLogger("Failed to exit")
+                }
                 else -> println("Invalid option, please try again")
             }
         }
@@ -204,6 +216,9 @@ class ConsoleView(
         println("Exiting...bye")
         exitProcess(0)
     }
+
+    private fun exit(): Boolean = userManager.saveUser(currentUser!!)
+
 
 
 }
