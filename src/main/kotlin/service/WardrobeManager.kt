@@ -53,7 +53,7 @@ class WardrobeManager(private val wardrobeAPI: WardrobeAPI) {
             emptyList()
         } else wardrobeAPI.searchClothingByColorAndType(color, convertToClothingType(type))
 
-    private fun convertToClothingType(type: Int): ClothingType =
+    fun convertToClothingType(type: Int): ClothingType =
         when (type) {
             1 -> ClothingType.JUMPER
             2 -> ClothingType.SHIRT

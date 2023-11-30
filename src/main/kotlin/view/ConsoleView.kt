@@ -11,7 +11,6 @@ import utils.ScannerInput
 import kotlin.system.exitProcess
 
 
-
 class ConsoleView(
     userAPI: UserAPI,
     wardrobeAPI: WardrobeAPI
@@ -38,10 +37,7 @@ class ConsoleView(
             when (choice) {
                 1 -> addUser()
                 2 -> deleteUser()
-                0 -> {
-                if (exit()) return
-                else printLogger("Failed to exit")
-            }
+                0 -> return
                 else -> println("Invalid option, please try again")
             }
         }
@@ -95,6 +91,7 @@ class ConsoleView(
                     if (exit()) return
                     else printLogger("Failed to exit")
                 }
+
                 else -> println("Invalid option, please try again")
             }
         }
@@ -110,7 +107,7 @@ class ConsoleView(
     }
 
     private fun viewWardrobe() {
-        while (true){
+        while (true) {
             val choice = MenuDisplay.displayViewWardrobe()
             when (choice) {
                 1 -> viewAllClothing()
@@ -120,13 +117,14 @@ class ConsoleView(
                     if (exit()) return
                     else printLogger("Failed to exit")
                 }
+
                 else -> println("Invalid option, please try again")
             }
         }
     }
 
     private fun manageWardrobe() {
-        while (true){
+        while (true) {
             val choice = MenuDisplay.displayManageWardrobe()
             when (choice) {
                 1 -> addClothing()
@@ -136,6 +134,7 @@ class ConsoleView(
                     if (exit()) return
                     else printLogger("Failed to exit")
                 }
+
                 else -> println("Invalid option, please try again")
             }
         }
@@ -156,7 +155,7 @@ class ConsoleView(
         if (clothing.isNotEmpty()) {
             clothing.forEach { println(it) }
         } else {
-            println("No clothing of type $type in wardrobe")
+            println("No clothing of type ${wardrobeManager.convertToClothingType(type)} in wardrobe")
         }
     }
 
@@ -167,12 +166,12 @@ class ConsoleView(
         if (clothing.isNotEmpty()) {
             clothing.forEach { println(it) }
         } else {
-            println("No clothing of type $type and color $color in wardrobe")
+            println("No clothing of type ${wardrobeManager.convertToClothingType(type)} and color $color in wardrobe")
         }
     }
 
     private fun addClothing() {
-        val id = ScannerInput.readNextLine("Enter clothing id: ").toInt()
+        val id = ScannerInput.readNextInt("Enter clothing id: ")
         val type = MenuDisplay.displayClothingType()
         val brand = ScannerInput.readNextLine("Enter clothing brand: ")
         val name = ScannerInput.readNextLine("Enter clothing name: ")
@@ -212,13 +211,12 @@ class ConsoleView(
      * Handles the process of exiting the application, including saving any changes to the current user.
      */
     private fun exitApplication() {
+        exit()
         printLogger("exitApp() function invoked")
         println("Exiting...bye")
         exitProcess(0)
     }
 
     private fun exit(): Boolean = userManager.saveUser(currentUser!!)
-
-
 
 }
