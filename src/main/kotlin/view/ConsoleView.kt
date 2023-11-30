@@ -4,374 +4,196 @@ import controller.UserAPI
 import controller.WardrobeAPI
 import model.ClothingType
 import model.User
-import mu.KotlinLogging
 import service.OutfitSuggester
+import service.UserManager
+import service.WardrobeManager
+import utils.LoggerUtil.printLogger
 import utils.ScannerInput
+import kotlin.system.exitProcess
 
-/**
- * Console-based view for the application, providing a user interface for interacting with the system.
- * Handles user and wardrobe management, including login, user creation/deletion, and wardrobe operations.
- *
- * @property userAPI An instance of [UserAPI] for handling user-related operations.
- * @property wardrobeAPI An instance of [WardrobeAPI] for handling wardrobe-related operations.
- */
+
+
 class ConsoleView(
     private val userAPI: UserAPI,
     private val wardrobeAPI: WardrobeAPI
 ) {
-    private val logger = KotlinLogging.logger {}
+    private val userManager = UserManager(userAPI)
+    private val wardrobeManager = WardrobeManager(wardrobeAPI)
     private var currentUser: User? = null
 
-    /**
-     * Starts the application, displaying the main menu and handling user input.
-     */
     fun startApplication() {
-        var choice: Int
-        do {
-            choice = displayMainMenu()
+        while (true) {
+            val choice = MenuDisplay.displayMainMenu()
             when (choice) {
-                1 -> adminMenu()
+                1 -> handleUserManagement()
                 2 -> userLogin()
                 0 -> exitApplication()
-                else -> logger.info { "Invalid option" }
+                else -> println("Invalid option, please try again")
             }
-        } while (choice != 0)
+        }
     }
 
-    /**
-     * Displays the main menu and reads the user's choice.
-     *
-     * @return The user's menu choice as an integer.
-     */
-    private fun displayMainMenu(): Int {
-        return ScannerInput.readNextInt(
-            """
-            1 -> Admin
-            2 -> Smart Wardrobe
-            0 -> Exit
-            Enter option: 
-            """.trimIndent()
-        )
-    }
-
-    /**
-     * Displays the user management menu and reads the user's choice.
-     *
-     * @return The user's choice for user management operations as an integer.
-     */
-    private fun manageUsers(): Int {
-        return ScannerInput.readNextInt(
-            """
-            User Management:
-            1 -> Create User
-            2 -> Delete User
-            0 -> Back to Main Menu
-            Enter option: 
-            """.trimIndent()
-        )
-    }
-
-    /**
-     * Handles the admin menu, providing options for user management.
-     */
-    private fun adminMenu() {
-        var choice: Int
-        do {
-            choice = manageUsers()
+    private fun handleUserManagement() {
+        while (true) {
+            val choice = MenuDisplay.displayUserManagementMenu()
             when (choice) {
                 1 -> addUser()
                 2 -> deleteUser()
-                0 -> exitApplication()
-                else -> logger.info { "Invalid option" }
+                0 -> return
+                else -> println("Invalid option, please try again")
             }
-        } while (choice != 0)
+        }
     }
 
-    /**
-     * Handles the process of adding a new user.
-     */
     private fun addUser() {
         val username = ScannerInput.readNextLine("Enter username: ")
         val password = ScannerInput.readNextLine("Enter password: ")
-        val success = userAPI.createUser(username, password)
+        val success = userManager.createUser(username, password)
         if (success) {
-            logger.info { "User created successfully" }
+            println("User created successfully")
         } else {
-            logger.info { "User already exists" }
+            println("User already exists")
         }
     }
 
-    /**
-     * Handles the process of deleting an existing user.
-     */
     private fun deleteUser() {
         val username = ScannerInput.readNextLine("Enter username: ")
-        val success = userAPI.deleteUser(username)
+        val success = userManager.deleteUser(username)
         if (success) {
-            logger.info { "User deleted successfully" }
+            println("User deleted successfully")
         } else {
-            logger.info { "User does not exist" }
+            println("User does not exist")
         }
     }
 
-    // Wardrobe Menu
-
-    /**
-     * Handles user login, setting the current user and transitioning to the wardrobe menu.
-     */
+    // User login
     private fun userLogin() {
         println("Welcome to Smart Wardrobe! Please login to continue.")
         val username = ScannerInput.readNextLine("Enter username: ")
         val password = ScannerInput.readNextLine("Enter password: ")
-        val user = userAPI.findUser(username)
-        if (user != null && userAPI.authenticateUser(user, password)) {
+        val user = userManager.userLogin(username, password)
+        if (user != null) {
+            println("Login successful")
             currentUser = user
-            wardrobeAPI.setWardrobe(currentUser!!.getWardrobe())
-            wardrobeMenu()
+            wardrobeManager.setWardrobe(user.getWardrobe())
+            handleWardrobeManagement()
         } else {
-            logger.info { "Invalid username or password" }
+            println("Login failed")
         }
     }
 
-    /**
-     * Displays the wardrobe menu and reads the user's choice.
-     *
-     * @return The user's choice for wardrobe operations as an integer.
-     */
-    private fun displayWardrobe(): Int {
-        return ScannerInput.readNextInt(
-            """
-            1 -> Today's Outfit
-            2 -> View Wardrobe
-            3 -> Manage Wardrobe
-            0 -> Back to Main Menu
-            Enter option: 
-            """.trimIndent()
-        )
-    }
-
-    /**
-     * Handles the wardrobe menu, providing options for outfit suggestions and wardrobe management.
-     */
-    private fun wardrobeMenu() {
-        var choice: Int
-        do {
-            choice = displayWardrobe()
+    private fun handleWardrobeManagement() {
+        while (true) {
+            val choice = MenuDisplay.displayWardrobe()
             when (choice) {
-                1 -> todaysOutfit()
+                1 -> suggestOutfit()
                 2 -> viewWardrobe()
                 3 -> manageWardrobe()
-                0 -> exitApplication()
-                else -> logger.info { "Invalid option" }
+                0 -> return
+                else -> println("Invalid option, please try again")
             }
-        } while (choice != 0)
-    }
-
-    /**
-     * Suggests an outfit for the current day based on the current user's wardrobe.
-     */
-    private fun todaysOutfit() {
-        val wardrobe = currentUser?.getWardrobe()
-        if (wardrobe != null) {
-            val outfit = OutfitSuggester.suggestOutfit(wardrobe, 5)
-            if (outfit != null) {
-                if (outfit.isNotEmpty()) {
-                    outfit.forEach { println(it) }
-                } else {
-                    logger.info { "No outfit suggestions for today" }
-                }
-            }
-        } else {
-            logger.info { "No wardrobe found" }
         }
     }
 
-    /**
-     * Displays the wardrobe management menu and reads the user's choice.
-     *
-     * @return The user's choice for wardrobe management operations as an integer.
-     */
-    private fun displayManageWardrobe(): Int {
-        return ScannerInput.readNextInt(
-            """
-            Wardrobe Management:
-            1 -> Add Clothing
-            2 -> Update Clothing
-            3 -> Remove Clothing
-            0 -> Back to Wardrobe Menu
-            Enter option: 
-            """.trimIndent()
-        )
-    }
-
-    /**
-     * Handles the process of managing the wardrobe, including adding, updating, and removing clothing.
-     */
-    private fun manageWardrobe() {
-        var choice: Int
-        do {
-            choice = displayManageWardrobe()
-            when (choice) {
-                1 -> addClothing()
-                2 -> updateClothing()
-                3 -> removeClothing()
-                0 -> exitApplication()
-                else -> logger.info { "Invalid option" }
-            }
-        } while (choice != 0)
-    }
-
-    /**
-     * Handles the process of adding a new clothing item to the wardrobe.
-     */
-    private fun addClothing() {
-        val clothingData = mutableMapOf<String, String>()
-        clothingData["id"] = ScannerInput.readNextLine("Enter clothing id: ")
-        clothingData["type"] = getClothingType().toString()
-        clothingData["brand"] = ScannerInput.readNextLine("Enter clothing brand: ")
-        clothingData["name"] = ScannerInput.readNextLine("Enter clothing name: ")
-        clothingData["color"] = ScannerInput.readNextLine("Enter clothing color: ")
-        clothingData["texture"] = ScannerInput.readNextLine("Enter clothing texture: ")
-        val success = wardrobeAPI.addClothingToWardrobe(clothingData)
-        if (success) {
-            logger.info { "Clothing added successfully" }
+    private fun suggestOutfit() {
+        val outfit = currentUser?.let { OutfitSuggester.suggestOutfit(it.getWardrobe(), 5) }
+        if (outfit != null) {
+            outfit.forEach { println(it) }
         } else {
-            logger.info { "Clothing already exists" }
+            println("No outfit suggestions available")
         }
     }
 
-    /**
-     * Handles the process of updating an existing clothing item in the wardrobe.
-     */
-    private fun updateClothing() {
-        val clothingData = mutableMapOf<String, String>()
-        val id = ScannerInput.readNextInt("Enter clothing id: ")
-        clothingData["color"] = ScannerInput.readNextLine("Enter clothing color: ")
-        clothingData["texture"] = ScannerInput.readNextLine("Enter clothing texture: ")
-        val success = wardrobeAPI.updateClothingInWardrobe(id, clothingData)
-        if (success) {
-            logger.info { "Clothing updated successfully" }
-        } else {
-            logger.info { "Clothing does not exist" }
-        }
-    }
-
-    /**
-     * Handles the process of removing a clothing item from the wardrobe.
-     */
-    private fun removeClothing() {
-        val id = ScannerInput.readNextInt("Enter clothing id: ")
-        val success = wardrobeAPI.deleteClothingFromWardrobe(id)
-        if (success) {
-            logger.info { "Clothing deleted successfully" }
-        } else {
-            logger.info { "Clothing does not exist" }
-        }
-    }
-
-    /**
-     * Displays options for viewing the wardrobe and reads the user's choice.
-     *
-     * @return The user's choice for viewing wardrobe contents as an integer.
-     */
-    private fun displayViewWardrobe(): Int {
-        return ScannerInput.readNextInt(
-            """
-            Wardrobe View:
-            1 -> View All Clothing
-            2 -> View Clothing by Type
-            3 -> View Clothing by Type and Color
-            0 -> Back to Wardrobe Menu
-            Enter option: 
-            """.trimIndent()
-        )
-    }
-
-    /**
-     * Handles the process of viewing the wardrobe contents.
-     */
     private fun viewWardrobe() {
-        var choice: Int
-        do {
-            choice = displayViewWardrobe()
+        while (true){
+            val choice = MenuDisplay.displayViewWardrobe()
             when (choice) {
                 1 -> viewAllClothing()
                 2 -> viewClothingByType()
                 3 -> viewClothingByTypeAndColor()
-                0 -> exitApplication()
-                else -> logger.info { "Invalid option" }
+                0 -> return
+                else -> println("Invalid option, please try again")
             }
-        } while (choice != 0)
+        }
     }
 
-    /**
-     * Displays all clothing items in the current user's wardrobe.
-     */
+    private fun manageWardrobe() {
+        while (true){
+            val choice = MenuDisplay.displayManageWardrobe()
+            when (choice) {
+                1 -> addClothing()
+                2 -> updateClothing()
+                3 -> removeClothing()
+                0 -> return
+                else -> println("Invalid option, please try again")
+            }
+        }
+    }
+
     private fun viewAllClothing() {
-        val clothing = wardrobeAPI.getAllClothing()
+        val clothing = wardrobeManager.getAllClothing()
         if (clothing.isNotEmpty()) {
             clothing.forEach { println(it) }
         } else {
-            logger.info { "No clothing in wardrobe" }
+            println("No clothing in wardrobe")
         }
     }
 
-    /**
-     * Displays clothing items of a specific type in the current user's wardrobe.
-     */
     private fun viewClothingByType() {
-        val type = getClothingType()
-        val clothing = wardrobeAPI.getClothingByType(type)
+        val type = MenuDisplay.displayClothingType()
+        val clothing = wardrobeManager.getClothingByType(type)
         if (clothing.isNotEmpty()) {
             clothing.forEach { println(it) }
         } else {
-            logger.info { "No clothing of type $type in wardrobe" }
+            println("No clothing of type $type in wardrobe")
         }
     }
 
-    /**
-     * Displays clothing items of a specific type and color in the current user's wardrobe.
-     */
     private fun viewClothingByTypeAndColor() {
-        val type = getClothingType()
+        val type = MenuDisplay.displayClothingType()
         val color = ScannerInput.readNextLine("Enter clothing color: ")
-        val clothing = wardrobeAPI.searchClothingByColorAndType(color, type)
+        val clothing = wardrobeManager.getClothingByTypeAndColor(type, color)
         if (clothing.isNotEmpty()) {
             clothing.forEach { println(it) }
         } else {
-            logger.info { "No clothing of type $type and color $color in wardrobe" }
+            println("No clothing of type $type and color $color in wardrobe")
         }
     }
 
-    /**
-     * Gets the clothing type from the user.
-     *
-     * @return The chosen [ClothingType].
-     */
-    private fun getClothingType(): ClothingType {
-        while (true) {
-            val option = ScannerInput.readNextInt(
-                """
-            Clothing Types:
-            1 -> JUMPER
-            2 -> SHIRT
-            3 -> SHORTS
-            4 -> TRACKSUIT
-            5 -> JACKET
-            Enter option: 
-                """.trimIndent()
-            )
-            return when (option) {
-                1 -> ClothingType.JUMPER
-                2 -> ClothingType.SHIRT
-                3 -> ClothingType.SHORTS
-                4 -> ClothingType.TRACKSUIT
-                5 -> ClothingType.JACKET
-                else -> {
-                    logger.info { "Invalid option" }
-                    continue
-                }
-            }
+    private fun addClothing() {
+        val id = ScannerInput.readNextLine("Enter clothing id: ").toInt()
+        val type = MenuDisplay.displayClothingType()
+        val brand = ScannerInput.readNextLine("Enter clothing brand: ")
+        val name = ScannerInput.readNextLine("Enter clothing name: ")
+        val color = ScannerInput.readNextLine("Enter clothing color: ")
+        val texture = ScannerInput.readNextLine("Enter clothing texture: ")
+        val success = wardrobeManager.addClothing(id, type, brand, name, color, texture)
+        if (success) {
+            println("Clothing added successfully")
+        } else {
+            println("Clothing already exists")
+        }
+    }
+
+    private fun updateClothing() {
+        val id = ScannerInput.readNextInt("Enter clothing id: ")
+        val color = ScannerInput.readNextLine("Enter clothing color: ")
+        val texture = ScannerInput.readNextLine("Enter clothing texture: ")
+        val success = wardrobeManager.updateClothing(color, texture, id)
+        if (success) {
+            println("Clothing updated successfully")
+        } else {
+            println("Clothing does not exist")
+        }
+    }
+
+    private fun removeClothing() {
+        val id = ScannerInput.readNextInt("Enter clothing id: ")
+        val success = wardrobeManager.removeClothing(id)
+        if (success) {
+            println("Clothing removed successfully")
+        } else {
+            println("Clothing does not exist")
         }
     }
 
@@ -379,10 +201,10 @@ class ConsoleView(
      * Handles the process of exiting the application, including saving any changes to the current user.
      */
     private fun exitApplication() {
-        currentUser?.let {
-            userAPI.updateUser(it)
-            logger.info { "User data saved successfully." }
-        }
+        printLogger("exitApp() function invoked")
+        println("Exiting...bye")
+        exitProcess(0)
     }
-}
 
+
+}

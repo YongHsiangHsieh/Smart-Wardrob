@@ -2,6 +2,7 @@ package service
 
 import controller.UserAPI
 import model.User
+import model.Wardrobe
 import utils.LoggerUtil.printLogger
 
 class UserManager(private val userAPI: UserAPI) {
@@ -10,7 +11,7 @@ class UserManager(private val userAPI: UserAPI) {
             false
         } else userAPI.createUser(username, password)
 
-    fun createUser(username: String): Boolean =
+    fun deleteUser(username: String): Boolean =
         if (username.isBlank()) {
             false
         } else userAPI.deleteUser(username)
@@ -20,7 +21,7 @@ class UserManager(private val userAPI: UserAPI) {
             return null
         }
         return userAPI.findUser(username)?.takeIf { userAPI.authenticateUser(it, password) }
-            ?: printLogger("Invalid username or password").let { null }
     }
+
 
 }

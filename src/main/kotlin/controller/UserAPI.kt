@@ -25,7 +25,6 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
             false
         }
 
-
     /**
      * Deletes a user with the specified username.
      *
@@ -37,7 +36,6 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
             persistenceManager.deleteUserData(username)
             true
         } ?: false
-
 
     /**
      * Finds a user by their username.

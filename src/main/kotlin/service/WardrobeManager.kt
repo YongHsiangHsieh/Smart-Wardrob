@@ -3,17 +3,18 @@ package service
 import controller.WardrobeAPI
 import model.Clothing
 import model.ClothingType
+import model.Wardrobe
 
 
 class WardrobeManager(private val wardrobeAPI: WardrobeAPI) {
-    fun addClothing(id: Int, type: ClothingType, brand: String, name: String, color: String, texture: String): Boolean {
-        if (id <= 0 || brand.isBlank() || name.isBlank() || color.isBlank() || texture.isBlank()) {
+    fun addClothing(id: Int, type: Int, brand: String, name: String, color: String, texture: String): Boolean {
+        if (id <= 0 || type < 1 || brand.isBlank() || name.isBlank() || color.isBlank() || texture.isBlank()) {
             return false
         }
 
         val clothingData = mapOf(
             "id" to id.toString(),
-            "type" to type.toString(),
+            "type" to convertToClothingType(type).toString(),
             "brand" to brand,
             "name" to name,
             "color" to color,
@@ -42,14 +43,27 @@ class WardrobeManager(private val wardrobeAPI: WardrobeAPI) {
 
     fun getAllClothing(): List<Clothing> = wardrobeAPI.getAllClothing()
 
-    fun getClothingByType(type: ClothingType): List<Clothing> =
-        if (type == ClothingType.UNKNOWN) {
-            emptyList()
-        } else wardrobeAPI.getClothingByType(type)
+    fun getClothingByType(type: Int): List<Clothing> {
+        val clothingType = convertToClothingType(type)
+        return wardrobeAPI.getClothingByType(clothingType)
+    }
 
-    fun getClothingByTypeAndColor(type: ClothingType, color: String): List<Clothing> =
-        if (type == ClothingType.UNKNOWN || color.isBlank()) {
+    fun getClothingByTypeAndColor(type: Int, color: String): List<Clothing> =
+        if (color.isBlank()) {
             emptyList()
-        } else wardrobeAPI.searchClothingByColorAndType(color, type)
+        } else wardrobeAPI.searchClothingByColorAndType(color, convertToClothingType(type))
+
+    private fun convertToClothingType(type: Int): ClothingType =
+        when (type) {
+            1 -> ClothingType.JUMPER
+            2 -> ClothingType.SHIRT
+            3 -> ClothingType.SHORTS
+            4 -> ClothingType.TRACKSUIT
+            5 -> ClothingType.JACKET
+            else -> ClothingType.UNKNOWN
+        }
+    fun setWardrobe(newWardrobe: Wardrobe) {
+        wardrobeAPI.setWardrobe(newWardrobe)
+    }
 
 }
