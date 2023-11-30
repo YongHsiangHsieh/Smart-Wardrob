@@ -22,14 +22,21 @@ object PersistenceManager {
     /**
      * Saves user data to a JSON file.
      *
-     * Serializes the [User] object into JSON and writes it to a file named after the user's username.
+     * Serializes the given [User] object into a JSON string and writes it to a file corresponding to the user's username.
      *
-     * @param user The [User] object to be saved.
+     * @param user The user whose data is to be saved.
+     * @return True if the data is successfully saved, false otherwise.
      */
-    fun saveUserData(user: User) {
-        val userData = JsonUtil.serializeToJson(user)
-        File(USER_DATA_PATH + user.username + EXTENSION).writeText(userData)
+    fun saveUserData(user: User): Boolean {
+        return try {
+            val userData = JsonUtil.serializeToJson(user)
+            File(USER_DATA_PATH + user.username + EXTENSION).writeText(userData)
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
+
 
     /**
      * Loads user data from a JSON file.
@@ -45,13 +52,13 @@ object PersistenceManager {
     }
 
     /**
-     * Deletes a user's data file.
+     * Deletes user data from a JSON file.
      *
-     * Removes the file corresponding to the given username if it exists.
+     * Deletes the file corresponding to the given username.
      *
-     * @param username The username of the user whose data file is to be deleted.
+     * @param username The username of the user whose data is to be deleted.
+     * @return True if the data is successfully deleted, false otherwise.
      */
-    fun deleteUserData(username: String) {
-        File(USER_DATA_PATH + username + EXTENSION).delete()
-    }
+    fun deleteUserData(username: String): Boolean = File(USER_DATA_PATH + username + EXTENSION).delete()
+
 }
