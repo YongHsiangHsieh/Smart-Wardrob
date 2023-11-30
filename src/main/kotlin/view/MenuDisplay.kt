@@ -2,7 +2,7 @@ package view
 
 import utils.ScannerInput
 
-class MenuDisplay {
+object MenuDisplay {
     fun displayMainMenu(): Int =
         ScannerInput.readNextInt(
             """
