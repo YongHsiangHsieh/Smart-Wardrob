@@ -18,6 +18,14 @@
                 "name": "Zara Shirt",
                 "color": "brown",
                 "texture": "cotton"
+            },
+            {
+                "id": 3,
+                "type": "SHORTS",
+                "brand": "Puma",
+                "name": "Puma Short",
+                "color": "black",
+                "texture": "cotton"
             }
         ]
     }
