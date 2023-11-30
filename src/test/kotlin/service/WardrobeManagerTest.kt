@@ -3,12 +3,7 @@ package service
 import controller.WardrobeAPI
 import model.ClothingType
 import model.Wardrobe
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertNotNull
-import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -27,24 +22,26 @@ class WardrobeManagerTest {
 
     @Test
     fun `addClothing should successfully add valid clothing`() {
-        assertTrue(wardrobeManager.addClothing(1, 2, "Brand", "Name", "Color", "Texture"))
-        val addedClothing = wardrobeAPI.getClothingById(1)
-        assertNotNull(addedClothing)
-        assertEquals("Brand", addedClothing?.brand)
+        val initialCount = wardrobeManager.getAllClothing().size
+        assertTrue(wardrobeManager.addClothing(2, "Brand", "Name", "Color", "Texture"))
+
+        val newCount = wardrobeManager.getAllClothing().size
+        assertTrue(newCount > initialCount) // Check if a new item was added
     }
 
     @Test
     fun `addClothing should fail for invalid data`() {
-        assertFalse(wardrobeManager.addClothing(-1, 2, "Brand", "Name", "Color", "Texture"))
-        assertFalse(wardrobeManager.addClothing(1, 2, "", "Name", "Color", "Texture"))
+        assertFalse(wardrobeManager.addClothing(-1, "", "Name", "Color", "Texture"))
+        assertFalse(wardrobeManager.addClothing(2, "Brand", "", "Color", "Texture"))
     }
 
     @Test
     fun `updateClothing should update clothing for valid data`() {
-        wardrobeManager.addClothing(1, 2, "Brand", "Name", "Color", "Texture")
-        assertTrue(wardrobeManager.updateClothing("NewColor", "NewTexture", 1))
-        val updatedClothing = wardrobeAPI.getClothingById(1)
-        assertNotNull(updatedClothing)
+        wardrobeManager.addClothing(2, "Brand", "Name", "Color", "Texture")
+        val lastAddedClothing = wardrobeManager.getAllClothing().last()
+        assertTrue(wardrobeManager.updateClothing("NewColor", "NewTexture", lastAddedClothing.id))
+
+        val updatedClothing = wardrobeAPI.getClothingById(lastAddedClothing.id)
         assertEquals("NewColor", updatedClothing?.color)
     }
 
@@ -56,9 +53,11 @@ class WardrobeManagerTest {
 
     @Test
     fun `removeClothing should remove existing clothing`() {
-        wardrobeManager.addClothing(1, 2, "Brand", "Name", "Color", "Texture")
-        assertTrue(wardrobeManager.removeClothing(1))
-        assertNull(wardrobeAPI.getClothingById(1))
+        wardrobeManager.addClothing(2, "Brand", "Name", "Color", "Texture")
+        val lastAddedClothing = wardrobeManager.getAllClothing().last()
+        assertTrue(wardrobeManager.removeClothing(lastAddedClothing.id))
+
+        assertNull(wardrobeAPI.getClothingById(lastAddedClothing.id))
     }
 
     @Test
@@ -68,7 +67,7 @@ class WardrobeManagerTest {
 
     @Test
     fun `getAllClothing should retrieve clothing list`() {
-        wardrobeManager.addClothing(1, 2, "Brand", "Name", "Color", "Texture")
+        wardrobeManager.addClothing(2, "Brand", "Name", "Color", "Texture")
         val clothingList = wardrobeManager.getAllClothing()
         assertFalse(clothingList.isEmpty())
         assertEquals(1, clothingList.size)
@@ -76,7 +75,7 @@ class WardrobeManagerTest {
 
     @Test
     fun `getClothingByType should retrieve clothing list of specified type`() {
-        wardrobeManager.addClothing(1, 2, "Brand", "Name", "Color", "Texture") // Type 2 corresponds to SHIRT
+        wardrobeManager.addClothing(2, "Brand", "Name", "Color", "Texture") // Type 2 corresponds to SHIRT
         val clothingList = wardrobeManager.getClothingByType(2) // Requesting SHIRT type
         assertFalse(clothingList.isEmpty())
         assertTrue(clothingList.all { it.type == ClothingType.SHIRT })
@@ -84,7 +83,7 @@ class WardrobeManagerTest {
 
     @Test
     fun `getClothingByTypeAndColor should retrieve clothing list of specified type and color`() {
-        wardrobeManager.addClothing(1, 2, "Brand", "Name", "Blue", "Texture")
+        wardrobeManager.addClothing(2, "Brand", "Name", "Blue", "Texture")
         val clothingList = wardrobeManager.getClothingByTypeAndColor(2, "Blue") // Requesting SHIRT type, Blue color
         assertFalse(clothingList.isEmpty())
         assertTrue(clothingList.all { it.type == ClothingType.SHIRT && it.color == "Blue" })
@@ -106,6 +105,6 @@ class WardrobeManagerTest {
     fun `setWardrobe should update the wardrobe managed by WardrobeAPI`() {
         val newWardrobe = Wardrobe()
         wardrobeManager.setWardrobe(newWardrobe)
-        Assertions.assertSame(newWardrobe.getAllClothing(), wardrobeManager.getAllClothing())
+        assertSame(newWardrobe.getAllClothing(), wardrobeManager.getAllClothing())
     }
 }

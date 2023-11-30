@@ -5,7 +5,6 @@ import model.Clothing
 import model.ClothingType
 import model.Wardrobe
 import utils.IdGenerator
-import utils.LoggerUtil
 
 /**
  * Manages wardrobe operations by interfacing with the [WardrobeAPI].
