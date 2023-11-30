@@ -32,14 +32,4 @@ class User(
      * @return The wardrobe of the user.
      */
     fun getWardrobe() = wardrobe
-
-    /**
-     * Returns a string representation of the User object.
-     *
-     * The format includes the username and password, followed by the wardrobe details.
-     * Note: This method exposes the password and should be used with caution.
-     *
-     * @return A string representation of the User object.
-     */
-    override fun toString() = "User: $username, Password=$password\nWardrobe: $wardrobe"
 }

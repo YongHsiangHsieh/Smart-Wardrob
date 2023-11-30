@@ -25,7 +25,6 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
             false
         }
 
-
     /**
      * Deletes a user with the specified username.
      *
@@ -37,7 +36,6 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
             persistenceManager.deleteUserData(username)
             true
         } ?: false
-
 
     /**
      * Finds a user by their username.
@@ -61,7 +59,5 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
      *
      * @param user The user with updated information.
      */
-    fun updateUser(user: User) {
-        persistenceManager.saveUserData(user)
-    }
+    fun updateUser(user: User): Boolean = persistenceManager.saveUserData(user)
 }

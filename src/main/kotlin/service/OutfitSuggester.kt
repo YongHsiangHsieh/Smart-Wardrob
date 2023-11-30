@@ -49,7 +49,6 @@ object OutfitSuggester {
         return wardrobe.getClothesByType(clothingType).randomOrNull()
     }
 
-
     /**
      * Compiles an outfit suitable for the given season from the wardrobe.
      *

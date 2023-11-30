@@ -1,0 +1,24 @@
+{
+    "username": "test2",
+    "password": "2",
+    "wardrobe": {
+        "clothes": [
+            {
+                "id": 55,
+                "type": "SHORTS",
+                "brand": "t",
+                "name": "t",
+                "color": "t",
+                "texture": "t"
+            },
+            {
+                "id": 44,
+                "type": "JACKET",
+                "brand": "test",
+                "name": "test",
+                "color": "t",
+                "texture": "t"
+            }
+        ]
+    }
+}

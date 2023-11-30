@@ -35,4 +35,14 @@ data class Clothing(
     val name: String = "Unknown",
     var color: String = "Unknown",
     var texture: String = "Unknown"
-)
+) {
+    /**
+     * Generates a string representation of the clothing item.
+     * It includes all the attributes in a readable format.
+     *
+     * @return A string describing the clothing item details.
+     */
+    override fun toString(): String =
+        "Clothing Details:\n" + "ID: $id\n" + "Type: $type\n" + "Brand: $brand\n" + "Name: $name\n" +
+            "Color: $color\n" + "Texture: $texture\n"
+}
