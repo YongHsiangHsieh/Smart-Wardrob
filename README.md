@@ -1,63 +1,89 @@
-# Smart Wardrob
+# Smart Wardrobe Application
 
-## Introduction
+## Overview
 
-Welcome to the Smart Wardrobe Management System, a sophisticated Kotlin-based application designed to revolutionize wardrobe management. In the modern, fast-paced world, organizing clothing and selecting the perfect outfit for each occasion can be daunting. Our application simplifies this process, offering an all-encompassing solution for users to efficiently manage their wardrobes.
-
-Smart Wardrobe stands out as your personal wardrobe assistant, providing features such as user account management, wardrobe customization, and intelligent outfit suggestions tailored to seasonal trends and personal preferences. Suitable for fashion enthusiasts and organization lovers alike, our application ensures a seamless, interactive experience in wardrobe management.
+The Smart Wardrobe application is a Kotlin-based console application designed to manage and suggest clothing combinations from a user's wardrobe. Leveraging modern programming practices and a clean, modular architecture, the application provides functionalities such as managing user profiles, handling wardrobe items, and suggesting outfits based on user preferences and other criteria.
 
 ## Features
 
-- **User and Wardrobe Management**: Create and manage user profiles and wardrobes with ease.
-- **Intelligent Outfit Suggestions**: Get personalized outfit recommendations based on the season, trend, and user preference.
-- **Data Persistence**: Robust data storage and retrieval for user and wardrobe information.
-- **Interactive Console Interface**: User-friendly console interface for effortless interaction with the application.
-- **Comprehensive Documentation and Testing**: Well-documented and thoroughly tested codebase for reliability and maintainability.
+- **User Management**: Handle user creation, authentication, and profile management.
+- **Wardrobe Management**: Add, update, and remove clothing items from a digital wardrobe.
+- **Outfit Suggestions**: Intelligent suggestions for outfit combinations.
+- **Data Persistence**: Store and retrieve user and wardrobe data.
+- **Interactive Console Interface**: Easy-to-navigate console-based UI for all functionalities.
 
-## Components
+## Architecture
 
-- **Controllers (UserAPI & WardrobeAPI)**: Intermediaries for processing user input and manipulating data models.
-- **Models (Clothing, User, Wardrobe)**: Core data structures, designed for efficient serialization.
-- **PersistenceManager**: Ensures efficient data storage and retrieval.
-- **OutfitSuggester**: Algorithmic logic for outfit recommendations.
-- **JsonUtil**: Utility class for JSON operations.
-- **ScannerInput & ConsoleView**: Manage console inputs and user interface.
+The application follows the MVC (Model-View-Controller) architectural pattern:
 
-## Technical Highlights
+- **Model**: Contains `Clothing`, `User`, and `Wardrobe` classes for data representation.
+- **View**: `ConsoleView` and `MenuDisplay` manage user interactions and display.
+- **Controller**: `UserAPI` and `WardrobeAPI` handle operations on model data.
+- **Service Layer**: Includes `UserManager`, `WardrobeManager`, and `OutfitSuggester` for business logic.
+- **Utilities**: `JsonUtil` for JSON operations and `LoggerUtil` for application logging.
 
-- **Kotlin Development**: Written in Kotlin, offering a robust, efficient, and enjoyable coding experience.
-- **MVC Architecture**: Adheres to Model-View-Controller principles, ensuring a clean separation of concerns.
-- **Unit and Integration Testing**: High coverage testing for reliability and future scalability.
-- **Professional Documentation**: Detailed KDoc documentation and a comprehensive GitHub Wiki.
-- **Continuous Development**: Regular updates and enhancements based on user feedback and technological advancements.
+## Setup
 
-## Setup and Execution
+### Prerequisites
 
-To get started with the Smart Wardrobe Management System:
+- Kotlin Compiler
+- Java Runtime Environment
 
-1. **Prerequisites**:
-   - Install Kotlin and a compatible IDE (e.g., IntelliJ IDEA).
-   - Ensure a stable internet connection for dependency resolution.
+### Installation
 
-2. **Installation**:
-   - Clone the repository or download the source code.
-   - Open the project in your IDE and allow it to resolve dependencies.
+1. Clone the repository:
+   ```bash
+   git clone [repository-url]
+   ```
 
-3. **Running the Application**:
-   - Navigate to the main entry point (`Main.kt` or equivalent).
-   - Execute the program to launch the console interface.
+2. Navigate to the project directory:
+   ```bash
+   cd smart-wardrobe
+   ```
 
-## Future Developments
+3. Compile the project:
+   ```bash
+   kotlinc src -include-runtime -d smart-wardrobe.jar
+   ```
 
-Looking ahead, we plan to:
+4. Run the application:
+   ```bash
+   java -jar smart-wardrobe.jar
+   ```
 
-- Enhance outfit suggestion algorithms for more personalized recommendations.
-- Develop a more dynamic user interface.
-- Integrate additional features for user preferences and external factors (like weather).
-- Expand the persistence layer for improved data management and security.
+## Usage
 
-## Contributing
+After launching the application, follow the on-screen prompts to interact with the system. Available options include:
 
-We welcome contributions! Please read our contributing guidelines for details on how to submit pull requests, report issues, or suggest enhancements.
+- Managing user accounts
+- Adding or removing clothing items
+- Viewing and organizing wardrobe
+- Getting outfit suggestions
+
+## Contribution
+
+Contributions to the Smart Wardrobe project are welcome. To contribute:
+
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin new-feature`
+5. Submit a pull request.
+
+## Testing
+
+Most modules in the project are fully tested. Due to the interactive nature of `LoggerUtil`, `ScannerInput`, `MenuDisplay`, and `ConsoleView`, these modules are currently exempt from automated testing but are verified through manual testing.
 
 ## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Future Enhancements
+
+### Automated Clothing ID Assignment
+- **Current State**: Users manually input IDs when adding new clothing items.
+- **Enhancement**: Implement an automated ID assignment system to streamline the process of adding new clothing to the wardrobe. This will improve user experience by reducing manual input and minimizing the potential for errors.
+
+### Weather-Based Outfit Suggestion
+- **Current State**: Outfit suggestions are based on user preferences and wardrobe contents without considering external factors.
+- **Enhancement**: Integrate a weather API to fetch daily weather forecasts. Utilize this data to offer more context-aware outfit suggestions, such as recommending an umbrella on rainy days. This feature aims to enhance the application's practicality by adapting suggestions to daily weather conditions.
