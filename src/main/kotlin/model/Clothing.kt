@@ -44,5 +44,5 @@ data class Clothing(
      */
     override fun toString(): String =
         "Clothing Details:\n" + "ID: $id\n" + "Type: $type\n" + "Brand: $brand\n" + "Name: $name\n" +
-                "Color: $color\n" + "Texture: $texture\n"
+            "Color: $color\n" + "Texture: $texture\n"
 }
