@@ -17,7 +17,7 @@ object WeatherAPI {
     fun getApiResponse(): String {
         val apiKey = dotenv["OPEN_WEATHER_API_KEY"]
         if (apiKey.isNullOrEmpty()) {
-            return "API key not found. Please check your configuration."
+            return ""
         }
 
         parameters["appid"] = apiKey

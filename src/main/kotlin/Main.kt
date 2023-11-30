@@ -19,7 +19,11 @@ fun main() {
 //    val jason = JsonUtil.deserializeFromJson<JsonObject>(response)
 //    println(jason)
 
-    println(WeatherForecaster.willRainToday())
-
+    val r = WeatherAPI.getApiResponse()
+    if (r.isEmpty()) {
+        println("No API key found")
+    } else {
+        println(WeatherForecaster.willRainToday(r))
+    }
 
 }
