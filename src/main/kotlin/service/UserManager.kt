@@ -21,7 +21,9 @@ class UserManager(private val userAPI: UserAPI) {
     fun createUser(username: String, password: String): Boolean =
         if (username.isBlank() || password.isBlank()) {
             false
-        } else userAPI.createUser(username, password)
+        } else {
+            userAPI.createUser(username, password)
+        }
 
     /**
      * Deletes a user with the specified username.
@@ -32,7 +34,9 @@ class UserManager(private val userAPI: UserAPI) {
     fun deleteUser(username: String): Boolean =
         if (username.isBlank()) {
             false
-        } else userAPI.deleteUser(username)
+        } else {
+            userAPI.deleteUser(username)
+        }
 
     /**
      * Authenticates a user based on the provided username and password.
@@ -55,5 +59,4 @@ class UserManager(private val userAPI: UserAPI) {
      * @return `true` if the user was successfully updated; `false` otherwise.
      */
     fun saveUser(user: User): Boolean = userAPI.updateUser(user)
-
 }

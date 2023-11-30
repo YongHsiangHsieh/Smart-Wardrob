@@ -60,5 +60,4 @@ class UserAPI(private val persistenceManager: PersistenceManager) {
      * @param user The user with updated information.
      */
     fun updateUser(user: User): Boolean = persistenceManager.saveUserData(user)
-
 }

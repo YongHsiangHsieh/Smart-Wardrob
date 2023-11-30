@@ -69,7 +69,9 @@ class WardrobeManager(private val wardrobeAPI: WardrobeAPI) {
     fun removeClothing(id: Int) =
         if (id <= 0) {
             false
-        } else wardrobeAPI.deleteClothingFromWardrobe(id)
+        } else {
+            wardrobeAPI.deleteClothingFromWardrobe(id)
+        }
 
     /**
      * Retrieves all clothing items from the wardrobe.
@@ -99,7 +101,9 @@ class WardrobeManager(private val wardrobeAPI: WardrobeAPI) {
     fun getClothingByTypeAndColor(type: Int, color: String): List<Clothing> =
         if (color.isBlank()) {
             emptyList()
-        } else wardrobeAPI.searchClothingByColorAndType(color, convertToClothingType(type))
+        } else {
+            wardrobeAPI.searchClothingByColorAndType(color, convertToClothingType(type))
+        }
 
     /**
      * Converts an integer to a [ClothingType].
@@ -125,5 +129,4 @@ class WardrobeManager(private val wardrobeAPI: WardrobeAPI) {
     fun setWardrobe(newWardrobe: Wardrobe) {
         wardrobeAPI.setWardrobe(newWardrobe)
     }
-
 }

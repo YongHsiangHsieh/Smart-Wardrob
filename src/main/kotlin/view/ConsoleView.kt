@@ -119,8 +119,11 @@ class ConsoleView(
                 2 -> viewWardrobe()
                 3 -> manageWardrobe()
                 0 -> {
-                    if (exit()) return
-                    else printLogger("Failed to exit")
+                    if (exit()) {
+                        return
+                    } else {
+                        printLogger("Failed to exit")
+                    }
                 }
 
                 else -> println("Invalid option, please try again")
@@ -153,8 +156,11 @@ class ConsoleView(
                 2 -> viewClothingByType()
                 3 -> viewClothingByTypeAndColor()
                 0 -> {
-                    if (exit()) return
-                    else printLogger("Failed to exit")
+                    if (exit()) {
+                        return
+                    } else {
+                        printLogger("Failed to exit")
+                    }
                 }
 
                 else -> println("Invalid option, please try again")
@@ -174,8 +180,11 @@ class ConsoleView(
                 2 -> updateClothing()
                 3 -> removeClothing()
                 0 -> {
-                    if (exit()) return
-                    else printLogger("Failed to exit")
+                    if (exit()) {
+                        return
+                    } else {
+                        printLogger("Failed to exit")
+                    }
                 }
 
                 else -> println("Invalid option, please try again")
@@ -204,7 +213,7 @@ class ConsoleView(
         val type = MenuDisplay.displayClothingType()
         val clothing = wardrobeManager.getClothingByType(type)
         if (clothing.isNotEmpty()) {
-            clothing.forEach { println(it)}
+            clothing.forEach { println(it) }
         } else {
             println("No clothing of type ${wardrobeManager.convertToClothingType(type)} in wardrobe")
         }
@@ -292,5 +301,4 @@ class ConsoleView(
      * @return `true` if the user state is saved successfully, `false` otherwise.
      */
     private fun exit(): Boolean = userManager.saveUser(currentUser!!)
-
 }

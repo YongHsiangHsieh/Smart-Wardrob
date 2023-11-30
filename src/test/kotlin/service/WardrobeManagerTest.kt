@@ -1,8 +1,6 @@
 package service
 
-
 import controller.WardrobeAPI
-
 import model.ClothingType
 import model.Wardrobe
 import org.junit.jupiter.api.Assertions
@@ -26,7 +24,6 @@ class WardrobeManagerTest {
         wardrobeAPI = WardrobeAPI(wardrobe)
         wardrobeManager = WardrobeManager(wardrobeAPI)
     }
-
 
     @Test
     fun `addClothing should successfully add valid clothing`() {
@@ -79,8 +76,8 @@ class WardrobeManagerTest {
 
     @Test
     fun `getClothingByType should retrieve clothing list of specified type`() {
-        wardrobeManager.addClothing(1, 2, "Brand", "Name", "Color", "Texture")  // Type 2 corresponds to SHIRT
-        val clothingList = wardrobeManager.getClothingByType(2)  // Requesting SHIRT type
+        wardrobeManager.addClothing(1, 2, "Brand", "Name", "Color", "Texture") // Type 2 corresponds to SHIRT
+        val clothingList = wardrobeManager.getClothingByType(2) // Requesting SHIRT type
         assertFalse(clothingList.isEmpty())
         assertTrue(clothingList.all { it.type == ClothingType.SHIRT })
     }
@@ -88,7 +85,7 @@ class WardrobeManagerTest {
     @Test
     fun `getClothingByTypeAndColor should retrieve clothing list of specified type and color`() {
         wardrobeManager.addClothing(1, 2, "Brand", "Name", "Blue", "Texture")
-        val clothingList = wardrobeManager.getClothingByTypeAndColor(2, "Blue")  // Requesting SHIRT type, Blue color
+        val clothingList = wardrobeManager.getClothingByTypeAndColor(2, "Blue") // Requesting SHIRT type, Blue color
         assertFalse(clothingList.isEmpty())
         assertTrue(clothingList.all { it.type == ClothingType.SHIRT && it.color == "Blue" })
     }

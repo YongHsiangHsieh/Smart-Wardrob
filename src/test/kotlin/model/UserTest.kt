@@ -1,6 +1,5 @@
 package model
 
-
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -32,5 +31,4 @@ class UserTest {
         val wardrobe = user.getWardrobe()
         assertNotNull(wardrobe)
     }
-
 }

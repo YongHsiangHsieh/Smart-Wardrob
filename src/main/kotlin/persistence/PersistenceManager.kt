@@ -37,7 +37,6 @@ object PersistenceManager {
         }
     }
 
-
     /**
      * Loads user data from a JSON file.
      *
@@ -60,5 +59,4 @@ object PersistenceManager {
      * @return True if the data is successfully deleted, false otherwise.
      */
     fun deleteUserData(username: String): Boolean = File(USER_DATA_PATH + username + EXTENSION).delete()
-
 }

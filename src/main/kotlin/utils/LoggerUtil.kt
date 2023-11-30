@@ -18,7 +18,7 @@ object LoggerUtil {
      *
      * @param prompt The message to be logged. This should contain the information to be conveyed in the log.
      */
-    fun printLogger(prompt: String){
+    fun printLogger(prompt: String) {
         logger.info { prompt }
     }
 }

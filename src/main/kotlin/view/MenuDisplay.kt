@@ -77,7 +77,7 @@ object MenuDisplay {
             3 -> Manage Wardrobe
             0 -> Back to Main Menu
             Enter option: 
-            """.trimIndent()
+                """.trimIndent()
             )
             if (choice in 0..3) {
                 return choice
@@ -103,7 +103,7 @@ object MenuDisplay {
             3 -> Remove Clothing
             0 -> Back to Wardrobe Menu
             Enter option: 
-            """.trimIndent()
+                """.trimIndent()
             )
             if (choice in 0..3) {
                 return choice
@@ -129,7 +129,7 @@ object MenuDisplay {
             3 -> View Clothing by Type and Color
             0 -> Back to Wardrobe Menu
             Enter option: 
-            """.trimIndent()
+                """.trimIndent()
             )
             if (choice in 0..3) {
                 return choice
@@ -157,7 +157,7 @@ object MenuDisplay {
             4 -> TRACKSUIT
             5 -> JACKET
             Enter option: 
-            """.trimIndent()
+                """.trimIndent()
             )
             if (choice in 1..5) {
                 return choice
@@ -165,5 +165,4 @@ object MenuDisplay {
             println("Invalid option, please try again")
         }
     }
-
 }
