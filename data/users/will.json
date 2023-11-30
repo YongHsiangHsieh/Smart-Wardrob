@@ -4,12 +4,28 @@
     "wardrobe": {
         "clothes": [
             {
-                "id": 1,
-                "type": "TRACKSUIT",
-                "brand": "Nike",
-                "name": "Nike Pants",
-                "color": "green",
-                "texture": "cotton"
+                "id": 761,
+                "type": "JUMPER",
+                "brand": "1",
+                "name": "1",
+                "color": "1",
+                "texture": "1"
+            },
+            {
+                "id": 281,
+                "type": "SHIRT",
+                "brand": "2",
+                "name": "2",
+                "color": "2",
+                "texture": "2"
+            },
+            {
+                "id": 198,
+                "type": "SHORTS",
+                "brand": "3",
+                "name": "3",
+                "color": "3",
+                "texture": "3"
             }
         ]
     }
