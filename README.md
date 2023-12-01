@@ -13,7 +13,7 @@ The Smart Wardrobe System is a console-based application developed in Kotlin, de
 ## Installation
 To install and run the Smart Wardrobe System, follow these steps:
 1. Ensure you have Kotlin and Java installed on your system.
-2. Clone the repository: `git clone [repository_url]`.
+2. Clone the repository: `git clone https://github.com/YongHsiangHsieh/Smart-Wardrob.git`.
 3. Navigate to the project directory: `cd smart-wardrobe`.
 4. Compile the project: `kotlinc -include-runtime -d smart-wardrobe.jar src/*.kt`.
 5. Run the application: `java -jar smart-wardrobe.jar`.
@@ -46,7 +46,7 @@ We welcome contributions to the Smart Wardrobe System. Please follow these steps
 This project is licensed under the [MIT License](LICENSE.txt) - see the LICENSE file for details.
 
 ## Contact
-For any queries or contributions, please contact [Your Name] at [your.email@example.com].
+For any queries or contributions, please contact Yong-Hsiang Hsieh at wilsonhsieh1216@gmail.com.
 
 ## Acknowledgements
 - Weather API integration for real-time data.
