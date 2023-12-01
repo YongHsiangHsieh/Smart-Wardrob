@@ -2,6 +2,7 @@ package persistence
 
 import model.User
 import utils.JsonUtil
+import utils.YamlUtil
 import java.io.File
 
 /**
@@ -32,6 +33,11 @@ object PersistenceManager {
     fun saveUserData(user: User): Boolean {
         return try {
             val userData = JsonUtil.serializeToJson(user)
+
+            // Demonstrate the use of YAML
+//            val userData = YamlUtil.serializeToYaml(user)
+//            File(USER_DATA_PATH + user.username + YAML_EXTENSION).writeText(userData)
+
             File(USER_DATA_PATH + user.username + JSON_EXTENSION).writeText(userData)
             true
         } catch (e: Exception) {
@@ -49,6 +55,11 @@ object PersistenceManager {
      */
     fun loadUserData(username: String): User? {
         val userFile = File(USER_DATA_PATH + username + JSON_EXTENSION)
+
+        // Demonstrate the use of YAML
+//        val userFile = File(USER_DATA_PATH + username + YAML_EXTENSION)
+//        return if (userFile.exists()) YamlUtil.deserializeFromYaml<User>(userFile.readText(), User::class.java) else null
+
         return if (userFile.exists()) JsonUtil.deserializeFromJson<User>(userFile.readText()) else null
     }
 
