@@ -105,7 +105,7 @@ class ConsoleView(
                 " \\ \\ /\\ / / _` | '__/ _` | '__/ _ \\| '_ \\ / _ \\\n" +
                 "  \\ V  V / (_| | | | (_| | | | (_) | |_) |  __/\n" +
                 "   \\_/\\_/ \\__,_|_|  \\__,_|_|  \\___/|_.__/ \\___|")
-        println("\nWelcome to Smart Wardrobe! Please login to continue.")
+        println("\nWelcome to Smart Wardrobe! Please login to continue. (wilson, 123)")
         val username = ScannerInput.readNextLine("Enter username: ")
         val password = ScannerInput.readNextLine("Enter password: ")
         val user = userManager.userLogin(username, password)
