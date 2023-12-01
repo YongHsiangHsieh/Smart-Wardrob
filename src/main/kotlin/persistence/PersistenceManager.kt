@@ -13,7 +13,9 @@ object PersistenceManager {
      * Path to the directory where user data is stored.
      */
     var USER_DATA_PATH = "data${File.separator}users${File.separator}"
-    private const val EXTENSION = ".json"
+    private const val JSON_EXTENSION = ".json"
+    private const val YAML_EXTENSION = ".yaml"
+
 
     init {
         File(USER_DATA_PATH).mkdirs()
@@ -30,7 +32,7 @@ object PersistenceManager {
     fun saveUserData(user: User): Boolean {
         return try {
             val userData = JsonUtil.serializeToJson(user)
-            File(USER_DATA_PATH + user.username + EXTENSION).writeText(userData)
+            File(USER_DATA_PATH + user.username + JSON_EXTENSION).writeText(userData)
             true
         } catch (e: Exception) {
             false
@@ -46,7 +48,7 @@ object PersistenceManager {
      * @return The [User] object if found, null otherwise.
      */
     fun loadUserData(username: String): User? {
-        val userFile = File(USER_DATA_PATH + username + EXTENSION)
+        val userFile = File(USER_DATA_PATH + username + JSON_EXTENSION)
         return if (userFile.exists()) JsonUtil.deserializeFromJson<User>(userFile.readText()) else null
     }
 
@@ -58,5 +60,5 @@ object PersistenceManager {
      * @param username The username of the user whose data is to be deleted.
      * @return True if the data is successfully deleted, false otherwise.
      */
-    fun deleteUserData(username: String): Boolean = File(USER_DATA_PATH + username + EXTENSION).delete()
+    fun deleteUserData(username: String): Boolean = File(USER_DATA_PATH + username + JSON_EXTENSION).delete()
 }
