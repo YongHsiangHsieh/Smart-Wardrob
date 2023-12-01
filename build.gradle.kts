@@ -28,6 +28,7 @@ dependencies {
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:1.9.10")
 
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
+
 //    implementation("org.yaml:snakeyaml:1.33")
 }
 
