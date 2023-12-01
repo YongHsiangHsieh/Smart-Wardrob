@@ -25,8 +25,7 @@ class WeatherForecasterTest {
             {"weather": [{"id": 811}]}
         ]
     }
-""".trimIndent()
-
+        """.trimIndent()
 
         assertFalse(WeatherForecaster.willRainToday(noRainData))
     }
@@ -50,7 +49,7 @@ class WeatherForecasterTest {
             {"weather": [{"id": 810}]}
         ]
     }
-""".trimIndent()
+        """.trimIndent()
 
         assertTrue(WeatherForecaster.willRainToday(rainData))
     }
