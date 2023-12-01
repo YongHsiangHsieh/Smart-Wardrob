@@ -45,5 +45,4 @@ object YamlUtil {
     fun <T> deserializeFromYaml(yamlString: String, type: Class<T>): T {
         return yaml.loadAs(yamlString, type)
     }
-
 }

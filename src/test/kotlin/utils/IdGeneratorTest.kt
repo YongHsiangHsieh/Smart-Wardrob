@@ -11,8 +11,6 @@ class IdGeneratorTest {
         val to = 1000
         val randomId = IdGenerator.generateRandomId(from, to)
 
-        assertTrue(randomId in from..<to)
+        assertTrue(randomId >= from && randomId < to)
     }
-
 }
-
