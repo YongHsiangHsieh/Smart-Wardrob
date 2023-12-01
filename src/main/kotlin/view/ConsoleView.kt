@@ -301,7 +301,6 @@ class ConsoleView(
      * Logs the exit attempt, saves the current user's state, and terminates the application.
      */
     private fun exitApplication() {
-        exit()
         printLogger("exitApp() function invoked")
         println("Exiting...bye")
         exitProcess(0)
