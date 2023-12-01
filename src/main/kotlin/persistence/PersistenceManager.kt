@@ -2,7 +2,6 @@ package persistence
 
 import model.User
 import utils.JsonUtil
-import utils.YamlUtil
 import java.io.File
 
 /**
@@ -16,7 +15,6 @@ object PersistenceManager {
     var USER_DATA_PATH = "data${File.separator}users${File.separator}"
     private const val JSON_EXTENSION = ".json"
     private const val YAML_EXTENSION = ".yaml"
-
 
     init {
         File(USER_DATA_PATH).mkdirs()
