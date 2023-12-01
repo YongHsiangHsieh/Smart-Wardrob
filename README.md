@@ -1,4 +1,4 @@
-# Smart Wardrobe Application
+# Smart Wardrobe Applicatio
 
 ## Overview
 
