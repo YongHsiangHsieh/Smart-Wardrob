@@ -1,7 +1,9 @@
 package service
 
 import controller.UserAPI
+import model.User
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNull
@@ -34,7 +36,7 @@ class UserManagerTest {
     @Test
     fun `createUser should successfully create new user when data is valid`() {
         assertTrue(userManager.createUser(testUsername, testPassword))
-//        assertNotNull(userAPI.findUser(testUsername))
+        assertNotNull(userAPI.findUser(testUsername))
     }
 
     @Test
@@ -46,8 +48,8 @@ class UserManagerTest {
     @Test
     fun `deleteUser should remove existing user`() {
         userManager.createUser(testUsername, testPassword)
-//        assertTrue(userManager.deleteUser(testUsername))
-//        assertNull(userAPI.findUser(testUsername))
+        assertTrue(userManager.deleteUser(testUsername))
+        assertNull(userAPI.findUser(testUsername))
     }
 
     @Test
@@ -59,7 +61,7 @@ class UserManagerTest {
     fun `userLogin should return user for correct credentials`() {
         userManager.createUser(testUsername, testPassword)
         val user = userManager.userLogin(testUsername, testPassword)
-//        assertNotNull(user)
+        assertNotNull(user)
         assertEquals(testUsername, user?.username)
     }
 
@@ -69,9 +71,9 @@ class UserManagerTest {
         assertNull(userManager.userLogin(testUsername, "wrongPassword"))
     }
 
-//    @Test
-//    fun `saveUser should return true for valid user`() {
-//        val user = User(testUsername, testPassword)
-//        assertTrue(userManager.saveUser(user))
-//    }
+    @Test
+    fun `saveUser should return true for valid user`() {
+        val user = User(testUsername, testPassword)
+        assertTrue(userManager.saveUser(user))
+    }
 }
