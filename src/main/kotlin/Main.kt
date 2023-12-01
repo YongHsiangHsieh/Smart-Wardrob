@@ -8,6 +8,4 @@ fun main() {
     val wardrobeAPI = WardrobeAPI()
     val consoleView = ConsoleView(userAPI, wardrobeAPI)
     consoleView.startApplication()
-
-
 }
