@@ -1,108 +1,53 @@
-# Smart Wardrobe Applicatio
+# Smart Wardrobe System
 
-## Overview
-
-The Smart Wardrobe application is a Kotlin-based console application designed to manage and suggest clothing combinations from a user's wardrobe. Leveraging modern programming practices and a clean, modular architecture, the application provides functionalities such as managing user profiles, handling wardrobe items, and suggesting outfits based on user preferences and other criteria.
+## Introduction
+The Smart Wardrobe System is a console-based application developed in Kotlin, designed to manage and suggest clothing options based on various criteria such as user preferences and weather conditions. This system aims to revolutionize the way individuals interact with their wardrobe, offering a user-friendly and intelligent approach to outfit selection.
 
 ## Features
+- **Wardrobe Management:** Add, remove, and organize clothing items in your virtual wardrobe.
+- **User Profile Management:** Create and manage user profiles with personal preferences and sizes.
+- **Outfit Suggestions:** Get clothing suggestions based on weather and personal style.
+- **Weather Integration:** Receive weather-based outfit recommendations.
+- **Data Persistence:** Store and retrieve user and wardrobe data efficiently.
 
-- **User Management**: Handle user creation, authentication, and profile management.
-- **Wardrobe Management**: Add, update, and remove clothing items from a digital wardrobe.
-- **Outfit Suggestions**: Intelligent suggestions for outfit combinations.
-- **Data Persistence**: Store and retrieve user and wardrobe data.
-- **Interactive Console Interface**: Easy-to-navigate console-based UI for all functionalities.
-
-## Architecture
-
-The application follows the MVC (Model-View-Controller) architectural pattern:
-
-- **Model**: Contains `Clothing`, `User`, and `Wardrobe` classes for data representation.
-- **View**: `ConsoleView` and `MenuDisplay` manage user interactions and display.
-- **Controller**: `UserAPI` and `WardrobeAPI` handle operations on model data.
-- **Service Layer**: Includes `UserManager`, `WardrobeManager`, and `OutfitSuggester` for business logic.
-- **Utilities**: `JsonUtil` for JSON operations and `LoggerUtil` for application logging.
-
-## Setup
-
-### Prerequisites
-
-- Kotlin Compiler
-- Java Runtime Environment
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YongHsiangHsieh/Smart-Wardrob.git
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd smart-wardrobe
-   ```
-
-3. Compile the project:
-   ```bash
-   kotlinc src -include-runtime -d smart-wardrobe.jar
-   ```
-
-4. Run the application:
-   ```bash
-   java -jar smart-wardrobe.jar
-   ```
+## Installation
+To install and run the Smart Wardrobe System, follow these steps:
+1. Ensure you have Kotlin and Java installed on your system.
+2. Clone the repository: `git clone [repository_url]`.
+3. Navigate to the project directory: `cd smart-wardrobe`.
+4. Compile the project: `kotlinc -include-runtime -d smart-wardrobe.jar src/*.kt`.
+5. Run the application: `java -jar smart-wardrobe.jar`.
 
 ## Usage
+The application is operated via a console interface. Follow the on-screen instructions to interact with the system.
 
-After launching the application, follow the on-screen prompts to interact with the system. Available options include:
+### Main Menu Options
+1. **Manage Wardrobe:** Add or remove clothing items.
+2. **Manage Profile:** Create or update your user profile.
+3. **Get Outfit Suggestions:** Receive outfit recommendations.
+4. **Exit:** Quit the application.
 
-- Managing user accounts
-- Adding or removing clothing items
-- Viewing and organizing wardrobe
-- Getting outfit suggestions
+## Code Structure
+- `Clothing.kt`: Defines the clothing item data structure.
+- `User.kt`: Manages user data structures and profiles.
+- `Wardrobe.kt`: Core logic for wardrobe management.
+- `OutfitSuggester.kt`: Algorithm for suggesting outfits.
+- Additional utility files (`JsonUtil.kt`, `YamlUtil.kt`, etc.) support various functionalities like data handling and input processing.
 
-## Contribution
-
-Contributions to the Smart Wardrobe project are welcome. To contribute:
-
+## Contributing
+We welcome contributions to the Smart Wardrobe System. Please follow these steps:
 1. Fork the repository.
-2. Create a feature branch: `git checkout -b new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin new-feature`
-5. Submit a pull request.
-
-## Testing
-
-Most modules in the project are fully tested. Due to the interactive nature of `LoggerUtil`, `ScannerInput`, `MenuDisplay`, and `ConsoleView`, these modules are currently exempt from automated testing but are verified through manual testing.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes and commit (`git commit -am 'Add some feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Create a new Pull Request.
 
 ## License
+This project is licensed under the [MIT License](LICENSE.txt) - see the LICENSE file for details.
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+## Contact
+For any queries or contributions, please contact [Your Name] at [your.email@example.com].
 
-## Future Enhancements
-
-### Automated Clothing ID Assignment
-- **Current State**: Users manually input IDs when adding new clothing items.
-- **Enhancement**: Implement an automated ID assignment system to streamline the process of adding new clothing to the wardrobe. This will improve user experience by reducing manual input and minimizing the potential for errors.
-
-### Weather-Based Outfit Suggestion
-- **Current State**: Outfit suggestions are based on user preferences and wardrobe contents without considering external factors.
-- **Enhancement**: Integrate a weather API to fetch daily weather forecasts. Utilize this data to offer more context-aware outfit suggestions, such as recommending an umbrella on rainy days. This feature aims to enhance the application's practicality by adapting suggestions to daily weather conditions.
-
-## Known Issues
-
-### UserManagerTest Fails on Gradle Build
-
-**Issue Description:**
-- The `UserManagerTest` suite passes when executed within IntelliJ IDEA, but fails during a Gradle build.
-- This inconsistency in test results is yet to be resolved.
-
-**Impact:**
-- This issue may affect the reliability of the `UserManager` functionality when the application is built using Gradle.
-
-**Current Workarounds:**
-- None at the moment. Tests are currently being executed and validated within the IntelliJ IDEA environment.
-
-**Investigation and Help Needed:**
-- We are actively investigating the root cause of this discrepancy.
-- Any insights or contributions to resolve this issue would be greatly appreciated. Please refer to our [Contribution Guidelines](link-to-contribution-guidelines) for more details on how you can help.
-
+## Acknowledgements
+- Weather API integration for real-time data.
+- Kotlin community for continuous support.
