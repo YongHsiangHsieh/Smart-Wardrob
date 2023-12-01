@@ -96,7 +96,16 @@ class ConsoleView(
      * Prompts for username and password, and attempts to authenticate the user.
      */
     private fun userLogin() {
-        println("Welcome to Smart Wardrobe! Please login to continue.")
+        println(" ____                       _                  \n" +
+                "/ ___| _ __ ___   __ _ _ __| |_                \n" +
+                "\\___ \\| '_ ` _ \\ / _` | '__| __|               \n" +
+                " ___) | | | | | | (_| | |  | |_                \n" +
+                "|____/|_| |_| |_|\\__,_|_|   \\__|    _          \n" +
+                "\\ \\      / /_ _ _ __ __| |_ __ ___ | |__   ___ \n" +
+                " \\ \\ /\\ / / _` | '__/ _` | '__/ _ \\| '_ \\ / _ \\\n" +
+                "  \\ V  V / (_| | | | (_| | | | (_) | |_) |  __/\n" +
+                "   \\_/\\_/ \\__,_|_|  \\__,_|_|  \\___/|_.__/ \\___|")
+        println("\nWelcome to Smart Wardrobe! Please login to continue. (wilson, 123)")
         val username = ScannerInput.readNextLine("Enter username: ")
         val password = ScannerInput.readNextLine("Enter password: ")
         val user = userManager.userLogin(username, password)
@@ -140,8 +149,13 @@ class ConsoleView(
      */
     private fun suggestOutfit() {
         val outfit = currentUser?.let { OutfitSuggester.suggestOutfit(it.getWardrobe(), TimeUtil.getCurrentMonthAsInt()) }
-        if (outfit != null) {
-            println("Suggested outfit:")
+        if (!outfit.isNullOrEmpty()) {
+            println("\n ____                              _           _               _    __ _ _   \n" +
+                    "/ ___| _   _  __ _  __ _  ___  ___| |_ ___  __| |   ___  _   _| |_ / _(_) |_ \n" +
+                    "\\___ \\| | | |/ _` |/ _` |/ _ \\/ __| __/ _ \\/ _` |  / _ \\| | | | __| |_| | __|\n" +
+                    " ___) | |_| | (_| | (_| |  __/\\__ \\ ||  __/ (_| | | (_) | |_| | |_|  _| | |_ \n" +
+                    "|____/ \\__,_|\\__, |\\__, |\\___||___/\\__\\___|\\__,_|  \\___/ \\__,_|\\__|_| |_|\\__|\n" +
+                    "             |___/ |___/                                                     ")
             outfit.forEach { println(it) }
         } else {
             println("No outfit suggestions available")
