@@ -140,7 +140,7 @@ class ConsoleView(
      */
     private fun suggestOutfit() {
         val outfit = currentUser?.let { OutfitSuggester.suggestOutfit(it.getWardrobe(), TimeUtil.getCurrentMonthAsInt()) }
-        if (outfit != null) {
+        if (!outfit.isNullOrEmpty()) {
             println("Suggested outfit:")
             outfit.forEach { println(it) }
         } else {
