@@ -33,7 +33,11 @@ The application is operated via a console interface. Follow the on-screen instru
 - `Wardrobe.kt`: Core logic for wardrobe management.
 - `OutfitSuggester.kt`: Algorithm for suggesting outfits.
 - Additional utility files (`JsonUtil.kt`, `YamlUtil.kt`, etc.) support various functionalities like data handling and input processing.
-
+- 
+### Testing Coverage
+- **Comprehensive Testing**: Each class, with the exception of `WeatherAPI`, `LoggerUtil`, `ScannerInput`, `YamlUtil`, `ConsoleView`, and `MenuDisplay`, is covered with unit tests to ensure reliability and stability.
+- **Continuous Integration**: Automated testing routines are integrated for continuous quality assurance.
+  
 ## Contributing
 We welcome contributions to the Smart Wardrobe System. Please follow these steps:
 1. Fork the repository.
